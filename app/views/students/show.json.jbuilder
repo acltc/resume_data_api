@@ -1,0 +1,12 @@
+json.id @student.id
+json.first_name @student.first_name
+json.last_name @student.last_name
+json.email @student.email
+json.phone_number @student.phone_number
+json.linkedin @student.linkedin
+json.twitter @student.twitter
+json.blog @student.blog
+json.online_resume @student.online_resume
+json.github @student.github
+json.photo @student.photo
+json.short_bio @student.short_bio
