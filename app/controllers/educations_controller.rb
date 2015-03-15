@@ -1,8 +1,5 @@
 class EducationsController < ApplicationController
 
-	def show
-
-	end
 
 	def update
 
@@ -15,5 +12,5 @@ class EducationsController < ApplicationController
 	def delete
 
 	end
-	
+
 end
