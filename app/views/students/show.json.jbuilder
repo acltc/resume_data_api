@@ -18,8 +18,8 @@ end
 json.educations @educations do |education|
   json.degreed education.degree
   json.university_name education.university_name
-  json.university_name education.start_date
-  json.university_name education.end_date
+  json.start_date education.start_date
+  json.end_date education.end_date
 end
 
 
