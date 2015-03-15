@@ -2,7 +2,9 @@ class StudentsController < ApplicationController
 
 	def show  
 		@student = Student.find(params[:id])
-		@experiences = @student.experiences
+    	@educations = @student.educations
+    	@experiences = @student.experiences
+    	@skills = @student.skills
 	end
 
 	def update
