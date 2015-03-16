@@ -16,7 +16,7 @@ json.skills @skills do |skill|
 end
 
 json.educations @educations do |education|
-  json.degreed education.degree
+  json.degrees education.degree
   json.university_name education.university_name
   json.start_date education.start_date
   json.end_date education.end_date
