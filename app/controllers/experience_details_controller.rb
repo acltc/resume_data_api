@@ -1,7 +1,8 @@
 class ExperienceDetailsController < ApplicationController
 
 	def create
-		@experience_detail = ExperienceDetail.create({:detail => params[:detail], :experience_id => params[:experience_id]})
+		@experience_detail = ExperienceDetail.create({:experience_id => params[:experience_id], :detail => params[:detail]})
+		render '/students/1.json'
 	end
 
 	def update
