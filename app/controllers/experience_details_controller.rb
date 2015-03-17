@@ -3,7 +3,7 @@ class ExperienceDetailsController < ApplicationController
 	def create
 		@experience_detail = ExperienceDetail.create({:experience_id => params[:experience_id], :detail => params[:detail]})
 		@student = @experience_detail.experience.student
-		render "students/show"
+			render "students/show"
 	end
 
 	def update
@@ -19,7 +19,7 @@ class ExperienceDetailsController < ApplicationController
 		@experience_detail = ExperienceDetail.find(params[:id])
 		@student = @experience_detail.experience.student
 		@experience_detail.destroy
-		render "students/show"
+			render "students/show"
 	end
 	
 end
