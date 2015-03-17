@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315161526) do
+ActiveRecord::Schema.define(version: 20150317011720) do
 
   create_table "education_details", force: :cascade do |t|
     t.text     "detail",       limit: 65535
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150315161526) do
     t.string   "email",         limit: 255
     t.string   "phone_number",  limit: 255
     t.string   "linkedin",      limit: 255
-    t.string   "twitter",       limit: 255
+    t.text     "twitter",       limit: 65535
     t.string   "blog",          limit: 255
     t.string   "online_resume", limit: 255
     t.string   "github",        limit: 255
