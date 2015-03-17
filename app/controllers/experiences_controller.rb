@@ -15,6 +15,8 @@ class ExperiencesController < ApplicationController
 
 	def delete
 		@experience = Experience.find(params[:id])
+		@student = @experience.student
 		@experience.destroy
+		render "students/show"
 	end
 end
