@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   patch '/experiences/:id' => 'experiences#update'
   delete '/experiences/:id' => 'experiences#delete'
 
+  post '/education_details' => 'education_details#create'
+  patch '/education_details/:id' => 'education_details#update'
+  delete '/education_details/:id' => 'education_details#delete' 
+
 
   
 
