@@ -19,17 +19,13 @@ Rails.application.routes.draw do
   post '/experiences' => 'experiences#create'
   patch '/experiences/:id' => 'experiences#update'
   delete '/experiences/:id' => 'experiences#delete'
+  
 
   post '/education_details' => 'education_details#create'
   patch '/education_details/:id' => 'education_details#update'
   delete '/education_details/:id' => 'education_details#delete' 
 
 
-  
-
-
-
-  
   post '/experience_details' => 'experience_details#create'
   patch '/experience_details/:id' => 'experience_details#update'
   delete 'experience_details/:id' => 'experience_details#delete'

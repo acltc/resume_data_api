@@ -11,11 +11,13 @@ json.github @student.github
 json.photo @student.photo
 json.short_bio @student.short_bio
 
-json.skills @student.skills do |skill|
+json.skills @student.skills do |skill| 
+json.id skill.id
   json.skill_name skill.skill_name
 end
 
 json.educations @student.educations do |education|
+	json.id education.id
   json.degrees education.degree
   json.university_name education.university_name
   json.start_date education.start_date
@@ -24,6 +26,7 @@ end
 
 
 json.experiences @student.experiences do |experience|
+	json.id experience.id
   json.job_title experience.job_title 
   json.company_name experience.company_name
   json.start_date experience.start_date 
