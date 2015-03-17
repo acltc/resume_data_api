@@ -22,6 +22,7 @@ json.educations @student.educations do |education|
   json.university_name education.university_name
   json.start_date education.start_date
   json.end_date education.end_date
+  json.details education.education_details
 end
 
 
@@ -31,5 +32,6 @@ json.experiences @student.experiences do |experience|
   json.company_name experience.company_name
   json.start_date experience.start_date 
   json.end_date experience.end_date
+  json.detail experience.experience_details
 end
 

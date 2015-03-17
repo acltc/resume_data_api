@@ -8,9 +8,7 @@ class ExperienceDetailsController < ApplicationController
 
 	def update
 		@experience_detail = ExperienceDetail.find(params[:id])
-
 		@experience_detail.update({:detail => params[:experience_detail]})
-		p "that worked!!"
 		@student = @experience_detail.experience.student
 		render "students/show"
 	end
