@@ -26,4 +26,11 @@ Rails.application.routes.draw do
 
 
   
+
+
+
+  
+  post '/experience_details' => 'experience_details#create'
+  patch '/experience_details/:id' => 'experience_details#update'
+  delete 'experience_details/:id' => 'experience_details#delete'
 end
