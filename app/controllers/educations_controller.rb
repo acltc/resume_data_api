@@ -3,6 +3,8 @@ class EducationsController < ApplicationController
 def update
 		@education = Education.find(params[:id])
 		@education.update({:start_date => params[:start_date], :end_date => params[:end_date], :degree => params[:degree], :university_name => params[:university_name]})
+		@student = @education.student
+		render "students/show"
 	end
 
 	def create
@@ -14,6 +16,8 @@ def update
 
 	def delete
 		@education = Education.find(params[:id])
+		@student = @education.student
 		@education.destroy
+		render "students/show"
 	end
 end
