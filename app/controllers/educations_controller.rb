@@ -2,7 +2,6 @@ class EducationsController < ApplicationController
 
 	def show
 		@education = Education.find(params[:id])
-		@student = @education.student
 	end
 
 	def create

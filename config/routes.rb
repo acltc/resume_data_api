@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   patch '/students/:id' => 'students#update'
 
  
- get '/skills/:id' => 'skills#show', :as => :skill
+  get '/skills/:id' => 'skills#show', :as => :skill
   post '/skills' => 'skills#create'
   patch '/skills/:id' => 'skills#update'
   delete '/skills/:id' => 'skills#delete'

@@ -19,7 +19,10 @@ class ReferencesController < ApplicationController
 	end
 
 	def delete
-
+		@references = Reference.find(params[:id])
+		@student = @references.student
+		@references.destroy
+		render "students/show"
 	end
 
 end
