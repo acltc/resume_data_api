@@ -20,5 +20,10 @@ class SkillsController < ApplicationController
 		render "students/show"
 	end
 
+	def show
+		@skill = Skill.find(params[:id])
+		render "skills/show"
+	end
+
 
 end
