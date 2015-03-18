@@ -22,7 +22,6 @@ class SkillsController < ApplicationController
 
 	def show
 		@skill = Skill.find(params[:id])
-		render "skills/show"
 	end
 
 

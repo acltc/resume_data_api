@@ -1,5 +1,9 @@
 class ExperienceDetailsController < ApplicationController
 
+	def show
+		@experience_detail = ExperienceDetail.find(params[:id])
+	end
+
 	def create
 		@experience_detail = ExperienceDetail.create({:experience_id => params[:experience_id], :detail => params[:detail]})
 		@student = @experience_detail.experience.student
@@ -20,10 +24,6 @@ class ExperienceDetailsController < ApplicationController
 			render "students/show"
 	end
 	
-	def show
-		@experience_detail = ExperienceDetail.find(params[:id])
-		@student = @experience_detail.experience.student
-	end
 
 
 end

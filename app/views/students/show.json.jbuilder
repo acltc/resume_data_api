@@ -35,3 +35,9 @@ json.experiences @student.experiences do |experience|
   json.details experience.experience_details
 end
 
+json.references @student.references do |reference|
+json.id reference.id
+json.student_id reference.student_id
+json.refrencer_id reference.referencer_id
+json.text reference.good_word
+end
