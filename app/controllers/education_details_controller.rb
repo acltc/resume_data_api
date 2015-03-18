@@ -1,5 +1,9 @@
 class EducationDetailsController < ApplicationController
 
+	def show
+		@detail = EducationDetail.find(params[:id])
+	end
+
 	def create
 		@education_detail = EducationDetail.create({:detail => params[:detail], :education_id => params[:education_id]})
 		@student = @education_detail.education.student
