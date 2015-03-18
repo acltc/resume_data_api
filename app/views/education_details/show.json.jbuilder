@@ -1,0 +1,1 @@
+json.detail @detail

@@ -21,12 +21,14 @@ Rails.application.routes.draw do
   patch '/experiences/:id' => 'experiences#update'
   delete '/experiences/:id' => 'experiences#delete'
   
-
+  
+  get '/education_details/:id' => 'education_details#show', :as => :education_detail
   post '/education_details' => 'education_details#create'
   patch '/education_details/:id' => 'education_details#update'
   delete '/education_details/:id' => 'education_details#delete' 
 
 
+  get '/experience_details/:id' => 'experience_details#show', :as => :experience_detail
   post '/experience_details' => 'experience_details#create'
   patch '/experience_details/:id' => 'experience_details#update'
   delete 'experience_details/:id' => 'experience_details#delete'
