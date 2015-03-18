@@ -20,4 +20,10 @@ class ExperienceDetailsController < ApplicationController
 			render "students/show"
 	end
 	
+	def show
+		@experience_detail = ExperienceDetail.find(params[:id])
+		@student = @experience_detail.experience.student
+	end
+
+
 end
