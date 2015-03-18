@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/skills/:id' => 'skills#show', :as => :skill
   # get '/students' => 'students#index'
   # get '/students/new' => 'students#new'
   get '/students/:id' => 'students#show', :as => :student
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   patch '/skills/:id' => 'skills#update'
   delete '/skills/:id' => 'skills#delete'
 
-
+  get '/educations/:id' => 'educations#show', :as => :education
   post '/educations' => 'educations#create'
   patch '/educations/:id' => 'educations#update'
   delete '/educations/:id' => 'educations#delete'
