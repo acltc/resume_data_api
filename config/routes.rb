@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   delete '/educations/:id' => 'educations#delete'
   
 
+  get '/experiences/:id' => 'experiences#show', :as => :experience
   post '/experiences' => 'experiences#create'
   patch '/experiences/:id' => 'experiences#update'
   delete '/experiences/:id' => 'experiences#delete'
