@@ -33,4 +33,10 @@ Rails.application.routes.draw do
   post '/experience_details' => 'experience_details#create'
   patch '/experience_details/:id' => 'experience_details#update'
   delete 'experience_details/:id' => 'experience_details#delete'
+
+
+  get '/references/:id' => 'references#show', :as => :reference
+  post '/references' => 'references#create'
+  patch '/references/:id' => 'references#update'
+  delete 'references/:id' => 'references#delete'
 end
