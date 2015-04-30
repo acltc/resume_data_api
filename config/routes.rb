@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # get '/students' => 'students#index'
   # get '/students/new' => 'students#new'
+  get '/students' => 'students#index'
   get '/students/:id' => 'students#show', :as => :student
   patch '/students/:id' => 'students#update'
 
