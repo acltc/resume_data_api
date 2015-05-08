@@ -1,4 +1,4 @@
-class ReferencesController < ApplicationController
+class Api::V1::ReferencesController < ApplicationController
 
 	def show
 		@reference = Reference.find(params[:id])

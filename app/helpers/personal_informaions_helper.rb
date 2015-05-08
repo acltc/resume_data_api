@@ -1,0 +1,2 @@
+module PersonalInformaionsHelper
+end

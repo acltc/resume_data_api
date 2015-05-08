@@ -1,4 +1,4 @@
-class EducationsController < ApplicationController
+class Api::V1::EducationsController < ApplicationController
 
 	def show
 		@education = Education.find(params[:id])
