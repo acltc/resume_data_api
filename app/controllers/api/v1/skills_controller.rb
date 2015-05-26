@@ -1,4 +1,4 @@
-class SkillsController < ApplicationController
+class Api::V1::SkillsController < ApplicationController
 
 	def create 
 		@skill = Skill.create({:skill_name => params[:skill_name], :student_id => params[:student_id]})

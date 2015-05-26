@@ -1,0 +1,31 @@
+<div ng-app="app">
+  <div ng-controller="resumeCtrl">
+  {{ 1 + 1 }}
+<br>
+<label>First Name:</label>
+<input ng-model="firstName">
+<br>
+<label>Last Name:</label>
+<input ng-model="lastName">
+<br>
+<label>Email:</label>
+<input ng-model="email">
+<br>
+<label>Phone Number:</label>
+<input ng-model="phoneNumber">
+<br>
+<label>Github Account:</label>
+<input ng-model="github">
+<br>
+<label>Blog:</label>
+<input ng-model="blog">
+<br>
+<label>Twitter:</label>
+<input ng-model="twitter">
+<br>
+<label>Linkedin:</label>
+<input ng-model="linkedin">
+<br>
+<a href=<%= new_experience_path %>><button ng-click="addPersonalInfo(first_name, last_name, email, phone_number, github, blog, twitter, linkedin)">Next</button></a>
+  </div>
+</div>

@@ -1,1 +1,0 @@
-json.details @experience_detail

@@ -1,4 +1,4 @@
-class ExperienceDetailsController < ApplicationController
+class Api::V1::ExperienceDetailsController < ApplicationController
 
 	def show
 		@experience_detail = ExperienceDetail.find(params[:id])

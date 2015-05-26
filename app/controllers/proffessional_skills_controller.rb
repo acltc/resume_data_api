@@ -1,4 +1,4 @@
-class ExperiencesController < ApplicationController
+class ProffessionalSkillsController < ApplicationController
 
   def new
 

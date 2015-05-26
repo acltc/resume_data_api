@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class Api::V1::StudentsController < ApplicationController
 
   def index
   	@students = Student.all
@@ -9,6 +9,22 @@ class StudentsController < ApplicationController
     	# @educations = @student.educations
     	# @experiences = @student.experiences
     	# @skills = @student.skills
+  end
+
+  def create
+    @student = Student.create({
+      :first_name => params[:first_name],
+      :last_name => params[:last_name],
+      :email => params[:email],
+      :phone_number => params[:phone_number],
+      :github => params[:github],
+      :blog => params[:blog],
+      :twitter => params[:twitter],
+      :linkedin => params[:linkedin]
+    })
+    # redirect_to api_v1_student_path(@student.id)
+    # redirect_to "api/v1/students/#{@student.id}.json"
+    redirect_to "#{api_v1_student_path(@student.id)}.json"
   end
 
   def update
