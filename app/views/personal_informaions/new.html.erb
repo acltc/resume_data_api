@@ -1,32 +1,23 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>resume/personal_information/new</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet" type="text/css">
+        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+        rel="stylesheet" type="text/css">
+    </head>
+    
+    <body>
+
 <div ng-app="app">
 	<div ng-controller="resumeCtrl">
 		{{ 1 + 1 }}
-		<br>
-		<label>First Name:</label>
-		<input ng-model="firstName">
-		<br>
-		<label>Last Name:</label>
-		<input ng-model="lastName">
-		<br>
-		<label>Email:</label>
-		<input ng-model="email">
-		<br>
-		<label>Phone Number:</label>
-		<input ng-model="phoneNumber">
-		<br>
-		<label>Github Account:</label>
-		<input ng-model="github">
-		<br>
-		<label>Blog:</label>
-		<input ng-model="blog">
-		<br>
-		<label>Twitter:</label>
-		<input ng-model="twitter">
-		<br>
-		<label>Linkedin:</label>
-		<input ng-model="linkedin">
-		<br>
-		<a href=<%= new_experience_path %>><button ng-click="addPersonalInfo(first_name, last_name, email, phone_number, github, blog, twitter, linkedin)">Next</button></a>
 
 		<div class="navbar navbar-default navbar-static-top">
 			<div class="container">
@@ -57,26 +48,26 @@
 								<h3 class="panel-title">Personal Information</h3>
 							</div>
 							<div class="panel-body">
-								<form role="form">
+								<form role="form" method="get" action="/experiences/new">
 									<div class="form-group">
 										<label class="control-label" for="exampleInputEmail1">First Name</label>
 										<input class="form-control" id="exampleInputEmail1"
-										placeholder="Enter First Name" type="text">
+										placeholder="Enter First Name" type="text" ng-model="fistName">
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="exampleInputPassword1">Last Name</label>
 										<input class="form-control" id="exampleInputPassword1"
-										placeholder="Enter Last Name" type="text">
+										placeholder="Enter Last Name" type="text" ng-model="lastName">
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="exampleInputPassword1">Email</label>
 										<input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
-										type="email">
+										type="email" ng-model="email">
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="exampleInputPassword1">Phone Number</label>
 										<input class="form-control" id="exampleInputPassword1"
-										placeholder="Phone Number" type="text">
+										placeholder="Phone Number" type="text" ng-model="phoneNumber">
 									</div>
 									<div class="row">
 										<div class="form-group col-md-6" id="double_column">
@@ -95,7 +86,35 @@
 											type="text">
 										</div>
 									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
+									<div class="row">
+										<div class="form-group col-md-3" id="double_column">
+											<label class="control-label" for="exampleInputPassword1">Github,</label>
+											<input class="form-control" id="exampleInputPassword1"
+											placeholder="Github" type="text" ng-model="github">
+										</div>
+										<div class="form-group col-md-3" id="double_column">
+											<label class="control-label" for="exampleInputPassword1">Blog,</label>
+											<input class="form-control" id="exampleInputPassword1"
+											placeholder="Blog" type="text" ng-model="blog">
+										</div>
+										<div class="form-group col-md-3" id="double_column">
+											<label class="control-label" for="exampleInputPassword1">Twitter,</label>
+											<input class="form-control" id="exampleInputPassword1"
+											placeholder="Twitter" type="text" ng-model="twitter">
+										</div>
+										<div class="form-group col-md-3" id="double_column">
+											<label class="control-label" for="exampleInputPassword1">Linkedin,</label>
+											<input class="form-control" id="exampleInputPassword1"
+											placeholder="Linkedin" type="text" ng-model="linkedin">
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-offset-11" id="double_column" >
+											<!-- <a href=<%= new_experience_path %>> -->
+									        <button type="submit" class="btn btn-default" ng-click="addPersonalInfo(firstName, lastName, email, phoneNumber, github, blog, twitter, linkedin)">Submit</button>
+									        <!-- </a> -->
+									    </div>
+									</div>
 								</form>
 							</div>
 						</div>
@@ -105,3 +124,5 @@
 		</div>
 	</div>
 </div>
+</body>
+</html>
