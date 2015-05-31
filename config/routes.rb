@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :proffessional_skills
   resources :personal_skills
   resources :references
+  resources :users
 end

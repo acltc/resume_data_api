@@ -13,6 +13,7 @@
   	}
 
   	$scope.addNewExperience = function(startDate, endDate, jobTitle, companyName){
+      var startDate = startDate.
   		var experience = {start_date: startDate, end_date: endDate, job_title: jobTitle, company_name: companyName};
   		$http.post("/api/v1/experiences.json", experience).then(function(response){
   			$scope.experiences.push(experience);
