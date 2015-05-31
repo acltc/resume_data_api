@@ -12,8 +12,8 @@
   		}
   	}
 
-  	$scope.addNewExperience = function(companyName, jobTitle, startDate, endDate){
-  		var experience = {job_title: jobTitle, company_name: companyName, start_date: startDate, end_date: endDate};
+  	$scope.addNewExperience = function(startDate, endDate, jobTitle, companyName){
+  		var experience = {start_date: startDate, end_date: endDate, job_title: jobTitle, company_name: companyName};
   		$http.post("/api/v1/experiences.json", experience).then(function(response){
   			$scope.experiences.push(experience);
   		}), function(error){
