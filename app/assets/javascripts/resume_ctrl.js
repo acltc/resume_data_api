@@ -21,6 +21,15 @@
   		}
   	}
 
+    $scope.addNewExperienceDetails = function(detail){
+      var experienceDetail = {detail: detail};
+      $http.post("/api/v1/experiences.json", experienceDetail).then(function(response){
+        $scope.experienceDetails.push(experienceDetail);
+      }), function(error){
+        $scope.errors = error.data.errors;
+      }
+    }
+
     $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){
       var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName};
       $http.post("/api/v1/educations.json", education).then(function(response){

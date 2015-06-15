@@ -8,7 +8,7 @@ json.twitter @student.twitter
 json.blog @student.blog
 json.online_resume @student.online_resume
 json.github @student.github
-json.street_address student.street_address
+json.address student.street_address
 json.city student.city
 json.state student.state
 json.photo @student.photo

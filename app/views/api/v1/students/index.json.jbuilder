@@ -9,7 +9,7 @@ json.students @students.each do |student|
   json.blog student.blog
   json.online_resume student.online_resume
   json.github student.github
-  json.street_address student.address
+  json.address student.address
   json.city student.city
   json.state student.state
   json.photo student.photo
