@@ -20,7 +20,10 @@ class Api::V1::StudentsController < ApplicationController
       :github => params[:github],
       :blog => params[:blog],
       :twitter => params[:twitter],
-      :linkedin => params[:linkedin]
+      :linkedin => params[:linkedin],
+      :address => params[:address],
+      :city => params[:city],
+      :state => params[:state]
     })
     # redirect_to api_v1_student_path(@student.id)
     # redirect_to "api/v1/students/#{@student.id}.json"
