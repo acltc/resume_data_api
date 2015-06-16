@@ -1,10 +1,64 @@
 <div ng-app="app">
-  <div ng-controller="resumeCtrl">
-    <input ng-model="companyName">
-    <input ng-model="jobTitle">
-    <input ng-model="startDate">
-    <input ng-model="endDate">
-    <a href=<%= new_education_path %>>
-    <button ng-click="addNewExperience(comanyName, jobTitle, startDate, endDate)">next</button></a>
-  </div>
+	<div ng-controller="resumeCtrl">
+
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">Experience</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" method="get" action="<%= new_education_path %>">
+									<div class="form-group">
+										<label class="control-label">Job Title</label>
+										<input class="form-control" type="text" ng-model="jobTitle">
+									</div>
+									<div class="form-group">
+										<label class="control-label">Company Name</label>
+										<input class="form-control" type="text" ng-model="companyName">
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label">Employed From:</label>
+											<input class="form-control" type="date" ng-model="startDate">
+										</div>
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label">To:</label>
+											<input class="form-control" type="date" ng-model="endDate">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label">Job Description</label>
+										<!-- <input class="form-control" type="text"> -->
+										<textarea class="form-control" rows="5" ng-model="jobDescription"></textarea>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label">Details:</label>
+											<input class="form-control" type="text" ng-model="experienceDetail">
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-11" id="double_column">
+									      <i class="fa fa-1x fa-plus fa-fw "></i>
+									      <label class="control-label">Add Another Experience</label>
+									      <!-- <br> -->
+										</div>
+										<div class="form-group col-md-1" id="double_column">
+										<!-- <a href=<%= new_education_path %>> -->
+									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName)" ng-click="addNewExperienceDetails(experienceDetail)">Submit</button>
+										<!-- </a> -->
+									    </div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </div>

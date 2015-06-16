@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318002901) do
+ActiveRecord::Schema.define(version: 20150614225819) do
 
   create_table "education_details", force: :cascade do |t|
     t.text     "detail",       limit: 65535
@@ -76,6 +76,10 @@ ActiveRecord::Schema.define(version: 20150318002901) do
     t.text     "short_bio",     limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address",       limit: 255
+    t.string   "city",          limit: 255
+    t.string   "state",         limit: 255
+    t.string   "appt_number",   limit: 255
   end
 
 end
