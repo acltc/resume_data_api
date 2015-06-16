@@ -1,46 +1,6 @@
-<!DOCTYPE html>
-<html>
-    
-    <head>
-        <title>resume-education-new</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
-        rel="stylesheet" type="text/css">
-        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
-        rel="stylesheet" type="text/css">
-    </head>
-    
-    <body>
-
-
-
-
-
 <div ng-app="app">
 	<div ng-controller="resumeCtrl">
-		<div class="navbar navbar-default navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#"><span>Sharon Knight</span></a>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar-ex-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active">
-							<a href="#">Home</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+
 		<div class="section">
 			<div class="container">
 				<div class="row">
@@ -70,9 +30,15 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label">Job Description and Details</label>
+										<label class="control-label">Job Description</label>
 										<!-- <input class="form-control" type="text"> -->
-										<textarea class="form-control" rows="5"></textarea>
+										<textarea class="form-control" rows="5" ng-model="jobDescription"></textarea>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label">Details:</label>
+											<input class="form-control" type="text" ng-model="experienceDetail">
+										</div>
 									</div>
 									<div class="row">
 										<div class="form-group col-md-11" id="double_column">
@@ -82,7 +48,7 @@
 										</div>
 										<div class="form-group col-md-1" id="double_column">
 										<!-- <a href=<%= new_education_path %>> -->
-									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName)">Submit</button>
+									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName)" ng-click="addNewExperienceDetails(experienceDetail)">Submit</button>
 										<!-- </a> -->
 									    </div>
 									</div>
@@ -93,11 +59,6 @@
 				</div>
 			</div>
 		</div>
+		
 	</div>
 </div>
-
-
-
-
-</body>
-</html>
