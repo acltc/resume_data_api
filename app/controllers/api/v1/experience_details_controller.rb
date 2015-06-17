@@ -5,9 +5,11 @@ class Api::V1::ExperienceDetailsController < ApplicationController
 	end
 
 	def create
+		puts "triggered details"
 		@experience_detail = ExperienceDetail.create({:experience_id => params[:experience_id], :detail => params[:detail]})
-		@student = @experience_detail.experience.student
-			render "students/show"
+		# @student = @experience_detail.experience.student
+			# render "students/show"
+		redirect_to "#{api_v1_students_path}.json"
 	end
 
 	def update

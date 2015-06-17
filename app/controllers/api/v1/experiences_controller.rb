@@ -12,7 +12,8 @@ class Api::V1::ExperiencesController < ApplicationController
 	def create
 		@experience = Experience.create({:start_date => params[:start_date], :end_date => params[:end_date], :job_title => params[:job_title], :company_name => params[:company_name], :student_id => params[:student_id]})
 		@student = @experience.student
-		render "students/show"		
+		# render "students/show"
+		redirect_to "#{api_v1_students_path}.json"	
 	end
 
 	def update

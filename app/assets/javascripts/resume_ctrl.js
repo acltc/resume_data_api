@@ -23,7 +23,7 @@
 
     $scope.addNewExperienceDetails = function(detail){
       var experienceDetail = {detail: detail};
-      $http.post("/api/v1/experiences.json", experienceDetail).then(function(response){
+      $http.post("/api/v1/experience_details.json", experienceDetail).then(function(response){
         $scope.experienceDetails.push(experienceDetail);
       }), function(error){
         $scope.errors = error.data.errors;
