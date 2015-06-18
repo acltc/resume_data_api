@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :references
     end
   end
-  resources :personal_informaions
+  resources :personal_informations
   resources :profiles
   resources :experiences
   resources :educations
