@@ -1,0 +1,7 @@
+<button><a href="http://localhost:3001/resumes/down_load_pdf/<%= @student.id %>.pdf">Get your PDF!</a></button>
+
+<button><a onclick="window.open('http://localhost:3001/resumes/leach_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Leach template</a></button>
+
+<button><a onclick="window.open('http://localhost:3001/resumes/walsh_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Walsh template</a></button>
+
+<%= render 'personal_informations' %>
