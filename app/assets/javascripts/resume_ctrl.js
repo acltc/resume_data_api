@@ -13,26 +13,21 @@
     }
 
     $scope.addNewExperience = function(startDate, endDate, jobTitle, companyName, detail){
-      alert("this processed");
-      var experienceDetail = {detail: detail};
-      $http.post("/api/v1/experience_details.json", experienceDetail).then(function(response){
-        $scope.experienceDetails.push(experienceDetail);
-      }), function(error){
-        $scope.errors = error.data.errors;
-      }
-      var experience = {start_date: startDate, end_date: endDate, job_title: jobTitle, company_name: companyName};
+      var experience = {start_date: startDate, end_date: endDate, job_title: jobTitle, company_name: companyName, details: [detail]};
       $http.post("/api/v1/experiences.json", experience).then(function(response){
         $scope.experiences.push(experience);
-        // debugger;
       }), function(error){
         $scope.errors = error.data.errors;
       }
 
+
+      
       // $http.get("/api/v1/experiences.json").then(function(response){
       //   $scope.allExperiences = response.data["experiences"];
-      //   var matchingExperience = undefined
+      //   console.log(allExperiences);
+        // var matchingExperience = undefined;
       //   for(var i = 0; i < allExperiences.length; i++){
-      //   var hashComparisonCounter = 0
+      //   var hashComparisonCounter = 0;
       //     for(var j = 0; j < experience.length; j++){
       //       if (allExperiences[i][(j + 1)] === experience[j]){
       //         hashComparisonCounter ++;
@@ -47,6 +42,12 @@
 
       // var experienceId = matchingExperience["id"];
 
+      // var experienceDetail = {detail: detail};
+      // $http.post("/api/v1/experience_details.json", experienceDetail).then(function(response){
+      //   $scope.experienceDetails.push(experienceDetail);
+      // }), function(error){
+      //   $scope.errors = error.data.errors;
+      // }
       
     }
 
