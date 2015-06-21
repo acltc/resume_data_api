@@ -13,7 +13,18 @@ class ProfilesController < ApplicationController
 
   def show
     @students = Student.all
-    @student = Student.find_by_first_name(users_name(params[:full_name]))
+    # binding.pry
+    if users_name(params[:full_name])
+      @student = Student.find_by_first_name(users_name(params[:full_name]))
+    else
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
+    
   end
+
+
+
+   
+
 
 end
