@@ -1,5 +1,10 @@
 class Api::V1::ExperienceDetailsController < ApplicationController
 
+	def index
+		@details = ExperienceDetail.all
+	end
+
+
 	def show
 		@experience_detail = ExperienceDetail.find(params[:id])
 	end

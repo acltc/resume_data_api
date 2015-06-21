@@ -17,11 +17,13 @@ json.students @students.each do |student|
 
   json.skills student.skills do |skill| 
     json.id skill.id
+    json.student_id skill.student_id
     json.skill_name skill.skill_name
   end
 
   json.educations student.educations do |education|
   	json.id education.id
+    json.student_id education.student_id
     json.degrees education.degree
     json.university_name education.university_name
     json.start_date education.start_date
@@ -34,12 +36,14 @@ json.students @students.each do |student|
 
   json.experiences student.experiences do |experience|
   	json.id experience.id
+    json.student_id experience.student_id
     json.job_title experience.job_title 
     json.company_name experience.company_name
     json.start_date experience.start_date 
     json.end_date experience.end_date
     json.details experience.experience_details do |experience_detail|
       json.id experience_detail.id
+      json.experience_id experience_detail.experience_id
       json.detail experience_detail.detail
     end
   end
