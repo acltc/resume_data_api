@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  devise_scope :user do
+     authenticated :user do
+       root 'profiles#edit', as: :authenticated_root
+     end
+  unauthenticated do
+       root 'devise/sessions#new', as: :unauthenticated_root
+     end
+   end
+  
+  get '/:full_name' => 'profiles#show'
+
   namespace :api do
     namespace :v1 do
       resources :students
@@ -11,7 +24,7 @@ Rails.application.routes.draw do
       resources :references
     end
   end
-  resources :personal_informaions
+  resources :personal_informations
   resources :profiles
   resources :experiences
   resources :educations
@@ -19,4 +32,5 @@ Rails.application.routes.draw do
   resources :personal_skills
   resources :references
   resources :users
+  resources :students
 end
