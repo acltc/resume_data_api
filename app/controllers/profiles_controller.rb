@@ -16,4 +16,9 @@ class ProfilesController < ApplicationController
     @student = Student.find_by_first_name(users_name(params[:full_name]))
   end
 
+
+
+   
+
+
 end
