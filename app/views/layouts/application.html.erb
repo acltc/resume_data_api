@@ -26,15 +26,17 @@
       </div>
       <div class="collapse navbar-collapse" id="navbar-ex-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active">
-<!--               <a href="#">Home</a> -->
+          <% if user_signed_in? %>
+          <li class="">
+            <%= link_to "Sign out", destroy_user_session_path %>
           </li>
+          <% end %>
         </ul>
       </div>
     </div>
   </div>
 <% flash.each do |name, message| %>
-  <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+  <div id="flash" class="alert alert-<%= name %> alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <%= message %>
   </div>
@@ -43,3 +45,11 @@
 
 </body>
 </html>
+
+<script>
+  $(function() {
+     $('#flash').fadeIn(1000, function() {
+        $(this).delay(1000).fadeOut();
+     });
+  });
+</script>

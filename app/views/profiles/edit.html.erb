@@ -1,0 +1,245 @@
+<h1>This is the users edit page</h1>
+<button><a href="http://localhost:3001/resumes/down_load_pdf/<%= @student.id %>.pdf">Get your PDF!</a></button>
+
+<button><a onclick="window.open('http://localhost:3001/resumes/leach_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Leach template</a></button>
+
+<button><a onclick="window.open('http://localhost:3001/resumes/walsh_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Walsh template</a></button>
+
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Personal Information</h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label class="control-label" for="exampleInputEmail1">First Name</label>
+                <input class="form-control" id="exampleInputEmail1"
+                placeholder="<%= @student.first_name %>" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Last Name</label>
+                <input class="form-control" id="exampleInputPassword1"
+                placeholder="Enter Last Name" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Email</label>
+                <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
+                type="email">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Phone Number</label>
+                <input class="form-control" id="exampleInputPassword1"
+                placeholder="Phone Number" type="text">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label" for="exampleInputPassword1">Street Address,</label>
+                  <input class="form-control" id="exampleInputPassword1"
+                  placeholder="Street Address" type="text">
+                </div>
+                <div class="form-group col-md-3" id="double_column">
+                  <label class="control-label" for="exampleInputPassword1">Street Address,</label>
+                  <input class="form-control" id="exampleInputPassword1"
+                  placeholder="City" type="text">
+                </div>
+                <div class="form-group col-md-3" id="double_column">
+                  <label class="control-label" for="exampleInputPassword1" contenteditable="true">State</label>
+                  <input class="form-control" id="exampleInputPassword1" placeholder="State"
+                  type="text">
+                </div>
+              </div>
+              <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-default">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Profile</h3>
+          </div>
+          <div class="panel-body">
+            <p>Fingerstache Shoreditch normcore, Blue Bottle tofu vegan Neutra fap fashion
+              axe mumblecore. Blue Bottle PBR&amp;B Truffaut organic, tilde shabby chic
+              listicle deep v Echo Park pop-up YOLO 8-bit selfies before they sold out.
+              Banjo wayfarers Odd Future, lomo McSweeney's roof party meggings scenester
+              cray normcore forage Austin. +1 deep v fixie, semiotics twee scenester
+              freegan fingerstache Thundercats health goth kale chips quinoa. Gentrify
+              viral XOXO Shoreditch trust fund, tote bag Intelligentsia ugh mumblecore
+              occupy health goth sartorial Portland fixie. Gastropub Odd Future fingerstache,
+              squid Tumblr ugh mumblecore XOXO occupy slow-carb disrupt heirloom health
+              goth biodiesel small batch. Vinyl whatever Helvetica Brooklyn.</p>
+              <div
+              class="btn-group pull-right">
+              <button type="submit" class="btn btn-default">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Education</h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label class="control-label">Degree Earned</label>
+                <input class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label">University Name</label>
+                <input class="form-control" type="text">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">Attended From:</label>
+                  <input class="form-control" type="text">
+                </div>
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">To:</label>
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Details</label>
+                <input class="form-control" type="text">
+              </div>
+              <br>
+              <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-default">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Experience</h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label class="control-label">Job Title</label>
+                <input class="form-control" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Company Name</label>
+                <input class="form-control" type="text">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">Employed From:</label>
+                  <input class="form-control" type="text">
+                </div>
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">To:</label>
+                  <input class="form-control" type="text">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Job Description and Details</label>
+                <input class="form-control" type="text">
+              </div>
+              <br>
+              <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-default">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Skills</h3>
+          </div>
+          <div class="panel-body">
+            <p>Fingerstache Shoreditch normcore, Blue Bottle tofu vegan Neutra fap fashion</p>
+            <div
+            class="btn-group pull-right">
+            <button type="submit" class="btn btn-default">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">References</h3>
+          </div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label class="control-label" for="exampleInputEmail1">First Name</label>
+                <input class="form-control" id="exampleInputEmail1"
+                placeholder="Enter First Name" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Last Name</label>
+                <input class="form-control" id="exampleInputPassword1"
+                placeholder="Enter Last Name" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Email</label>
+                <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
+                type="email">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Phone Number</label>
+                <input class="form-control" id="exampleInputPassword1"
+                placeholder="Phone Number" type="text">
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="exampleInputPassword1">Company</label>
+                <input class="form-control" id="exampleInputPassword1"
+                type="text">
+              </div>
+              <div class="btn-group pull-right">
+                <button type="submit" class="btn btn-default">Edit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
