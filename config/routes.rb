@@ -11,6 +11,7 @@ Rails.application.routes.draw do
    end
   
   get '/:full_name' => 'profiles#show'
+  # root 'profiles#edit'
 
   namespace :api do
     namespace :v1 do
