@@ -51,8 +51,8 @@
       
     }
 
-    $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){
-      var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName};
+    $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName, educationDetail){
+      var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName, education_details: [educationDetail]};
       $http.post("/api/v1/educations.json", education).then(function(response){
         $scope.educations.push(education);
       }), function(error){

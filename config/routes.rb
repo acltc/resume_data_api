@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :experiences
   resources :educations
-  resources :proffessional_skills
+  resources :professional_skills
   resources :personal_skills
   resources :references
   resources :users
