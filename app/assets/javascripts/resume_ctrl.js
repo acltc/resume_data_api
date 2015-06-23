@@ -60,10 +60,19 @@
       }
     }
 
-    $scope.addNewprofessionalSkills = function(skills){
-      var skill = {skills: [skills]};
-      $http.post("/api/v1/proffesional_skills.json", education).then(function(response){
-        $scope.educations.push(education);
+    $scope.addNewProfessionalSkills = function(skills){
+      var professional_skill = {skills: [skills]};
+      $http.post("/api/v1/professional_skills.json", professional_skill).then(function(response){
+        $scope.professional_skills.push(professional_skill);
+      }), function(error){
+        $scope.errors = error.data.errors;
+      }
+    }
+
+    $scope.addNewPersonalSkills = function(skills){
+      var personal_skill = {skills: [skills]};
+      $http.post("/api/v1/personal_skills.json", personal_skill).then(function(response){
+        $scope.personal_skills.push(personal_skill);
       }), function(error){
         $scope.errors = error.data.errors;
       }
