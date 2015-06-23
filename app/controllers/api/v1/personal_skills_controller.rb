@@ -1,9 +1,11 @@
-class Api::V1::SkillsController < ApplicationController
+class Api::V1::PersonalSkillsController < ApplicationController
+	skip_before_filter :verify_authenticity_token
 
-	def create 
-		@skill = Skill.create({:skill_name => params[:skill_name], :student_id => params[:student_id]})
-		@student = @skill.student
-		render "students/show"
+	def create
+		@student = current_user.student
+		student_id = @student.id
+		@skill = Skill.create({:skill_name => params[:skill_name], :student_id => student_id})
+		redirect_to "#{api_v1_students_path(student_id).json}"
 	end
 
 	def update

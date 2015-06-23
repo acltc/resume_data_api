@@ -60,6 +60,15 @@
       }
     }
 
+    $scope.addNewprofessionalSkills = function(skills){
+      var skill = {skills: [skills]};
+      $http.post("/api/v1/proffesional_skills.json", education).then(function(response){
+        $scope.educations.push(education);
+      }), function(error){
+        $scope.errors = error.data.errors;
+      }
+    }
+
     $scope.addNewReference = function(firstName, lastName, email, phoneNumber, companyName){
       var education = {first_name: firstName, last_name: lastName, email: email, company_name: companyName};
       $http.post("/api/v1/educations.json", education).then(function(response){

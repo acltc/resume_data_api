@@ -14,9 +14,9 @@ json.state @student.state
 json.photo @student.photo
 json.short_bio @student.short_bio
 
-json.skills @student.skills do |skill| 
-json.id skill.id
-  json.skill_name skill.skill_name
+json.skills @student.personal_skills do |personal_skill| 
+json.id personal_skill.id
+  json.skill_name personal_skill.skill_name
 end
 
 json.educations @student.educations do |education|
