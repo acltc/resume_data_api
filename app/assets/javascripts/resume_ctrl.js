@@ -79,9 +79,9 @@
     }
 
     $scope.addNewReference = function(firstName, lastName, email, phoneNumber, companyName){
-      var education = {first_name: firstName, last_name: lastName, email: email, company_name: companyName};
-      $http.post("/api/v1/educations.json", education).then(function(response){
-        $scope.educations.push(education);
+      var reference = {first_name: firstName, last_name: lastName, email: email, phone_number: phoneNumber, company_name: companyName};
+      $http.post("/api/v1/references.json", reference).then(function(response){
+        $scope.references.push(reference);
       }), function(error){
         $scope.errors = error.data.errors;
       }

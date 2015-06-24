@@ -47,6 +47,9 @@ end
 json.references @student.references do |reference|
 json.id reference.id
 json.student_id reference.student_id
-json.refrencer_id reference.referencer_id
-json.text reference.good_word
+json.first_name reference.first_name
+json.last_name reference.last_name
+json.email reference.email
+json.phone_number reference.phone_number
+json.company_name reference.company_name
 end
