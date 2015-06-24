@@ -11,17 +11,20 @@ class Api::V1::ExperiencesController < ApplicationController
 
 
 	def create
+		binding.pry	
 		user_id = current_user.student.id
 		@experience = Experience.create({:start_date => params[:start_date], :end_date => params[:end_date], :job_title => params[:job_title], :company_name => params[:company_name], :student_id => user_id})
 		experience_id = @experience.id
 
+
 		params[:details].each do |detail|
-			ExperienceDetail.create({:experience_id => experience_id, :detail => detail})
+			if detail["detail"]
+				ExperienceDetail.create({:experience_id => experience_id, :detail => detail["detail"]})
+			end
 		end
 		# @experience_details = ExperienceDetail.create({:experience_id => experience_id, details => [params[:detail]]})
 		@student = @experience.student
-
-		redirect_to "#{api_v1_students_path}.json"	
+		redirect_to "#{api_v1_students_path}.json"
 	end
 
 	def update

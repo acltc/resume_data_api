@@ -12,13 +12,36 @@
       }
     }
 
-    $scope.addNewExperience = function(startDate, endDate, jobTitle, companyName, detail){
-      var experience = {start_date: startDate, end_date: endDate, job_title: jobTitle, company_name: companyName, details: [detail]};
+// this is the controller for experience/details
+
+    $scope.details = [{}];
+
+    $scope.addNewDetail = function() {
+      // var newItemNo = $scope.details.length+1;
+      $scope.details.push({});
+    };
+      
+    $scope.removeDetail = function() {
+      var lastItem = $scope.details.length-1;
+      $scope.details.splice(lastItem);
+    };
+
+    $scope.addNewExperience = function(startDate, endDate, jobTitle, companyName, details){
+      var experience = {start_date: startDate,
+                        end_date: endDate,
+                        job_title: jobTitle,
+                        company_name: companyName,
+                        details: details};
+      // console.log(experience);
       $http.post("/api/v1/experiences.json", experience).then(function(response){
         $scope.experiences.push(experience);
       }), function(error){
         $scope.errors = error.data.errors;
       }
+
+
+
+      
 
 
       
@@ -51,6 +74,11 @@
       
     }
 
+    
+
+    
+//  - - - - - - - - - - - - - - - - - 
+
     $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){
       var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName};
       $http.post("/api/v1/educations.json", education).then(function(response){
@@ -68,6 +96,9 @@
         $scope.errors = error.data.errors;
       }
     }
+
+
+
     
     window.scope = $scope;
 

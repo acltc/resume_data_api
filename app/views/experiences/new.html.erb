@@ -34,12 +34,43 @@
 										<!-- <input class="form-control" type="text"> -->
 										<textarea class="form-control" rows="5" ng-model="jobDescription"></textarea>
 									</div>
+
+									<!-- <div class="row">
+									  <div class="form-group col-md-6" id="double_column">
+									    
+									      <label class="control-label">Details:</label>
+									      <input class="form-control" type="text" ng-model="experienceDetail" placeholder="Enter details about the job">
+									   
+									  </div>
+									</div> -->
+
+
 									<div class="row">
 										<div class="form-group col-md-6" id="double_column">
-											<label class="control-label">Details:</label>
-											<input class="form-control" type="text" ng-model="experienceDetail">
+											<div  ng-repeat="detail in details">
+												<label class="control-label">Details:</label>
+												<table>
+													<tr>
+														<td>
+															<input class="form-control" type="text" ng-click="addNewDetail()" ng-model="detail.detail" placeholder="Enter details about the job">
+														</td>
+														<td>
+															<label class="remove" ng-show="$last" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
+														</td>
+													</tr>
+												</table>
+											</div>
+											<!-- <label class="addfields" ng-click="addNewDetail()"><i class="fa fa-2x fa-plus-circle"></i>Add Another Detail</label> -->
 										</div>
 									</div>
+									<!-- <div id="choicesDisplay">
+									   {{ details }}
+									   {{experienceDetail}}
+									</div> -->
+
+									
+
+				
 									<div class="row">
 										<div class="form-group col-md-11" id="double_column">
 									      <i class="fa fa-1x fa-plus fa-fw "></i>
@@ -48,12 +79,14 @@
 										</div>
 										<div class="form-group col-md-1" id="double_column">
 										<!-- <a href=<%= new_education_path %>> -->
-									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName, experienceDetail)">Submit</button>
+									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName, details)">Submit</button>
 										<!-- </a> -->
 
 									    </div>
 									</div>
 								</form>
+
+
 							</div>
 						</div>
 					</div>
