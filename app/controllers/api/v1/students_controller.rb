@@ -1,4 +1,5 @@
 class Api::V1::StudentsController < ApplicationController
+    skip_before_filter :verify_authenticity_token
 
   def index
   	@students = Student.all
@@ -12,6 +13,7 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def create
+    user_id = current_user.id
     @student = Student.create({
       :first_name => params[:first_name],
       :last_name => params[:last_name],
@@ -23,7 +25,8 @@ class Api::V1::StudentsController < ApplicationController
       :linkedin => params[:linkedin],
       :address => params[:address],
       :city => params[:city],
-      :state => params[:state]
+      :state => params[:state],
+      :user_id => user_id
     })
     # redirect_to api_v1_student_path(@student.id)
     # redirect_to "api/v1/students/#{@student.id}.json"
