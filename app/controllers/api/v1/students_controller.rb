@@ -17,6 +17,7 @@ class Api::V1::StudentsController < ApplicationController
     @student = Student.create({
       :first_name => params[:first_name],
       :last_name => params[:last_name],
+      :job_title => params[:job_title],
       :email => params[:email],
       :phone_number => params[:phone_number],
       :github => params[:github],

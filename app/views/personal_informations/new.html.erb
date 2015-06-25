@@ -11,15 +11,22 @@
 							</div>
 							<div class="panel-body">
 								<form role="form" method="get" action="<%= new_experience_path %>">
-									<div class="form-group">
-										<label class="control-label" for="exampleInputEmail1">First Name</label>
-										<input class="form-control" id="exampleInputEmail1"
-										placeholder="Enter First Name" type="text" ng-model="firstName">
+									<div class="row">
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label" for="exampleInputEmail1">First Name</label>
+											<input class="form-control" id="exampleInputEmail1"
+											placeholder="Enter First Name" type="text" ng-model="firstName">
+										</div>
+										<div class="form-group col-md-6" id="double_column">
+											<label class="control-label" for="exampleInputPassword1">Last Name</label>
+											<input class="form-control" id="exampleInputPassword1"
+											placeholder="Enter Last Name" type="text" ng-model="lastName">
+										</div>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="exampleInputPassword1">Last Name</label>
-										<input class="form-control" id="exampleInputPassword1"
-										placeholder="Enter Last Name" type="text" ng-model="lastName">
+										<label class="control-label" for="exampleInputPassword1">Job Title</label>
+										<input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
+										type="text" ng-model="jobTitle">
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="exampleInputPassword1">Email</label>
@@ -55,7 +62,7 @@
 											placeholder="Github" type="text" ng-model="github">
 										</div>
 										<div class="form-group col-md-3" id="double_column">
-											<label class="control-label" for="exampleInputPassword1">Blog,</label>
+											<label class="control-label" for="exampleInputPassword1">Personal Website/Blog,</label>
 											<input class="form-control" id="exampleInputPassword1"
 											placeholder="Blog" type="text" ng-model="blog">
 										</div>
@@ -73,7 +80,7 @@
 									<div class="row">
 										<div class="form-group col-md-offset-11" id="double_column" >
 											<!-- <a href=<%= new_experience_path %>> -->
-									        <button type="submit" class="btn btn-default" ng-click="addPersonalInfo(firstName, lastName, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state)">Submit</button>
+									        <button type="submit" class="btn btn-default" ng-click="addPersonalInfo(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state)">Submit</button>
 									        <!-- </a> -->
 									    </div>
 									</div>
