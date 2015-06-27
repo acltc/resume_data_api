@@ -35,7 +35,7 @@
       // console.log(experience);
       $http.post("/api/v1/experiences.json", experience).then(function(response){
         $scope.experiences.push(experience);
-      }), function(error){
+      }), function(error){  
         $scope.errors = error.data.errors;
       }
 

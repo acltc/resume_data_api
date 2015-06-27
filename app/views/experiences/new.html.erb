@@ -9,8 +9,11 @@
 							<div class="panel-heading">
 								<h3 class="panel-title">Experience</h3>
 							</div>
+{{details}}
+{{experience}}
 							<div class="panel-body">
 								<form role="form" method="get" action="<%= new_education_path %>">
+
 									<div class="form-group">
 										<label class="control-label">Job Title</label>
 										<input class="form-control" type="text" ng-model="jobTitle">
@@ -35,16 +38,6 @@
 										<textarea class="form-control" rows="5" ng-model="jobDescription"></textarea>
 									</div>
 
-									<!-- <div class="row">
-									  <div class="form-group col-md-6" id="double_column">
-									    
-									      <label class="control-label">Details:</label>
-									      <input class="form-control" type="text" ng-model="experienceDetail" placeholder="Enter details about the job">
-									   
-									  </div>
-									</div> -->
-
-
 									<div class="row">
 										<div class="form-group col-md-6" id="double_column">
 											<div  ng-repeat="detail in details">
@@ -60,39 +53,27 @@
 													</tr>
 												</table>
 											</div>
-											<!-- <label class="addfields" ng-click="addNewDetail()"><i class="fa fa-2x fa-plus-circle"></i>Add Another Detail</label> -->
+												<!-- <label class="addfields" ng-click="addNewDetail()"><i class="fa fa-2x fa-plus-circle"></i>Add Another Detail</label> -->
 										</div>
 									</div>
-									<!-- <div id="choicesDisplay">
-									   {{ details }}
-									   {{experienceDetail}}
-									</div> -->
-
 									
-
-				
 									<div class="row">
 										<div class="form-group col-md-11" id="double_column">
-									      <i class="fa fa-1x fa-plus fa-fw "></i>
-									      <label class="control-label">Add Another Experience</label>
-									      <!-- <br> -->
+									    <i class="fa fa-1x fa-plus fa-fw "></i>
+									    <label class="control-label">Add Another Experience</label>
 										</div>
 										<div class="form-group col-md-1" id="double_column">
-										<!-- <a href=<%= new_education_path %>> -->
-									      <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName, details)">Submit</button>
-										<!-- </a> -->
-
-									    </div>
+									    <button type=" submit "="=" " "="" ng-click="addNewExperience(startDate, endDate, jobTitle, companyName, details)">Submit</button>
+									  </div>
 									</div>
+
 								</form>
-
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+							</div><!-- end of panel-body -->
+						</div><!-- end of panel panel-primary -->
+					</div><!-- end of first col-md-12 -->
+				</div><!-- end of first row -->
+			</div><!-- end of container -->
+		</div><!-- end of section -->
 		
-	</div>
-</div>
+	</div><!-- end of ng-controller -->
+</div><!-- end of ng-app -->
