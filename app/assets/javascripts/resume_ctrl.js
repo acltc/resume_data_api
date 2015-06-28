@@ -29,8 +29,8 @@
     };
       
     $scope.removeDetail = function() {
-      var lastItem = $scope.details.length-1;
-      $scope.details.splice(lastItem);
+      var lastItem = $scope.jobs[$scope.n]['details'].length-1;
+      $scope.jobs[$scope.n]['details'].splice(lastItem);
     };
 
     $scope.addNewExperience = function(jobs){
@@ -41,7 +41,7 @@
       }
       
     }
-      
+
 //  - - - - - - - - - - - - - - - - - 
 
     $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){

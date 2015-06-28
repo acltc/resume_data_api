@@ -22,3 +22,13 @@ body {
   color: red;
 }
 
+table{
+    border: none;
+    table-layout: fixed;
+    width: 400px;
+}
+
+th, td {
+    border: none;
+}
+

@@ -41,13 +41,12 @@
 										<div class="form-group col-md-6" id="double_column">
 											<div ng-repeat="item in job.details">
 												<label class="control-label">Details:</label>
-												<table>
+												<table border="1">
 													<tr>
 														<td>
-
 															<input class="form-control" type="text" ng-click="addNewDetail()" ng-model="item.detail" placeholder="Enter details about the job">
 														</td>
-														<td>
+														<td style="padding: 8px;">
 															<label class="remove" ng-show="$last" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
 														</td>
 													</tr>
