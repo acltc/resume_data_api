@@ -15,10 +15,16 @@ json.students @students.each do |student|
   json.photo student.photo
   json.short_bio student.short_bio
 
-  json.skills student.skills do |skill| 
-    json.id skill.id
-    json.student_id skill.student_id
-    json.skill_name skill.skill_name
+  json.professional_skills student.professional_skills do |professional_skill| 
+    json.id professional_skill.id
+    json.student_id professional_skill.student_id
+    json.skill_name professional_skill.skill_name
+  end
+
+  json.personal_skills student.personal_skills do |personal_skill|
+    json.id personal_skill.id
+    json.student_id personal_skill.student_id
+    json.skill_name personal_skill.skill_name
   end
 
   json.educations student.educations do |education|
@@ -51,7 +57,10 @@ json.students @students.each do |student|
   json.references student.references do |reference|
   json.id reference.id
   json.student_id reference.student_id
-  json.refrencer_id reference.referencer_id
-  json.text reference.good_word
+  json.first_name reference.first_name
+  json.last_name reference.last_name
+  json.email reference.email
+  json.phone_number reference.phone_number
+  json.company_name reference.company_name
   end
 end
