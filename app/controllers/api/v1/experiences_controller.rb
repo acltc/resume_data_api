@@ -9,19 +9,20 @@ class Api::V1::ExperiencesController < ApplicationController
 		@experience = Experience.find(params[:id])
 	end
 
-
 	def create
+# :job_description => job['jobDescription'], this will have to get added after Shlomos migrations
 		user_id = current_user.student.id
-		@experience = Experience.create({:start_date => params[:start_date], :end_date => params[:end_date], :job_title => params[:job_title], :job_details => params[:job_description],:company_name => params[:company_name], :student_id => user_id})
-		experience_id = @experience.id
-
-		params[:details].each do |detail|
-			ExperienceDetail.create({:experience_id => experience_id, :detail => detail})
+		params["_json"].each do |job|
+			@experience = Experience.create({:start_date => job['startDate'], :end_date => job['endDate'], :job_title => job['jobTitle'], :company_name => job['companyName'], :student_id => user_id})
+			experience_id = @experience.id
+			job["details"].each do |each_detail|
+				if each_detail["detail"]
+					ExperienceDetail.create({:experience_id => experience_id, :detail => each_detail["detail"]})
+				end
+			end
 		end
-		# @experience_details = ExperienceDetail.create({:experience_id => experience_id, details => [params[:detail]]})
 		@student = @experience.student
-
-		redirect_to "#{api_v1_students_path}.json"	
+		redirect_to "#{api_v1_students_path}.json"
 	end
 
 	def update
