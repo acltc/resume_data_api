@@ -1,0 +1,131 @@
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary" ng-model="experiencesCollapsed">
+          <div class="panel-heading" ng-click="experiencesCollapsed=!experiencesCollapsed">
+            <h3 class="panel-title">Experience</h3>
+            <div class="pull-right">
+              <i class="fa fa-plus-circle fa-2x" ng-show="experiencesCollapsed"></i>
+              <i class="fa fa-minus-circle fa-2x" ng-show="!experiencesCollapsed"></i>
+            </div>
+          </div>
+ 
+          <div class="panel-body" ng-show="!experiencesCollapsed" ng-switch on="ePanelStatus">
+<!-- below is the code to view the experiences -->
+
+          <div ng-switch-when="show">
+            <div ng-repeat="job in jobs">
+
+              <div class="form-group">
+                Job Title
+              </div>
+              <div class="form-group">
+                Company Name
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  Employed From:
+                </div>
+                <div class="form-group col-md-6" id="double_column">
+                  To:
+                </div>
+              </div>
+              <div class="form-group">
+                Job Description:
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <div ng-repeat="item in job.details">
+                
+                    Details:
+                    <ul>
+                      <li>Detail one</li>
+                      <li>Detail two</li>
+                      <li>Detail three</li>
+                      <li>Detail four</li>
+                    </ul>
+                  </div><!-- End of detail ng-repeat -->
+                </div>
+              </div>
+              <hr>
+            </div><!-- End of jobs ng-repeat -->
+              
+              <div class="row">
+                <div class="form-group col-md-11" id="double_column">
+                </div>
+                <div class="form-group col-md-1" id="double_column" ng-show="ePanelStatus='show'">
+                  <button type=" submit "="=" " "="" ng-click="editEPanel()">Edit</button>
+                </div>
+              </div>
+            
+          </div><!-- end of ng-switch="show" -->
+
+<!-- below is the code to edit the experiences -->
+
+          <div ng-switch-when="edit">
+            <form role="form" method="get" action="<%= new_education_path %>">
+            <div ng-repeat="job in jobs">
+
+              <div class="form-group">
+                <label class="control-label">Job Title</label>
+                <input class="form-control" type="text" ng-model="job.jobTitle">
+              </div>
+              <div class="form-group">
+                <label class="control-label">Company Name</label>
+                <input class="form-control" type="text" ng-model="job.companyName">
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">Employed From:</label>
+                  <input class="form-control" type="date" ng-model="job.startDate">
+                </div>
+                <div class="form-group col-md-6" id="double_column">
+                  <label class="control-label">To:</label>
+                  <input class="form-control" type="date" ng-model="job.endDate">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Job Description</label>
+                <textarea class="form-control" rows="5" ng-model="job.jobDescription"></textarea>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-md-6" id="double_column">
+                  <div ng-repeat="item in job.details">
+                    <label class="control-label">Details:</label>
+                    <table border="1">
+                      <tr>
+                        <td>
+                          <input class="form-control" type="text" ng-click="addNewDetail()" ng-model="item.detail" placeholder="Enter details about the job">
+                        </td>
+                        <td style="padding: 8px;">
+                          <label class="remove" ng-show="$last" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
+                        </td>
+                      </tr>
+                    </table>
+                  </div><!-- End of detail ng-repeat -->
+                </div>
+              </div>
+              <hr>
+            </div><!-- End of jobs ng-repeat -->
+              
+              <div class="row">
+                <div class="form-group col-md-11" id="double_column">
+                  <i class="fa fa-1x fa-plus fa-fw "></i>
+                  <label class="control-label" ng-click="addNewJob()">Add Another Experience</label>
+                </div>
+                <div class="form-group col-md-1" id="double_column">
+                  <button type=" submit "="=" " "="" ng-click="addNewExperience(jobs)">Update</button>
+                </div>
+              </div>
+            
+            </form>
+          </div><!-- end of ng-switch -->
+          </div><!-- end of panel-body -->
+        </div><!-- end of panel panel-primary -->
+      </div><!-- end of first col-md-12 -->
+    </div><!-- end of first row -->
+  </div><!-- end of container -->
+</div><!-- end of section -->
