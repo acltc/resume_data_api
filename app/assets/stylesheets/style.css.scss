@@ -13,3 +13,30 @@ body {
   font-size: 2em;
   color: red;
 }
+
+.panel-heading {
+  height: 40px;
+}
+
+.pull-right {
+  margin-top: -18px;
+}
+
+.fa-plus-circle {
+  color: green;
+}
+
+.fa-times-circle-o {
+  color: red;
+}
+
+table{
+    border: none;
+    table-layout: fixed;
+    width: 400px;
+}
+
+th, td {
+    border: none;
+}
+
