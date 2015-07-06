@@ -4,16 +4,16 @@ Rails.application.routes.draw do
       resources :students
       resources :experiences
       resources :educations
-      resources :proffessional_skills
+      resources :professional_skills
       resources :personal_skills
       resources :references
     end
   end
-  resources :personal_informaions
+  resources :personal_informations
   resources :profiles
   resources :experiences
   resources :educations
-  resources :proffessional_skills
+  resources :professional_skills
   resources :personal_skills
   resources :references
   resources :users
