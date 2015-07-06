@@ -15,11 +15,12 @@ body {
 }
 
 .panel-heading {
-  height: 60px;
+  background-color: #18A396 !important;
 }
 
 .panel {
   box-shadow: 10px 10px 5px #888888;
+  border-color: #18A396 !important;
 }
 
 .panel_body {
@@ -58,4 +59,3 @@ th, td {
   vertical-align: middle;
   padding-left: 10px;
 }
-
