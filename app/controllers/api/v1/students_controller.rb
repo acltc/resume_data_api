@@ -29,8 +29,6 @@ class Api::V1::StudentsController < ApplicationController
       :state => params[:state],
       :user_id => user_id
     })
-    # redirect_to api_v1_student_path(@student.id)
-    # redirect_to "api/v1/students/#{@student.id}.json"
     redirect_to "#{api_v1_student_path(@student.id)}.json"
   end
 
