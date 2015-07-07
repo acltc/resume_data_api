@@ -11,8 +11,6 @@ class Api::V1::ExperienceDetailsController < ApplicationController
 
 	def create
 		@experience_detail = ExperienceDetail.create({:experience_id => params[:experience_id], :detail => params[:detail]})
-		# @student = @experience_detail.experience.student
-			# render "students/show"
 		redirect_to "#{api_v1_students_path}.json"
 	end
 
