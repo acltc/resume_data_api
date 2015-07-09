@@ -1,28 +1,27 @@
 (function () {
   "use strict";
 
-  angular.module("app").controller("resumeCtrl", function($scope, $http, $location) {
+  angular.module("app").controller("resumeCtrl", function($scope, $http, $location, $filter) {
 
     // the get service below
-
     $scope.fetchData = function(id) {
-      $scope.user_id = id;
-      $http.get("/api/v1/profiles/" + user_id + ".json").then(function(response) {
+      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
         $scope.usersData = response.data;
+        $scope.experiences = $scope.usersData.experiences
+        $scope.ePanelStatus = "show"
       });
     }
 
-    // experiences Panel Crud Functions  <-- Start -->
-    $scope.getExperiencesPanel = function(panel) {
-        RequestService.getPanelData().then(function(res) {
-            $scope.screenings = res[0]
-            $scope.ePanelStatus = "show"
+    $scope.editEPanel = function() {
+        $scope.ePanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
 
-        });
-    }
+    $scope.resetEPanel = function() {
+        $scope.ePanelStatus = "show"
+    };
 
       // the post services below
-
   	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
   		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
       $http.post("/api/v1/students.json", student).then(function(response){

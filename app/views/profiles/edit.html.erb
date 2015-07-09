@@ -5,7 +5,7 @@
 <button><a onclick="window.open('http://localhost:3001/resumes/walsh_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Walsh template</a></button>
 
 <div ng-app="app">
-  <div ng-controller="resumeCtrl">
+  <div ng-controller="resumeCtrl" ng-init="fetchData(<%= @student.id %>)">
 
 <%= render 'personal_informations' %>
 <%= render 'experiences' %>

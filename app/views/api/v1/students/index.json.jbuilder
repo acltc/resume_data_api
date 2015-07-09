@@ -47,6 +47,7 @@ json.students @students.each do |student|
     json.company_name experience.company_name
     json.start_date experience.start_date 
     json.end_date experience.end_date
+    json.job_description experience.job_description
     json.details experience.experience_details do |experience_detail|
       json.id experience_detail.id
       json.experience_id experience_detail.experience_id
