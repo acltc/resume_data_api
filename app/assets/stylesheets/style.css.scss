@@ -33,21 +33,30 @@ body {
   text-align: center;
 }
 
+.form-control-details {
+  width: 50%
+}
+
 .fa-plus-circle {
   color: green;
 }
 
 .fa-times-circle-o {
   color: red;
+  margin-top: 13px;
 }
 
 table{
     border: none;
-    table-layout: fixed;
-    width: 400px;
+    width: 100%;
 }
 
 th, td {
     border: none;
+}
+
+.delete_circle {
+  vertical-align: middle;
+  padding-left: 10px;
 }
 

@@ -66,12 +66,13 @@
                 </div><!-- panel body -->
               </div><!-- end of row -->
             </div><!-- class="form-group" ng-repeat="job in experiences" -->
-        <hr>
               
             <div class="row">
-              <div class="form-group col-md-11" id="double_column">
-                <div class="form-group col-md-1" id="double_column" ng-show="ePanelStatus='show'">
-                  <button type=" submit "="=" " "="" ng-click="editEPanel()">Edit</button>
+            <div class="pull-right">
+                <div class="form-group col-md-12" class="pull-right" >
+                  <div class="form-group" ng-show="ePanelStatus='show'">
+                    <button type=" submit "="=" " "="" ng-click="editEPanel()">Edit</button>
+                  </div>
                 </div>
               </div>
             </div><!-- end of row -->
@@ -104,22 +105,22 @@
                     <div class="form-group">
 
                       <label class="control-label">Job Description</label>
-                      <!-- <textarea name="job_description" cols="130" rows="3" ng-model="job.jobDescription">{{experience["job_description"]}}</textarea> -->
-
-                      <textarea class="form-control" cols="130" rows="5">{{job['job_description']}}</textarea>
+                      <!-- <textarea class="form-control" cols="130" rows="5" ng-model='job.jobDescription'>{{experience['job_description']}}</textarea> -->
+                      
+                      <textarea class="form-control" rows="5">{{experience['job_description']}}</textarea>
                     </div>
 
                     <div class="row">
-                      <div class="form-group col-md-6" id="double_column">
+                      <div class="form-group col-md-12" id="double_column">
                         <div ng-repeat="jobDetail in experience['details']">
                           <div ng-repeat="item in job.details">
-                            <label class="control-label">Details:</label>
-                            <table border="1">
+                            <label class="control-label">Details:</label>                            
+                            <table>
                               <tr>
                                 <td>
-                                  <input class="form-control" type="text" ng-click="addNewDetail()" ng-model="item.detail" placeholder="{{jobDetail['detail']}}">
+                                  <textarea class="form-control" rows="3" ng-click="addNewDetail()">{{jobDetail['detail']}}</textarea>
                                 </td>
-                                <td style="padding: 8px;">
+                                <td class="delete_circle">
                                   <label class="remove" ng-show="$last" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
                                 </td>
                               </tr>
