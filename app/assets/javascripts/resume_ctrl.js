@@ -47,7 +47,7 @@
       $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
       $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
       if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
-        $scope.jobs[$scope.indexOfJobWithinJobs].details.push({});
+        $scope.jobs[$scope.indexOfJobWithinJobs].details.push( {} );
       }
     };
 
@@ -66,7 +66,7 @@
       $scope.jobs[indexOfJobWithinJobs]['details'].splice(indexOfItemWithinDetailsOfTheJob, 1);
     };
 
-    $scope.addNewExperience = function(jobs){
+    $scope.addAllExperiences = function(jobs){
       $http.post("/api/v1/experiences.json", jobs).then(function(response){
         $scope.experiences.push(jobs);
       }), function(error){  
@@ -77,10 +77,41 @@
 
 //  - - - - - - - - - - - - - - - - - 
 
-    $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){
-      var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName};
-      $http.post("/api/v1/educations.json", education).then(function(response){
-        $scope.educations.push(education);
+// education/education_details:
+
+    $scope.educations = [ {highlights: [{}] } ];
+
+    $scope.jobs = [{details: [{}] }];
+      $scope.moreThanOneEducation = function(){
+      var moreThanOne = true;
+      if ($scope.educations.length > 1){
+        moreThanOne = false;
+      }
+      return moreThanOne;
+    }
+
+    $scope.anotherEducationForm = function(){
+      $scope.educations.push( {highlights: [{}] } );
+    }
+
+    $scope.anotherHighlightForm = function(education, highlight){
+      $scope.indexOfEducationWithinEducations = $scope.educations.indexOf(education);
+      $scope.indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[$scope.indexOfEducationWithinEducations].highlights.length - 2;
+      if ($scope.educations[$scope.indexOfEducationWithinEducations].highlights.length === 1 || $scope.educations[$scope.indexOfEducationWithinEducations].highlights[$scope.indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
+        $scope.educations[$scope.indexOfEducationWithinEducations].highlights.push( {} );
+      }
+    }
+
+    $scope.removeEducationForm = function(education){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      $scope.educations.splice(indexOfParticularEducationWithinEducations, 1);
+    }
+
+    $scope.removeHighlightForm
+
+    $scope.addAllEducations = function(educationsBlob){
+      $http.post("/api/v1/educations.json", educationsBlob).then(function(response){
+        $scope.educations.push(educationsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
