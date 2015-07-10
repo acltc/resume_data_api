@@ -25,12 +25,12 @@ class Api::V1::ExperiencesController < ApplicationController
 		redirect_to "#{api_v1_students_path}.json"
 	end
 
-	def update
-		@experience = Experience.find(params[:id])
-		@experience.update({:start_date => params[:start_date], :end_date => params[:end_date], :job_title => params[:job_title], :company_name => params[:company_name], params[:job_description]})
-		@student = @experience.student
-		render "students/show"		
-	end
+	# def update
+	# 	@experience = Experience.find(params[:id])
+	# 	@experience.update({:start_date => params[:start_date], :end_date => params[:end_date], :job_title => params[:job_title], :company_name => params[:company_name], params[:job_description]})
+	# 	@student = @experience.student
+	# 	render "students/show"		
+	# end
 
 	def delete
 		@experience = Experience.find(params[:id])

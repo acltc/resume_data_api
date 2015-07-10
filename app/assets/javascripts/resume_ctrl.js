@@ -34,21 +34,36 @@
 // this is the controller for experience/details
 
     $scope.jobs = [{details: [{}] }];
-    $scope.n = 0
+    $scope.moreThanOne = function(){
+      var moreThanOne = true;
+      if ($scope.jobs.length > 1){
+        moreThanOne = false;
+      }
+      return moreThanOne;
+    }
 
 
-    $scope.addNewDetail = function() {
-      $scope.jobs[$scope.n].details.push({});
+    $scope.addNewDetail = function(job) {
+      $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
+      $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
+      if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
+        $scope.jobs[$scope.indexOfJobWithinJobs].details.push({});
+      }
     };
 
     $scope.addNewJob = function() {
-      $scope.jobs.push({details: [{}]})
-      $scope.n += 1
+      $scope.jobs.push({details: [{}]});
     };
+
+    $scope.removeJob = function(job){
+      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
+      $scope.jobs.splice(indexOfJobWithinJobs, 1);
+    }
       
-    $scope.removeDetail = function() {
-      var lastItem = $scope.jobs[$scope.n]['details'].length-1;
-      $scope.jobs[$scope.n]['details'].splice(lastItem);
+    $scope.removeDetail = function(job, item) {
+      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
+      var indexOfItemWithinDetailsOfTheJob = $scope.jobs[indexOfJobWithinJobs]['details'].indexOf(item);
+      $scope.jobs[indexOfJobWithinJobs]['details'].splice(indexOfItemWithinDetailsOfTheJob, 1);
     };
 
     $scope.addNewExperience = function(jobs){
