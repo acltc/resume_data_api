@@ -3,24 +3,6 @@
 
   angular.module("app").controller("resumeCtrl", function($scope, $http, $location, $filter) {
 
-    // the get service below
-    $scope.fetchData = function(id) {
-      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
-        $scope.usersData = response.data;
-        $scope.experiences = $scope.usersData.experiences
-        $scope.ePanelStatus = "show"
-      });
-    }
-
-    $scope.editEPanel = function() {
-        $scope.ePanelStatus = "edit"
-        // $scope.SPanelDeletions = []
-    };
-
-    $scope.resetEPanel = function() {
-        $scope.ePanelStatus = "show"
-    };
-
       // the post services below
   	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
   		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
@@ -40,6 +22,29 @@
         moreThanOne = false;
       }
       return moreThanOne;
+    }
+
+    $scope.fetchData = function(id) {
+      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
+        $scope.usersData = response.data;
+        $scope.experiences = $scope.usersData.experiences
+        $scope.ePanelStatus = "show"
+      });
+    }
+
+
+    $scope.editEPanel = function() {
+        $scope.ePanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
+
+    $scope.resetEPanel = function() {
+        $scope.ePanelStatus = "show"
+    };
+
+    $scope.setDate = function(aDate) {
+      // doesn't work yet
+      $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
     }
 
 
@@ -113,10 +118,9 @@
       }
     }
 
-
-
-    
     window.scope = $scope;
 
   });
 })();
+
+
