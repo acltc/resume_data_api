@@ -9,19 +9,17 @@ body {
   text-align: center;
 }
 
-.panel-title {
-  font-size: 2em;
-  color: #ffffff;
+.panel_title {
+  font-size: 3em;
+  color: red;
 }
 
 .panel-heading {
   height: 60px;
 }
 
-.panel_text {
-}
-
-.pull-right {
+.panel {
+  box-shadow: 10px 10px 5px #888888;
 }
 
 .panel_body {
@@ -31,6 +29,7 @@ body {
 
 .panel_buttons {
   text-align: center;
+  padding: 5px;
 }
 
 .form-control-details {
