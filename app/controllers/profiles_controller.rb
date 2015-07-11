@@ -1,23 +1,30 @@
 class ProfilesController < ApplicationController
-
-  def new
-
-  end
-
-  def create
-
-  end
+  include ProfilesHelper
+  before_action :authenticate_user!, :only => [:edit]
+  
 
   def edit
-
+    if current_user.student
+      @student = current_user.student
+    else
+      redirect_to new_personal_information_path
+    end
   end
 
-  def update
-
+  def show
+    @students = Student.all
+    # binding.pry
+    if users_name(params[:full_name])
+      @student = Student.find_by_first_name(users_name(params[:full_name]))
+    else
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
+    
   end
 
-  def delete
 
-  end
+
+   
+
 
 end
