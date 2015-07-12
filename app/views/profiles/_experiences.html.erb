@@ -4,10 +4,10 @@
       <div class="col-md-12">
         <div class="panel panel-primary" ng-model="experiencesCollapsed">
           <div class="panel-heading" ng-click="experiencesCollapsed=!experiencesCollapsed">
-            <h3 class="panel-title">Experience</h3>
+            <span class="panel-title panel_title">Experience</span>
             <div class="pull-right">
-              <i class="fa fa-plus-circle fa-2x" ng-show="experiencesCollapsed"></i>
-              <i class="fa fa-minus-circle fa-2x" ng-show="!experiencesCollapsed"></i>
+              <i class="expand fa fa-plus-circle fa-2x" ng-show="experiencesCollapsed"></i>
+              <i class="expand fa fa-minus-circle fa-2x" ng-show="!experiencesCollapsed"></i>
             </div>
           </div>
 
@@ -15,7 +15,7 @@
 <!-- below is the code to view the experiences -->
 
           <div ng-switch-when="show">
-            <div class="form-group" ng-repeat="job in experiences">
+            <div class="form-group well" ng-repeat="job in experiences">
               <div class="row">
                 <div class='panel_body'>
 
@@ -37,21 +37,21 @@
                   Employed From:
                   </div>
                   <div class="col-md-10">
-                  {{job["start_date"]}}
+                  {{job["start_date"] | date :  "MM/dd/yyyy"}}
                   </div>
-
+                  
                   <div class="col-md-2 panel_text">
                   Employed to:
                   </div>
                   <div class="col-md-10">
-                  {{job["end_date"]}}
+                  {{job["end_date"] | date :  "MM/dd/yyyy"}}
                   </div>
 
                   <div class="col-md-2 panel_text">
                   Job Description:
                   </div>
                   <div class="col-md-10">
-                  {{job["job_description"]}}
+                  {{job["job_description"] || "N/A"}}
                   </div>
                 
                   <div class="col-md-2 panel_text">
@@ -61,7 +61,6 @@
                     <ul ng-repeat="detail in job['details']">
                       <li>{{detail['detail']}}</li>
                     </ul>
-                  <hr>
                   </div><!-- col-md-10 in details -->
                 </div><!-- panel body -->
               </div><!-- end of row -->
@@ -82,61 +81,54 @@
 
             <div ng-switch-when="edit">
               <form role="form" method="get" action="<%= edit_profile_path(current_user.id) %>">
-                <div ng-repeat="experience in experiences">
-                  <div ng-repeat="job in jobs">
+                <div class="well" ng-repeat="experience in experiences">
+                  
                     <div class="form-group">
                       <label class="control-label">Job Title</label>
-                      <input class="form-control" type="text" ng-model="job.jobTitle" placeholder='{{experience["job_title"]}}'>
+                      <input class="form-control" type="text" ng-model="experience.jobTitle" placeholder='{{experience["job_title"]}}'>
                     </div>
                     <div class="form-group">
                       <label class="control-label">Company Name</label>
-                      <input class="form-control" type="text" ng-model="job.companyName" placeholder='{{experience["company_name"]}}'>
+                      <input class="form-control" type="text" ng-model="experience.companyName" placeholder='{{experience["company_name"]}}'>
                     </div>
                     <div class="row">
-                      <div class="form-group col-md-6" id="double_column">
-                        <label class="control-label">Employed From:</label>
-                        <input class="form-control" type="date" ng-model="job.startDate" placeholder='{{experience["start_date"]}}'>
+                      <div class="form-group col-md-6">
+                        <label class="control-label">Employed From:&nbsp;&nbsp;&nbsp;{{experience["start_date"] | date :  "MM/dd/yyyy"}}</label>
+                        <input class="form-control" type="date" ng-model="experience.startDate" placeholder='{{experience["start_date"] | date : "yyyy-MM-dd"}}'>
                       </div>
-                      <div class="form-group col-md-6" id="double_column">
-                        <label class="control-label">To:</label>
-                        <input class="form-control" type="date" ng-model="job.endDate">
+                      <div class="form-group col-md-6">
+                        <label class="control-label">To:&nbsp;&nbsp;&nbsp;{{experience["end_date"] | date :  "MM/dd/yyyy"}}</label>
+                        <input class="form-control" type="date" ng-model="experience.endDate">
                       </div>
                     </div>
-                    <div class="form-group">
-
+                    <div class="form-group" ng-init="defaultText='fucker'">
                       <label class="control-label">Job Description</label>
-                      <!-- <textarea class="form-control" cols="130" rows="5" ng-model='job.jobDescription'>{{experience['job_description']}}</textarea> -->
-                      
-                      <textarea class="form-control" rows="5">{{experience['job_description']}}</textarea>
+                      <textarea class="form-control" rows="5" ng-model="experience['job_description']"></textarea>
                     </div>
 
                     <div class="row">
                       <div class="form-group col-md-12" id="double_column">
                         <div ng-repeat="jobDetail in experience['details']">
-                          <div ng-repeat="item in job.details">
                             <label class="control-label">Details:</label>                            
                             <table>
                               <tr>
                                 <td>
-                                  <textarea class="form-control" rows="3" ng-click="addNewDetail()">{{jobDetail['detail']}}</textarea>
+                                  <textarea class="form-control" rows="3" ng-click="addNewDetail()" ng-model="jobDetail.detail">{{jobDetail['detail']}}</textarea>
                                 </td>
                                 <td class="delete_circle">
-                                  <label class="remove" ng-show="$last" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
+                                  <label class="remove" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
                                 </td>
                               </tr>
                             </table>
-                          </div><!-- End of detail ng-repeat -->
                         </div><!-- End of detail ng-repeat FOR THE EDIT FORM -->
                       </div><!-- End class="form-group col-md-6" id="double_column" -->
                     </div><!-- End of row -->
-                  <hr>
-                  </div><!-- End of jobs ng-repeat -->
                 </div><!-- end ng-repeat="experience in experiences -->
-                
+              </form>
                 <div class="row">
                   <div class="panel_buttons col-md-4">
                     <i class="fa fa-1x fa-plus fa-fw"></i>
-                    <label class="control-label" ng-click="addNewJob()">Add Another Experience</label>
+                    <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
                   </div>
                   <div class="panel_buttons col-md-4">
                     <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
@@ -145,8 +137,6 @@
                     <button type=" submit "="=" " "="" ng-click="addNewExperience(jobs)">Update</button>
                   </div>
                 </div><!-- end of row -->
-              
-              </form>
             </div><!-- end ng-switch-when="edit" -->
           </div><!-- end of panel-body ng-switch on="ePanelStatus" -->
 

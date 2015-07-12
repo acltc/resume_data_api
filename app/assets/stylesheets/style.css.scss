@@ -9,28 +9,28 @@ body {
   text-align: center;
 }
 
-.panel-title {
-  font-size: 2em;
-  color: #ffffff;
+.panel {
+  border-color: #18A396 !important;
+  box-shadow:5px 5px 2px rgba(122,116,116,0.15) !important;
 }
 
 .panel-heading {
+  background-color: #18A396 !important;
   height: 60px;
 }
 
-.panel_text {
-}
-
-.pull-right {
-}
-
-.panel_body {
-  // border: 1px solid blue;
-  // background-color: red;
+.panel-title {
+  font-size: 3em !important;
+  color: red;
 }
 
 .panel_buttons {
   text-align: center;
+  padding: 5px;
+}
+
+.expand {
+  margin-top: 10px;
 }
 
 .form-control-details {
@@ -43,20 +43,18 @@ body {
 
 .fa-times-circle-o {
   color: red;
-  margin-top: 13px;
 }
 
 table{
-    border: none;
-    width: 100%;
+  border: none;
+  width: 100%;
 }
 
 th, td {
-    border: none;
+  border: none;
 }
 
 .delete_circle {
   vertical-align: middle;
   padding-left: 10px;
 }
-
