@@ -81,8 +81,6 @@
 
     $scope.educations = [ {highlights: [{}] } ];
 
-    $scope.jobs = [{details: [{}] }];
-
     $scope.anotherEducationForm = function(){
       $scope.educations.push( {highlights: [{}] } );
     }
