@@ -31,18 +31,18 @@
       }
     }
 
-// this is the controller for experience/details
-
-    $scope.jobs = [{details: [{}] }];
-    $scope.moreThanOne = function(){
-      var moreThanOne = true;
-      if ($scope.jobs.length > 1){
-        moreThanOne = false;
+    $scope.moreThanOne = function(object){
+      var moreThanOne = false;
+      if (object.length > 1){
+        moreThanOne = true;
       }
       return moreThanOne;
     }
 
+// this is the controller for experience/details
 
+    $scope.jobs = [{details: [{}] }];
+    
     $scope.addNewDetail = function(job) {
       $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
       $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
@@ -82,23 +82,17 @@
     $scope.educations = [ {highlights: [{}] } ];
 
     $scope.jobs = [{details: [{}] }];
-      $scope.moreThanOneEducation = function(){
-      var moreThanOne = true;
-      if ($scope.educations.length > 1){
-        moreThanOne = false;
-      }
-      return moreThanOne;
-    }
 
     $scope.anotherEducationForm = function(){
       $scope.educations.push( {highlights: [{}] } );
     }
 
-    $scope.anotherHighlightForm = function(education, highlight){
-      $scope.indexOfEducationWithinEducations = $scope.educations.indexOf(education);
-      $scope.indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[$scope.indexOfEducationWithinEducations].highlights.length - 2;
-      if ($scope.educations[$scope.indexOfEducationWithinEducations].highlights.length === 1 || $scope.educations[$scope.indexOfEducationWithinEducations].highlights[$scope.indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
-        $scope.educations[$scope.indexOfEducationWithinEducations].highlights.push( {} );
+    $scope.anotherHighlightForm = function(education){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
+      var indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[indexOfParticularEducationWithinEducations].highlights.length - 2;
+      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
+        educationObjectOfInterest.highlights.push({});
       }
     }
 
@@ -107,15 +101,22 @@
       $scope.educations.splice(indexOfParticularEducationWithinEducations, 1);
     }
 
-    $scope.removeHighlightForm
+    $scope.removeHighlightForm = function(education, highlight){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
+      var indexOfParticularHighlightWithinAllHighlightsForThisEducationObjectOfInterest = educationObjectOfInterest.highlights.indexOf(highlight);
+      educationObjectOfInterest.highlights.splice(indexOfParticularHighlightWithinAllHighlightsForThisEducationObjectOfInterest, 1);
+    }
 
     $scope.addAllEducations = function(educationsBlob){
       $http.post("/api/v1/educations.json", educationsBlob).then(function(response){
-        $scope.educations.push(educationsBlob);
+        $scope.allEducations.push(educationsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
     }
+
+    // -----------------------------------------------
 
     $scope.addNewProfessionalSkills = function(skills){
       var professional_skill = {skills: [skills]};

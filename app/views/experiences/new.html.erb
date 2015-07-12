@@ -52,7 +52,7 @@
 												</table>
 											</div><!-- End of detail ng-repeat -->
 										</div>
-										<div ng-hide="moreThanOne()" class="form-group col-md-11" id="double_column">
+										<div ng-if="moreThanOne(jobs)" class="form-group col-md-11" id="double_column">
 										    <i class="fa fa-1x fa-plus fa-fw "></i>
 										    <label class="control-label" ng-click="removeJob(job)">Delete Experience</label>
 										</div>

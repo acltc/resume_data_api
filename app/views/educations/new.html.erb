@@ -37,16 +37,16 @@
 														<tr>
 															<td>
 																<label class="control-label">Highlights</label>
-																<input class="form-control" type="text" ng-click="anotherHighlightForm(education, highlight)" ng-model="highlight.highlight" placeholder="Enter specific details about this education">
+																<input class="form-control" type="text" ng-click="anotherHighlightForm(education)" ng-model="highlight.highlight" placeholder="Enter specific details about this education">
 															</td>
 															<td style="padding: 8px;" ng-if="highlight.highlight">
-																<label class="remove" ng-click="removeHighlight(education, highlight)"><i class="fa fa-2x fa-times-circle-o"></i>
+																<label class="remove" ng-click="removeHighlightForm(education, highlight)"><i class="fa fa-2x fa-times-circle-o"></i>
 																</label>
 															</td>
 														</tr>
 													</table>
 												</div>
-												<div ng-hide="moreThanOneEducation()" class="form-group col-md-11" id="double_column">
+												<div ng-if="moreThanOne(educations)" class="form-group col-md-11" id="double_column">
 										    		<i class="fa fa-1x fa-plus fa-fw "></i>
 										    		<label class="control-label" ng-click="removeEducationForm(education)">Delete Education</label>
 												</div>
