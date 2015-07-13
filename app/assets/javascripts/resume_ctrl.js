@@ -113,7 +113,7 @@
 
     $scope.addAllEducations = function(educationsBlob){
       $http.post("/api/v1/educations.json", educationsBlob).then(function(response){
-        $scope.allEducations.push(educationsBlob);
+        // $scope.educations.push(educationsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
@@ -139,7 +139,7 @@
 
     $scope.addNewProfessionalSkills = function(professionalSkillsBlob){
       $http.post("/api/v1/professional_skills.json", professionalSkillsBlob).then(function(response){
-        $scope.professional_skills.push(professionalSkillsBlob);
+        // $scope.professional_skills.push(professionalSkillsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
@@ -166,7 +166,7 @@
     $scope.addNewPersonalSkills = function(skills){
       var personal_skills = skills;
       $http.post("/api/v1/personal_skills.json", personal_skills).then(function(response){
-        $scope.personalSkills.push(personal_skills);
+        // $scope.personalSkills.push(personal_skills);
       }), function(error){
         $scope.errors = error.data.errors;
       }
@@ -187,10 +187,10 @@
       $scope.references.splice(indexOfParticularReferenceWithinReferences, 1);
     }
 
-    $scope.addNewReference = function(firstName, lastName, email, phoneNumber, companyName){
-      var reference = {first_name: firstName, last_name: lastName, email: email, phone_number: phoneNumber, company_name: companyName};
-      $http.post("/api/v1/references.json", reference).then(function(response){
-        $scope.references.push(reference);
+    $scope.addNewReferences = function(referencesBlob){
+      var references = referencesBlob;
+      $http.post("/api/v1/references.json", references).then(function(response){
+      // $scope.manyReferences.push(references);
       }), function(error){
         $scope.errors = error.data.errors;
       }

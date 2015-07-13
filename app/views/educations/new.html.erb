@@ -1,6 +1,6 @@
 <div ng-app="app">
 	<div ng-controller="resumeCtrl">
-		{{educations}}
+		
 		<div class="section">
 			<div class="container">
 				<div class="row">
@@ -14,7 +14,7 @@
 									<div ng-repeat="education in educations">
 										<div class="form-group">
 											<label class="control-label">Degree Earned</label>
-											<input class="form-control" type="text" ng-model="education.degreeEarned">
+											<input class="form-control" type="text" ng-model="education.degree">
 										</div>
 										<div class="form-group">
 											<label class="control-label">University Name</label>
@@ -54,7 +54,6 @@
 										</div>
 										<hr>
 									</div>
-								</form>
 								<div class="row">
 									<div class="form-group col-md-11" id="double_column">
 										<i class="fa fa-1x fa-plus fa-fw "></i>
@@ -67,6 +66,7 @@
 										<!-- </a> -->
 									</div>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>

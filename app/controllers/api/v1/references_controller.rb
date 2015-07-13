@@ -7,9 +7,13 @@ class Api::V1::ReferencesController < ApplicationController
 	
 	def create
 		@student = current_user.student
-		@student_id = @student.id
-		Reference.create({:student_id => @student_id, :first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :phone_number => params[:phone_number], :company_name => params[:company_name]})
-		redirect_to "#{api_v1_student_path(@student_id)}.json"
+		student_id = @student.id
+		params["_json"].each do |reference|
+		  if reference["firstName"] && reference["lastName"]
+		    Reference.create({:student_id => student_id, :first_name => reference["firstName"], :last_name => reference["lastName"], :email => reference["email"], :phone_number => reference["phoneNumber"], :company_name => reference["companyName"]})
+		  end
+		end
+		redirect_to "#{api_v1_student_path(student_id)}.json"
 	end
 
 	def update
