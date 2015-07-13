@@ -11,23 +11,21 @@
 							</div>
 							<div class="panel-body">
 								<form role="form" method="get" action="<%= new_personal_skill_path %>">
-									<div class="form-group col-md-4">
-										<h4>Example: Ruby</h4>
-										<!-- <label class="control-label">Example: Ruby</label> -->
-										<input class="form-control" type="text" ng-model="skill">
-									</div>
-
-									<div class="row">
-										<div class="form-group col-md-11" id="double_column">
-									      <i class="fa fa-1x fa-plus fa-fw "></i>
-									      <label class="control-label" ng-show>Add Another Skill</label>
-									      <!-- <br> -->
+									<h4>Example: Ruby</h4>
+									<div ng-repeat="skill in professionalSkills">
+										<div class="row">
+											<div class="form-group col-md-4">
+												<input class="form-control" type="text" ng-click="anotherSkillForm()" ng-model="skill.skillKey">
+											</div>
+											<div ng-if="skill.skillKey" class="form-group col-md-4">
+												<label class="remove" ng-click="removeSkillForm(skill)"><i class="fa fa-2x fa-times-circle-o"></i></label>
+											</div>
 										</div>
-										<div class="form-group col-md-1" id="double_column">
-										<!-- <a href=<%= new_education_path %>> -->
-									      <button type=" submit "="=" " "="" ng-click="addNewProfessionalSkills(skill)">Submit</button>
-										<!-- </a> -->
-									    </div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-2">
+											<button type=" submit "="=" " "="" ng-click="addNewProfessionalSkills(skill)">Submit</button>
+										</div>
 									</div>
 								</form>
 							</div>

@@ -122,10 +122,25 @@
 
     // -----------------------------------------------
 
-    $scope.addNewProfessionalSkills = function(skills){
-      var professional_skill = {skills: [skills]};
-      $http.post("/api/v1/professional_skills.json", professional_skill).then(function(response){
-        $scope.professional_skills.push(professional_skill);
+// professional skills controller
+
+    $scope.professionalSkills = [ {} ]
+
+    $scope.anotherSkillForm = function(){
+      var indexOfSecondToLastSkillInProfessionalSkills = $scope.professionalSkills.length - 2
+      if ($scope.professionalSkills.length === 1 || $scope.professionalSkills[indexOfSecondToLastSkillInProfessionalSkills]['skillKey']){
+        $scope.professionalSkills.push( {} );
+      }
+    }
+
+    $scope.removeSkillForm = function(skill){
+      var indexOfSkillWithinProfessionalSkills = $scope.professionalSkills.indexOf(skill);
+      $scope.professionalSkills.splice(indexOfSkillWithinProfessionalSkills, 1);
+    }
+
+    $scope.addNewProfessionalSkills = function(professionalSkills){
+      $http.post("/api/v1/professional_skills.json", professionalSkills).then(function(response){
+        $scope.professional_skills.push(professionalSkills);
       }), function(error){
         $scope.errors = error.data.errors;
       }
