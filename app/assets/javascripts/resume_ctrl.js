@@ -13,15 +13,6 @@
       }
     }
 
-    $scope.moreThanOne = function(object){
-      var moreThanOne = false;
-      if (object.length > 1){
-        moreThanOne = true;
-      }
-      return moreThanOne;
-    }
-
-
     $scope.fetchData = function(id) {
       $http.get("/api/v1/students/" + id + ".json").then(function(response) {
         $scope.usersData = response.data;
@@ -43,6 +34,14 @@
     $scope.setDate = function(aDate) {
       // doesn't work yet
       $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
+    }
+
+    $scope.moreThanOne = function(object){
+      var moreThanOne = false;
+      if (object.length > 1){
+        moreThanOne = true;
+      }
+      return moreThanOne;
     }
 
 // this is the controller for experience/details
@@ -165,12 +164,27 @@
     }
 
     $scope.addNewPersonalSkills = function(skills){
-      var personal_skill = {skills: [skills]};
-      $http.post("/api/v1/personal_skills.json", personal_skill).then(function(response){
-        $scope.personal_skills.push(personal_skill);
+      var personal_skills = skills;
+      $http.post("/api/v1/personal_skills.json", personal_skills).then(function(response){
+        $scope.personalSkills.push(personal_skills);
       }), function(error){
         $scope.errors = error.data.errors;
       }
+    }
+
+    // - - - - - - - - - - - - --  -- - - - - - - - - - - - - - - -- - - 
+
+    // references controller
+
+    $scope.references = [ {} ]
+
+    $scope.anotherReferenceForm = function(){
+      $scope.references.push( {} );
+    }
+
+    $scope.removeReferenceForm = function(reference){
+      var indexOfParticularReferenceWithinReferences = $scope.references.indexOf(reference);
+      $scope.references.splice(indexOfParticularReferenceWithinReferences, 1);
     }
 
     $scope.addNewReference = function(firstName, lastName, email, phoneNumber, companyName){
