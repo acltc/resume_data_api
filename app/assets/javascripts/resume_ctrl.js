@@ -126,24 +126,42 @@
 
     $scope.professionalSkills = [ {} ]
 
-    $scope.anotherSkillForm = function(){
+    $scope.anotherProfessionalSkillForm = function(){
       var indexOfSecondToLastSkillInProfessionalSkills = $scope.professionalSkills.length - 2
       if ($scope.professionalSkills.length === 1 || $scope.professionalSkills[indexOfSecondToLastSkillInProfessionalSkills]['skillKey']){
         $scope.professionalSkills.push( {} );
       }
     }
 
-    $scope.removeSkillForm = function(skill){
+    $scope.removeProfessionalSkillForm = function(skill){
       var indexOfSkillWithinProfessionalSkills = $scope.professionalSkills.indexOf(skill);
       $scope.professionalSkills.splice(indexOfSkillWithinProfessionalSkills, 1);
     }
 
-    $scope.addNewProfessionalSkills = function(professionalSkills){
-      $http.post("/api/v1/professional_skills.json", professionalSkills).then(function(response){
-        $scope.professional_skills.push(professionalSkills);
+    $scope.addNewProfessionalSkills = function(professionalSkillsBlob){
+      $http.post("/api/v1/professional_skills.json", professionalSkillsBlob).then(function(response){
+        $scope.professional_skills.push(professionalSkillsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
+    }
+
+    // - - - - - - - -- - - -  - - -- - - - - - - - - - -- - 
+
+// personal skills controller
+
+    $scope.personalSkills = [ {} ];
+
+    $scope.anotherPersonalSkillForm = function(skill){
+      var indexOfSecondToLastSkillInPersonalSkills = $scope.personalSkills.length - 2;
+      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && !skill['skillKey'])){
+        $scope.personalSkills.push( {} );
+      }
+    }
+
+    $scope.removePersonalSkillForm = function(skill){
+      var indexOfSkillWithinPersonalSkills = $scope.personalSkills.indexOf(skill);
+      $scope.personalSkills.splice(indexOfSkillWithinPersonalSkills, 1);
     }
 
     $scope.addNewPersonalSkills = function(skills){

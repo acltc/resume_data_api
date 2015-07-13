@@ -15,16 +15,16 @@
 									<div ng-repeat="skill in professionalSkills">
 										<div class="row">
 											<div class="form-group col-md-4">
-												<input class="form-control" type="text" ng-click="anotherSkillForm()" ng-model="skill.skillKey">
+												<input class="form-control" type="text" ng-click="anotherProfessionalSkillForm()" ng-model="skill.skillKey">
 											</div>
 											<div ng-if="skill.skillKey" class="form-group col-md-4">
-												<label class="remove" ng-click="removeSkillForm(skill)"><i class="fa fa-2x fa-times-circle-o"></i></label>
+												<label class="remove" ng-click="removeProfessionalSkillForm(skill)"><i class="fa fa-2x fa-times-circle-o"></i></label>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="form-group col-md-2">
-											<button type=" submit "="=" " "="" ng-click="addNewProfessionalSkills(skill)">Submit</button>
+											<button type=" submit "="=" " "="" ng-click="addNewProfessionalSkills(professionalSkills)">Submit</button>
 										</div>
 									</div>
 								</form>
