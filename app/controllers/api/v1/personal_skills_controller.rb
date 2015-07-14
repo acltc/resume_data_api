@@ -4,10 +4,12 @@ class Api::V1::PersonalSkillsController < ApplicationController
 	def create
 		@student = current_user.student
 		student_id = @student.id
-		params[:skills].each do |skill|
-		  PersonalSkill.create({:skill_name => skill, :student_id => student_id})
+		params["_json"].each do |skill|
+		  if skill["skillKey"]
+		    PersonalSkill.create({:skill_name => skill["skillKey"], :student_id => student_id})
+		  end
 		end
-		redirect_to "#{api_v1_students_path(student_id).json}"
+		redirect_to "#{api_v1_students_path(student_id)}.json"
 	end
 
 	def update

@@ -13,17 +13,6 @@
       }
     }
 
-// this is the controller for experience/details
-
-    $scope.jobs = [{details: [{}] }];
-    $scope.moreThanOne = function(){
-      var moreThanOne = true;
-      if ($scope.jobs.length > 1){
-        moreThanOne = false;
-      }
-      return moreThanOne;
-    }
-
     $scope.fetchData = function(id) {
       $http.get("/api/v1/students/" + id + ".json").then(function(response) {
         $scope.usersData = response.data;
@@ -47,12 +36,23 @@
       $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
     }
 
+    $scope.moreThanOne = function(object){
+      var moreThanOne = false;
+      if (object.length > 1){
+        moreThanOne = true;
+      }
+      return moreThanOne;
+    }
 
+// this is the controller for experience/details
+
+    $scope.jobs = [{details: [{}] }];
+    
     $scope.addNewDetail = function(job) {
       $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
       $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
       if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
-        $scope.jobs[$scope.indexOfJobWithinJobs].details.push({});
+        $scope.jobs[$scope.indexOfJobWithinJobs].details.push( {} );
       }
     };
 
@@ -71,7 +71,7 @@
       $scope.jobs[indexOfJobWithinJobs]['details'].splice(indexOfItemWithinDetailsOfTheJob, 1);
     };
 
-    $scope.addNewExperience = function(jobs){
+    $scope.addAllExperiences = function(jobs){
       $http.post("/api/v1/experiences.json", jobs).then(function(response){
         $scope.experiences.push(jobs);
       }), function(error){  
@@ -82,37 +82,115 @@
 
 //  - - - - - - - - - - - - - - - - - 
 
-    $scope.addNewEducation = function(startDate, endDate, degreeEarned, universityName){
-      var education = {start_date: startDate, end_date: endDate, degree: degreeEarned, university_name: universityName};
-      $http.post("/api/v1/educations.json", education).then(function(response){
-        $scope.educations.push(education);
+// education/education_details:
+
+    $scope.educations = [ {highlights: [{}] } ];
+
+    $scope.anotherEducationForm = function(){
+      $scope.educations.push( {highlights: [{}] } );
+    }
+
+    $scope.anotherHighlightForm = function(education){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
+      var indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[indexOfParticularEducationWithinEducations].highlights.length - 2;
+      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
+        educationObjectOfInterest.highlights.push({});
+      }
+    }
+
+    $scope.removeEducationForm = function(education){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      $scope.educations.splice(indexOfParticularEducationWithinEducations, 1);
+    }
+
+    $scope.removeHighlightForm = function(education, highlight){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
+      var indexOfParticularHighlightWithinAllHighlightsForThisEducationObjectOfInterest = educationObjectOfInterest.highlights.indexOf(highlight);
+      educationObjectOfInterest.highlights.splice(indexOfParticularHighlightWithinAllHighlightsForThisEducationObjectOfInterest, 1);
+    }
+
+    $scope.addAllEducations = function(educationsBlob){
+      $http.post("/api/v1/educations.json", educationsBlob).then(function(response){
+        // $scope.educations.push(educationsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
     }
 
-    $scope.addNewProfessionalSkills = function(skills){
-      var professional_skill = {skills: [skills]};
-      $http.post("/api/v1/professional_skills.json", professional_skill).then(function(response){
-        $scope.professional_skills.push(professional_skill);
+    // -----------------------------------------------
+
+// professional skills controller
+
+    $scope.professionalSkills = [ {} ]
+
+    $scope.anotherProfessionalSkillForm = function(){
+      var indexOfSecondToLastSkillInProfessionalSkills = $scope.professionalSkills.length - 2
+      if ($scope.professionalSkills.length === 1 || $scope.professionalSkills[indexOfSecondToLastSkillInProfessionalSkills]['skillKey']){
+        $scope.professionalSkills.push( {} );
+      }
+    }
+
+    $scope.removeProfessionalSkillForm = function(skill){
+      var indexOfSkillWithinProfessionalSkills = $scope.professionalSkills.indexOf(skill);
+      $scope.professionalSkills.splice(indexOfSkillWithinProfessionalSkills, 1);
+    }
+
+    $scope.addNewProfessionalSkills = function(professionalSkillsBlob){
+      $http.post("/api/v1/professional_skills.json", professionalSkillsBlob).then(function(response){
+        // $scope.professional_skills.push(professionalSkillsBlob);
       }), function(error){
         $scope.errors = error.data.errors;
       }
+    }
+
+    // - - - - - - - -- - - -  - - -- - - - - - - - - - -- - 
+
+// personal skills controller
+
+    $scope.personalSkills = [ {} ];
+
+    $scope.anotherPersonalSkillForm = function(skill){
+      var indexOfSecondToLastSkillInPersonalSkills = $scope.personalSkills.length - 2;
+      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && !skill['skillKey'])){
+        $scope.personalSkills.push( {} );
+      }
+    }
+
+    $scope.removePersonalSkillForm = function(skill){
+      var indexOfSkillWithinPersonalSkills = $scope.personalSkills.indexOf(skill);
+      $scope.personalSkills.splice(indexOfSkillWithinPersonalSkills, 1);
     }
 
     $scope.addNewPersonalSkills = function(skills){
-      var personal_skill = {skills: [skills]};
-      $http.post("/api/v1/personal_skills.json", personal_skill).then(function(response){
-        $scope.personal_skills.push(personal_skill);
+      var personal_skills = skills;
+      $http.post("/api/v1/personal_skills.json", personal_skills).then(function(response){
+        // $scope.personalSkills.push(personal_skills);
       }), function(error){
         $scope.errors = error.data.errors;
       }
     }
 
-    $scope.addNewReference = function(firstName, lastName, email, phoneNumber, companyName){
-      var reference = {first_name: firstName, last_name: lastName, email: email, phone_number: phoneNumber, company_name: companyName};
-      $http.post("/api/v1/references.json", reference).then(function(response){
-        $scope.references.push(reference);
+    // - - - - - - - - - - - - --  -- - - - - - - - - - - - - - - -- - - 
+
+    // references controller
+
+    $scope.references = [ {} ]
+
+    $scope.anotherReferenceForm = function(){
+      $scope.references.push( {} );
+    }
+
+    $scope.removeReferenceForm = function(reference){
+      var indexOfParticularReferenceWithinReferences = $scope.references.indexOf(reference);
+      $scope.references.splice(indexOfParticularReferenceWithinReferences, 1);
+    }
+
+    $scope.addNewReferences = function(referencesBlob){
+      var references = referencesBlob;
+      $http.post("/api/v1/references.json", references).then(function(response){
+      // $scope.manyReferences.push(references);
       }), function(error){
         $scope.errors = error.data.errors;
       }

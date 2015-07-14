@@ -10,10 +10,10 @@ class Api::V1::ExperiencesController < ApplicationController
 	end
 
 	def create
-# :job_description => job['jobDescription'], this will have to get added after Shlomos migrations
-		user_id = current_user.student.id
+		@student = current_user.student
+		user_id = @student.id
 		params["_json"].each do |job|
-			@experience = Experience.create({:start_date => job['startDate'], :end_date => job['endDate'], :job_title => job['jobTitle'], :company_name => job['companyName'], :job_description => job['job_description'], :student_id => user_id})
+			@experience = Experience.create({:start_date => job['startDate'], :end_date => job['endDate'], :job_title => job['jobTitle'], :company_name => job['companyName'], :job_description => job['jobDescription'], :student_id => user_id})
 			experience_id = @experience.id
 			job["details"].each do |each_detail|
 				if each_detail["detail"]
@@ -21,7 +21,6 @@ class Api::V1::ExperiencesController < ApplicationController
 				end
 			end
 		end
-		@student = @experience.student
 		redirect_to "#{api_v1_students_path}.json"
 	end
 

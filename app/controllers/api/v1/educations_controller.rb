@@ -8,10 +8,16 @@ class Api::V1::EducationsController < ApplicationController
 	def create
 		@student = current_user.student
 		student_id = @student.id
-		@education = Education.create({:start_date => params[:start_date], :end_date => params[:end_date], :degree => params[:degree], :university_name => params[:university_name], :student_id => student_id})
-
-		params[:education_details].each do |detail|
-			EducationDetail.create({:education_id => @education.id, :detail => detail})
+		params["_json"].each do |education|
+			if education["universityName"] && education["degree"]
+				@education = Education.create({:start_date => education["startDate"], :end_date => education["endDate"], :degree => education["degree"], :university_name => education["universityName"], :student_id => student_id})
+				education_id = @education.id
+				education["highlights"].each do |highlight|
+					if highlight["highlight"]
+						EducationDetail.create({:education_id => education_id, :detail => highlight["highlight"]})
+					end
+				end
+			end
 		end
 		redirect_to "#{api_v1_students_path}.json"
 	end

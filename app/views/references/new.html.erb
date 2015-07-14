@@ -1,5 +1,5 @@
-    <div ng-app="app">
-        <div ng-controller="resumeCtrl">
+<div ng-app="app">
+    <div ng-controller="resumeCtrl">
 
             <div class="section">
                 <div class="container">
@@ -11,43 +11,46 @@
                                 </div>
                                 <div class="panel-body">
                                     <form role="form" method="get" action="<%= edit_profile_path(@student_id) %>">
-                                        <div class="form-group">
-                                            <label class="control-label" for="exampleInputEmail1">First Name</label>
-                                            <input class="form-control" id="exampleInputEmail1"
-                                            placeholder="Enter First Name" type="text" ng-model="firstName">
+                                        <div ng-repeat="reference in references">
+                                            <div class="form-group">
+                                                <label class="control-label" for="exampleInputEmail1">First Name</label>
+                                                <input class="form-control" id="exampleInputEmail1"
+                                                placeholder="Enter First Name" type="text" ng-model="reference.firstName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="exampleInputPassword1">Last Name</label>
+                                                <input class="form-control" id="exampleInputPassword1"
+                                                placeholder="Enter Last Name" type="text" ng-model="reference.lastName">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="exampleInputPassword1">Email</label>
+                                                <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email" type="text" ng-model="reference.email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="exampleInputPassword1">Phone Number</label>
+                                                <input class="form-control" id="exampleInputPassword1"
+                                                placeholder="Phone Number" type="text" ng-model="reference.phoneNumber">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="exampleInputPassword1">Company</label>
+                                                <input class="form-control" id="exampleInputPassword1" placeholder="Company name"
+                                                type="text" ng-model="reference.companyName">
+                                            </div>
+                                            <div class="form-group" ng-if="moreThanOne(references)">
+                                                <label class="remove" ng-click="removeReferenceForm(reference)"><i class="fa fa-2x fa-times-circle-o"></i>Delete Reference</label>
+                                            </div>
+                                            <hr>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="exampleInputPassword1">Last Name</label>
-                                            <input class="form-control" id="exampleInputPassword1"
-                                            placeholder="Enter Last Name" type="text" ng-model="lastName">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="exampleInputPassword1">Email</label>
-                                            <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email" type="text" ng-model="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="exampleInputPassword1">Phone Number</label>
-                                            <input class="form-control" id="exampleInputPassword1"
-                                            placeholder="Phone Number" type="text" ng-model="phoneNumber">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label" for="exampleInputPassword1">Company</label>
-                                            <input class="form-control" id="exampleInputPassword1" placeholder="Company name"
-                                            type="text" ng-model="companyName">
-                                        </div>
-                                        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
                                         <div class="row">
-                                        <div class="form-group col-md-11" id="double_column">
-                                          <i class="fa fa-1x fa-plus fa-fw "></i>
-                                          <label class="control-label">Add Another Reference</label>
-                                          <!-- <br> -->
+                                            <div class="form-group col-md-11" id="double_column">
+                                            <i class="fa fa-1x fa-plus fa-fw" ng-click="anotherReferenceForm()">
+                                                <label class="control-label">Add Another Reference</label>
+                                            </i>
+                                            </div>
                                         </div>
                                         <div class="form-group col-md-1" id="double_column">
-                                        <!-- <a href=<%= new_education_path %>> -->
-                                          <button type=" submit "="=" " "="" ng-click="addNewReference(firstName, lastName, email, phoneNumber, companyName)">Submit</button>
-                                        <!-- </a> -->
+                                          <button type=" submit "="=" " "="" ng-click="addNewReferences(references)">Submit</button>
                                         </div>
-                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -56,5 +59,5 @@
                 </div>
             </div>
 
-        </div>
     </div>
+</div>
