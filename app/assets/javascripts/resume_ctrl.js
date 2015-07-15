@@ -153,7 +153,7 @@
 
     $scope.anotherPersonalSkillForm = function(skill){
       var indexOfSecondToLastSkillInPersonalSkills = $scope.personalSkills.length - 2;
-      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && !skill['skillKey'])){
+      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && (!skill['skillKey'] || $scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills + 1]['skillKey']))){
         $scope.personalSkills.push( {} );
       }
     }
