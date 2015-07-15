@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get '/:full_name' => 'profiles#show'
   # root 'profiles#edit'
 
+
+
   namespace :api do
     namespace :v1 do
       resources :students
@@ -25,6 +27,13 @@ Rails.application.routes.draw do
       resources :references
     end
   end
+
+  root 'resumes#index'
+  get '/resumes/:id' => 'resumes#show'
+  get '/resumes/down_load_pdf/:id' => 'resumes#down_load_pdf'
+  get '/resumes/leach_template_show/:id' => 'resumes#leach_template_show'
+  get '/resumes/walsh_template_show/:id' => 'resumes#walsh_template_show'
+
   resources :personal_informations
   resources :profiles
   resources :experiences
@@ -34,4 +43,7 @@ Rails.application.routes.draw do
   resources :references
   resources :users
   resources :students
+
+  
+
 end

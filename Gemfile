@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'devise'
+# by Author
+gem 'unirest'
+gem 'prawn', '~> 0.15.0'
+gem 'prawn-table', '~> 0.2.1'
 
 gem 'seed_dump'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
