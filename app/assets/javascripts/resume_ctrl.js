@@ -48,11 +48,11 @@
 
     $scope.jobs = [{details: [{}] }];
     
-    $scope.addNewDetail = function(job) {
-      $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
-      if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
-        $scope.jobs[$scope.indexOfJobWithinJobs].details.push( {} );
+    $scope.addNewDetail = function(job, item) {
+      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
+      var indexOfSecondToLastDetail = $scope.jobs[indexOfJobWithinJobs].details.length - 2;
+      if ($scope.jobs[indexOfJobWithinJobs].details.length < 2 || ($scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail]['detail'] && (!item['detail'] || $scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail + 1]['detail']))){
+        $scope.jobs[indexOfJobWithinJobs].details.push( {} );
       }
     };
 
