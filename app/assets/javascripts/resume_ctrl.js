@@ -21,6 +21,7 @@
       });
     }
 
+    
 
     $scope.editEPanel = function() {
         $scope.ePanelStatus = "edit"
@@ -205,6 +206,9 @@
         $scope.errors = error.data.errors;
       }
     }
+
+
+
 
     window.scope = $scope;
 
