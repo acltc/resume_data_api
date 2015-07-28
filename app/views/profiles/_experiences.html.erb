@@ -88,7 +88,7 @@
                       <input class="form-control" type="text" ng-model="experience.jobTitle" placeholder='{{experience["job_title"]}}'>
                     </div>
                     <div class="form-group">
-                      <label class="control-label">Company Name</label>
+                      <label class="control-label" for="code">Company Name</label>
                       <input class="form-control" type="text" ng-model="experience.companyName" placeholder='{{experience["company_name"]}}'>
                     </div>
                     <div class="row">
@@ -134,7 +134,7 @@
                     <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
-                    <button type=" submit "="=" " "="" ng-click="addNewExperience(jobs)">Update</button>
+                    <button type=" submit "="=" " "="" ng-click="updateAllExperiences(experiences)">Update</button>
                   </div>
                 </div><!-- end of row -->
             </div><!-- end ng-switch-when="edit" -->

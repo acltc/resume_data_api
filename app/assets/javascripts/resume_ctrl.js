@@ -36,6 +36,11 @@
       $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
     }
 
+    $scope.updateAllExperiences = function(experiences){
+      $http.patch("/api/v1/experiences/9.json", experiences);
+      $scope.ePanelStatus = "show";
+    }
+
     $scope.moreThanOne = function(object){
       var moreThanOne = false;
       if (object.length > 1){
