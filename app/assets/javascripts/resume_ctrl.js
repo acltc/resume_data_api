@@ -41,6 +41,11 @@
       $scope.ePanelStatus = "show";
     }
 
+    $scope.removeExperience = function(experience){
+      var indexOfExperienceWithinExperiences = $scope.experiences.indexOf(experience);
+      $scope.experiences.splice(indexOfExperienceWithinExperiences, 1);
+    }
+
     $scope.moreThanOne = function(object){
       var moreThanOne = false;
       if (object.length > 1){

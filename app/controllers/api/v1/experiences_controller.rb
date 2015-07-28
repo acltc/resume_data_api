@@ -46,14 +46,7 @@ class Api::V1::ExperiencesController < ApplicationController
 				experiences_to_delete_counter += 1
 			end
 		end
-		# @experiences.each_with_index do |experience, index|
-		# 	if @experiences[index]
-		# 		experience.update({:start_date => params["_json"][index]['startDate'], :end_date => params["_json"][index]['endDate'], :job_title => params["_json"][index]'jobTitle'], :company_name => params["_json"][index]['companyName'], :job_description => params["_json"][index]['jobDescription']})
-		# 	else
-		# 		Experience.create({:start_date => params["_json"][index]['startDate'], :end_date => params["_json"][index]['endDate'], :job_title => params["_json"][index]'jobTitle'], :company_name => params["_json"][index]['companyName'], :job_description => params["_json"][index]['jobDescription'], :student_id => user_id})
-		# 	end
-		# end
-		render "students/show"		
+		redirect_to "#{api_v1_students_path}.json"		
 	end
 
 	def delete
