@@ -83,12 +83,13 @@
               <form role="form" method="get" action="<%= edit_profile_path(current_user.id) %>">
                 <div class="well" ng-repeat="experience in experiences">
                   
+                      <label class="remove" ng-click="removeExperience(experience)"><i class="fa fa-2x fa-times-circle-o"></i>Delete This Experience</label>
                     <div class="form-group">
                       <label class="control-label">Job Title</label>
                       <input class="form-control" type="text" ng-model="experience.jobTitle" placeholder='{{experience["job_title"]}}'>
                     </div>
                     <div class="form-group">
-                      <label class="control-label">Company Name</label>
+                      <label class="control-label" for="code">Company Name</label>
                       <input class="form-control" type="text" ng-model="experience.companyName" placeholder='{{experience["company_name"]}}'>
                     </div>
                     <div class="row">
@@ -103,7 +104,7 @@
                     </div>
                     <div class="form-group" ng-init="defaultText='fucker'">
                       <label class="control-label">Job Description</label>
-                      <textarea class="form-control" rows="5" ng-model="experience['job_description']"></textarea>
+                      <textarea class="form-control" rows="5" ng-model="experience.jobDescription"></textarea>
                     </div>
 
                     <div class="row">
@@ -134,7 +135,7 @@
                     <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
-                    <button type=" submit "="=" " "="" ng-click="addNewExperience(jobs)">Update</button>
+                    <button type=" submit "="=" " "="" ng-click="updateAllExperiences(experiences)">Update</button>
                   </div>
                 </div><!-- end of row -->
             </div><!-- end ng-switch-when="edit" -->

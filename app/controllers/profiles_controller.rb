@@ -6,6 +6,11 @@ class ProfilesController < ApplicationController
   def edit
     if current_user.student
       @student = current_user.student
+      @experiences = @student.experiences
+      @educations = @student.educations
+      @professional_skills = @student.professional_skills
+      @personal_skills = @student.personal_skills
+      @references = @student.references
     else
       redirect_to new_personal_information_path
     end

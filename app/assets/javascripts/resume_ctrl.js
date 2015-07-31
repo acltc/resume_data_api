@@ -36,6 +36,16 @@
       $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
     }
 
+    $scope.updateAllExperiences = function(experiences){
+      $http.patch("/api/v1/experiences/9.json", experiences);
+      $scope.ePanelStatus = "show";
+    }
+
+    $scope.removeExperience = function(experience){
+      var indexOfExperienceWithinExperiences = $scope.experiences.indexOf(experience);
+      $scope.experiences.splice(indexOfExperienceWithinExperiences, 1);
+    }
+
     $scope.moreThanOne = function(object){
       var moreThanOne = false;
       if (object.length > 1){
@@ -48,11 +58,11 @@
 
     $scope.jobs = [{details: [{}] }];
     
-    $scope.addNewDetail = function(job) {
-      $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
-      if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
-        $scope.jobs[$scope.indexOfJobWithinJobs].details.push( {} );
+    $scope.addNewDetail = function(job, item) {
+      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
+      var indexOfSecondToLastDetail = $scope.jobs[indexOfJobWithinJobs].details.length - 2;
+      if ($scope.jobs[indexOfJobWithinJobs].details.length === 1 || ($scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail]['detail'] && (!item['detail'] || $scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail + 1]['detail']))){
+        $scope.jobs[indexOfJobWithinJobs].details.push( {} );
       }
     };
 
@@ -90,11 +100,11 @@
       $scope.educations.push( {highlights: [{}] } );
     }
 
-    $scope.anotherHighlightForm = function(education){
+    $scope.anotherHighlightForm = function(education, current_highlight){
       var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
       var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
       var indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[indexOfParticularEducationWithinEducations].highlights.length - 2;
-      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
+      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight'] && (!current_highlight['highlight'] || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation + 1]['highlight'])){
         educationObjectOfInterest.highlights.push({});
       }
     }
@@ -153,7 +163,7 @@
 
     $scope.anotherPersonalSkillForm = function(skill){
       var indexOfSecondToLastSkillInPersonalSkills = $scope.personalSkills.length - 2;
-      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && !skill['skillKey'])){
+      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && (!skill['skillKey'] || $scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills + 1]['skillKey']))){
         $scope.personalSkills.push( {} );
       }
     }
