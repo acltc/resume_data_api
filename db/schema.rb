@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618042105) do
+ActiveRecord::Schema.define(version: 20150625010834) do
 
   create_table "education_details", force: :cascade do |t|
     t.text     "detail",       limit: 65535
@@ -40,26 +40,37 @@ ActiveRecord::Schema.define(version: 20150618042105) do
   create_table "experiences", force: :cascade do |t|
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "job_title",    limit: 255
-    t.string   "company_name", limit: 255
-    t.integer  "student_id",   limit: 4
+    t.string   "job_title",       limit: 255
+    t.string   "company_name",    limit: 255
+    t.integer  "student_id",      limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "job_description", limit: 65535
   end
 
-  create_table "references", force: :cascade do |t|
-    t.integer  "student_id",    limit: 4
-    t.text     "good_word",     limit: 65535
-    t.integer  "referencer_id", limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "skills", force: :cascade do |t|
+  create_table "personal_skills", force: :cascade do |t|
     t.string   "skill_name", limit: 255
     t.integer  "student_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "professional_skills", force: :cascade do |t|
+    t.string   "skill_name", limit: 255
+    t.integer  "student_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "references", force: :cascade do |t|
+    t.integer  "student_id",   limit: 4
+    t.string   "last_name",    limit: 255
+    t.string   "first_name",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",        limit: 255
+    t.string   "phone_number", limit: 255
+    t.string   "company_name", limit: 255
   end
 
   create_table "students", force: :cascade do |t|
@@ -81,6 +92,7 @@ ActiveRecord::Schema.define(version: 20150618042105) do
     t.string   "state",         limit: 255
     t.string   "appt_number",   limit: 255
     t.integer  "user_id",       limit: 4
+    t.string   "job_title",     limit: 255
   end
 
   create_table "users", force: :cascade do |t|
