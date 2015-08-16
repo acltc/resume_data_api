@@ -16,6 +16,7 @@
 
           <div ng-switch-when="show">
             <div class="form-group well" ng-repeat="job in experiences">
+              <!-- {{experiences}} -->
               <div class="row">
                 <div class='panel_body'>
 
@@ -82,8 +83,6 @@
             <div ng-switch-when="edit">
               <form role="form" method="get" action="<%= edit_profile_path(current_user.id) %>">
                 <div class="well" ng-repeat="experience in experiences">
-                  
-                      <label class="remove" ng-click="removeExperience(experience)"><i class="fa fa-2x fa-times-circle-o"></i>Delete This Experience</label>
                     <div class="form-group">
                       <label class="control-label">Job Title</label>
                       <input class="form-control" type="text" ng-model="experience.jobTitle" placeholder='{{experience["job_title"]}}'>
@@ -109,6 +108,7 @@
 
                     <div class="row">
                       <div class="form-group col-md-12" id="double_column">
+                        {{ experience.details.push( {} ) }}
                         <div ng-repeat="jobDetail in experience['details']">
                             <label class="control-label">Details:</label>                            
                             <table>
@@ -116,7 +116,7 @@
                                 <td>
                                   <textarea class="form-control" rows="3" ng-click="addNewDetail()" ng-model="jobDetail.detail">{{jobDetail['detail']}}</textarea>
                                 </td>
-                                <td class="delete_circle">
+                                <td class="delete_circle" ng-if="moreThanOne(experience['details'])">
                                   <label class="remove" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
                                 </td>
                               </tr>
@@ -124,6 +124,7 @@
                         </div><!-- End of detail ng-repeat FOR THE EDIT FORM -->
                       </div><!-- End class="form-group col-md-6" id="double_column" -->
                     </div><!-- End of row -->
+                    <label class="remove" ng-click="removeExperience(experience)" ng-if="moreThanOne(experiences)"><i class="fa fa-2x fa-times-circle-o"></i>Delete Experience</label>
                 </div><!-- end ng-repeat="experience in experiences -->
               </form>
                 <div class="row">
