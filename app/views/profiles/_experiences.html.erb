@@ -85,36 +85,34 @@
                 <div class="well" ng-repeat="experience in experiences">
                     <div class="form-group">
                       <label class="control-label">Job Title</label>
-                      <input class="form-control" type="text" ng-model="experience.jobTitle" placeholder='{{experience["job_title"]}}'>
+                      <input class="form-control" type="text" ng-model="experience.job_title">
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="code">Company Name</label>
-                      <input class="form-control" type="text" ng-model="experience.companyName" placeholder='{{experience["company_name"]}}'>
+                      <input class="form-control" type="text" ng-model="experience.company_name">
                     </div>
                     <div class="row">
                       <div class="form-group col-md-6">
                         <label class="control-label">Employed From:&nbsp;&nbsp;&nbsp;{{experience["start_date"] | date :  "MM/dd/yyyy"}}</label>
-                        <input class="form-control" type="date" ng-model="experience.startDate" placeholder='{{experience["start_date"] | date : "yyyy-MM-dd"}}'>
+                        <input class="form-control" type="date" ng-model="experience.start_date">
                       </div>
                       <div class="form-group col-md-6">
                         <label class="control-label">To:&nbsp;&nbsp;&nbsp;{{experience["end_date"] | date :  "MM/dd/yyyy"}}</label>
-                        <input class="form-control" type="date" ng-model="experience.endDate">
+                        <input class="form-control" type="date" ng-model="experience.end_date">
                       </div>
                     </div>
                     <div class="form-group" ng-init="defaultText='fucker'">
                       <label class="control-label">Job Description</label>
-                      <textarea class="form-control" rows="5" ng-model="experience.jobDescription"></textarea>
+                      <textarea class="form-control" rows="5" ng-model="experience.job_description"></textarea>
                     </div>
-
                     <div class="row">
                       <div class="form-group col-md-12" id="double_column">
-                        {{ experience.details.push( {} ) }}
                         <div ng-repeat="jobDetail in experience['details']">
                             <label class="control-label">Details:</label>                            
                             <table>
                               <tr>
                                 <td>
-                                  <textarea class="form-control" rows="3" ng-click="addNewDetail()" ng-model="jobDetail.detail">{{jobDetail['detail']}}</textarea>
+                                  <input class="form-control" rows="3" ng-click="addNewDetail()" ng-model="jobDetail.detail">
                                 </td>
                                 <td class="delete_circle" ng-if="moreThanOne(experience['details'])">
                                   <label class="remove" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>

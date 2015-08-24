@@ -16,19 +16,21 @@
     $scope.fetchData = function(id) {
       $http.get("/api/v1/students/" + id + ".json").then(function(response) {
         $scope.usersData = response.data;
-        $scope.experiences = $scope.usersData.experiences
-        $scope.ePanelStatus = "show"
+        $scope.experiences = $scope.usersData.experiences;
+        $scope.ePanelStatus = "show";
       });
     }
 
-
     $scope.editEPanel = function() {
-        $scope.ePanelStatus = "edit"
-        // $scope.SPanelDeletions = []
+      $scope.ePanelStatus = "edit";
+      angular.forEach($scope.experiences, function(experience){
+        experience.details.push( {} );
+      })
+      // $scope.SPanelDeletions = []
     };
 
     $scope.resetEPanel = function() {
-        $scope.ePanelStatus = "show"
+        $scope.ePanelStatus = "show";
     };
 
     $scope.setDate = function(aDate) {
