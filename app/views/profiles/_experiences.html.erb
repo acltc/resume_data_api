@@ -81,7 +81,7 @@
 <!-- below is the code to edit the experiences -->
 
             <div ng-switch-when="edit">
-              <form role="form" method="get" action="<%= edit_profile_path(current_user.id) %>">
+              <!-- <form role="form" method="get" action="<%= edit_profile_path(current_user.id) %>"> -->
                 <div class="well" ng-repeat="experience in experiences">
                     <div class="form-group">
                       <label class="control-label">Job Title</label>
@@ -131,7 +131,7 @@
                     <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
                   </div>
                   <div class="panel_buttons col-md-4">
-                    <button type=" submit "="=" " "="" ng-click="resetEPanel(<%= current_user.student.id %>)">Cancel</button>
+                    <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
                     <button type=" submit "="=" " "="" ng-click="updateAllExperiences(experiences)">Update</button>

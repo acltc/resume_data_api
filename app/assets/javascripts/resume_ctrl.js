@@ -14,7 +14,8 @@
     }
 
     $scope.fetchData = function(id) {
-      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
+      $scope.userID = id
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
         $scope.usersData = response.data;
         $scope.experiences = $scope.usersData.experiences;
         $scope.ePanelStatus = "show";
@@ -31,9 +32,12 @@
       // $scope.SPanelDeletions = []
     };
 
-    $scope.resetEPanel = function(id) {
-        $scope.fetchData(id);
+    $scope.resetEPanel = function() {
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
+        $scope.usersData = response.data;
+        $scope.experiences = $scope.usersData.experiences;
         $scope.ePanelStatus = "show";
+      });
     };
 
     $scope.setDate = function(aDate) {
@@ -42,8 +46,9 @@
     }
 
     $scope.updateAllExperiences = function(experiences){
-      $http.patch("/api/v1/experiences/9.json", experiences);
-      $scope.ePanelStatus = "show";
+      $http.patch("/api/v1/experiences/" + $scope.userID + ".json", experiences).then(function(response){
+      $scope.resetEPanel();
+      });
     }
 
     $scope.removeExperience = function(experience){
