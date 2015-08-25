@@ -35,28 +35,35 @@ class Api::V1::ExperiencesController < ApplicationController
 				db_experiences[index].update({:start_date => angular_experience['start_date'], :end_date => angular_experience['end_date'], :job_title => angular_experience['job_title'], :company_name => angular_experience['company_name'], :job_description => angular_experience['job_description']})
 				db_experience_details = db_experiences[index].experience_details
 				angular_experience_details = angular_experience["details"]
-				# need_to_delete_experience_details = false
-				# if db_experience_details > angular_experience_details
-				# 	need_to_delete_experience_details = true
-			    # end
-			    # since db_experience_details is really an activerecord call, it cannot be compared to angular_experience_details to see if the two are the same and no changes need be updated. Therefor, I need to make the two comparible.
+				angular_experience_details.delete({})
 			    regular_array = []
 			    db_experience_details.each do |activerecord_detail_object|
                   regular_array << {"id" => activerecord_detail_object.id, "detail" => activerecord_detail_object.detail}
 			    end
-			    regular_array << {}
-			    if angular_experience_details != regular_array
-                  binding.pry
+			    if angular_experience_details != regular_array 
+			      if angular_experience_details.length < regular_array.length
+                    list_of_id = []
+                    angular_experience_details.each do |angular_experience_detail|
+                      list_of_id << angular_experience_detail["id"]
+                    end
+                    db_experience_details.each do |activerecord_detail_object|
+                      if !list_of_id.include?(activerecord_detail_object.id)
+                        activerecord_detail_object.destroy
+                      end
+                    end
+                  end
                   angular_experience_details.each_with_index do |angular_experience_detail, index_of_angular_detail|
-                    if db_experience_details[index_of_angular_detail] && db_experience_details[index_of_angular_detail].detail != angular_experience_detail["detail"]
-                      db_experience_details[index_of_angular_detail].update({:detail => angular_experience_detail["detail"]})
+                    if db_experience_details[index_of_angular_detail] 
+                      if db_experience_details[index_of_angular_detail].detail != angular_experience_detail["detail"]
+                        db_experience_details[index_of_angular_detail].update({:detail => angular_experience_detail["detail"]})
+                      end
                     else
-                      ExperienceDetail.create({:detail => angular_experience_detail["detail"], :experience_id => db_experiences[index]})
+                      ExperienceDetail.create({:detail => angular_experience_detail["detail"], :experience_id => db_experiences[index].id})
                     end
                   end
 			    end
 			else
-				Experience.create({:start_date => angular_experience['start_date'], :end_date => angular_experience['end_date'], :job_title => angular_experience['job_title'], :company_name => angular_experience['company_name'], :job_description => angular_experience['job_description'], :student_id => user_id})
+			  Experience.create({:start_date => angular_experience['start_date'], :end_date => angular_experience['end_date'], :job_title => angular_experience['job_title'], :company_name => angular_experience['company_name'], :job_description => angular_experience['job_description'], :student_id => user_id})
 			end
 		end
 		if need_to_delete_experiences
