@@ -15,7 +15,7 @@
 <!-- below is the code to view the experiences -->
 
           <div ng-switch-when="show">
-            <div class="form-group well" ng-repeat="job in experiences">
+            <div class="form-group well" ng-repeat="experience in experiences">
               <!-- {{experiences}} -->
               <div class="row">
                 <div class='panel_body'>
@@ -24,48 +24,48 @@
                     Job Title:
                   </div>
                   <div class="col-md-10">
-                  {{job["job_title"]}}
+                  {{experience["job_title"]}}
                   </div>
 
                   <div class="col-md-2 panel_text">
                   Company Name:
                   </div>
                   <div class="col-md-10">
-                  {{job["company_name"]}}
+                  {{experience["company_name"]}}
                   </div>
 
                   <div class="col-md-2 panel_text">
                   Employed From:
                   </div>
                   <div class="col-md-10">
-                  {{job["start_date"] | date :  "MM/dd/yyyy"}}
+                  {{experience["start_date"] | date :  "MM/dd/yyyy"}}
                   </div>
                   
                   <div class="col-md-2 panel_text">
                   Employed to:
                   </div>
                   <div class="col-md-10">
-                  {{job["end_date"] | date :  "MM/dd/yyyy"}}
+                  {{experience["end_date"] | date :  "MM/dd/yyyy"}}
                   </div>
 
                   <div class="col-md-2 panel_text">
                   Job Description:
                   </div>
                   <div class="col-md-10">
-                  {{job["job_description"] || "N/A"}}
+                  {{experience["job_description"] || "N/A"}}
                   </div>
                 
                   <div class="col-md-2 panel_text">
                     Details:
                   </div>
                   <div class="col-md-10">
-                    <ul ng-repeat="detail in job['details']">
+                    <ul ng-repeat="detail in experience['details']">
                       <li>{{detail['detail']}}</li>
                     </ul>
                   </div><!-- col-md-10 in details -->
                 </div><!-- panel body -->
               </div><!-- end of row -->
-            </div><!-- class="form-group" ng-repeat="job in experiences" -->
+            </div><!-- class="form-group" ng-repeat="experience in experiences" -->
               
             <div class="row">
             <div class="pull-right">
@@ -101,28 +101,28 @@
                         <input class="form-control" type="date" ng-model="experience.end_date">
                       </div>
                     </div>
-                    <div class="form-group" ng-init="defaultText='fucker'">
+                    <div class="form-group">
                       <label class="control-label">Job Description</label>
                       <textarea class="form-control" rows="5" ng-model="experience.job_description"></textarea>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-12" id="double_column">
-                        <div ng-repeat="jobDetail in experience['details']">
+                        <div ng-repeat="experienceDetail in experience['details']">
                             <label class="control-label">Details:</label>                            
                             <table>
                               <tr>
                                 <td>
-                                  <input class="form-control" rows="3" ng-click="addNewDetail()" ng-model="jobDetail.detail">
+                                  <input class="form-control" ng-click="addNewDetail(experience, experienceDetail)" ng-model="experienceDetail.detail">
                                 </td>
-                                <td class="delete_circle" ng-if="moreThanOne(experience['details'])">
-                                  <label class="remove" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
+                                <td class="delete_circle">
+                                  <label class="remove" ng-click="removeDetail(experience, experienceDetail)" ng-if="experienceDetail.detail"><i class="fa fa-2x fa-times-circle-o"></i></label>
                                 </td>
                               </tr>
                             </table>
                         </div><!-- End of detail ng-repeat FOR THE EDIT FORM -->
                       </div><!-- End class="form-group col-md-6" id="double_column" -->
                     </div><!-- End of row -->
-                    <label class="remove" ng-click="removeExperience(experience)" ng-if="moreThanOne(experiences)"><i class="fa fa-2x fa-times-circle-o"></i>Delete Experience</label>
+                    <label class="remove" ng-click="removeExperience(experience)"><i class="fa fa-2x fa-times-circle-o"></i>Delete Experience</label>
                 </div><!-- end ng-repeat="experience in experiences -->
               </form>
                 <div class="row">
@@ -131,7 +131,7 @@
                     <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
                   </div>
                   <div class="panel_buttons col-md-4">
-                    <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
+                    <button type=" submit "="=" " "="" ng-click="resetEPanel(<%= current_user.student.id %>)">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
                     <button type=" submit "="=" " "="" ng-click="updateAllExperiences(experiences)">Update</button>
