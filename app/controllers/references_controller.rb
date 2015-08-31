@@ -1,23 +1,7 @@
 class ReferencesController < ApplicationController
 
   def new
-
-  end
-
-  def create
-
-  end
-
-  def edit
-
-  end
-
-  def update
-
-  end
-
-  def delete
-
+  	@student_id = current_user.student.id
   end
 
 end

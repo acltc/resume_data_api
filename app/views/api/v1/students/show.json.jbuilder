@@ -14,9 +14,9 @@ json.state @student.state
 json.photo @student.photo
 json.short_bio @student.short_bio
 
-json.skills @student.skills do |skill| 
-json.id skill.id
-  json.skill_name skill.skill_name
+json.skills @student.personal_skills do |personal_skill| 
+json.id personal_skill.id
+  json.skill_name personal_skill.skill_name
 end
 
 json.educations @student.educations do |education|
@@ -38,6 +38,7 @@ json.experiences @student.experiences do |experience|
   json.company_name experience.company_name
   json.start_date experience.start_date 
   json.end_date experience.end_date
+  json.job_description experience.job_description
   json.details experience.experience_details do |experience_detail|
     json.id experience_detail.id
     json.detail experience_detail.detail
@@ -47,6 +48,9 @@ end
 json.references @student.references do |reference|
 json.id reference.id
 json.student_id reference.student_id
-json.refrencer_id reference.referencer_id
-json.text reference.good_word
+json.first_name reference.first_name
+json.last_name reference.last_name
+json.email reference.email
+json.phone_number reference.phone_number
+json.company_name reference.company_name
 end

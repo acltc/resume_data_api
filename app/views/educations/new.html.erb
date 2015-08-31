@@ -1,56 +1,72 @@
-	<div ng-app="app">
-		<div ng-controller="resumeCtrl">
-
-			<div class="section">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h3 class="panel-title">Education</h3>
-								</div>
-								<div class="panel-body">
-									<form role="form" method="get" action="<%= new_proffessional_skill_path %>">
+<div ng-app="app">
+	<div ng-controller="resumeCtrl">
+		
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">Education</h3>
+							</div>
+							<div class="panel-body">
+								<form role="form" method="get" action="<%= new_professional_skill_path %>">
+									<div ng-repeat="education in educations">
 										<div class="form-group">
 											<label class="control-label">Degree Earned</label>
-											<input class="form-control" type="text" ng-model="degreeEarned">
+											<input class="form-control" type="text" ng-model="education.degree">
 										</div>
 										<div class="form-group">
 											<label class="control-label">University Name</label>
-											<input class="form-control" type="text" ng-model="universityName">
+											<input class="form-control" type="text" ng-model="education.universityName">
 										</div>
 										<div class="row">
 											<div class="form-group col-md-6" id="double_column">
 												<label class="control-label">Attended From:</label>
-												<input class="form-control" type="date" ng-model="startDate">
+												<input class="form-control" type="date" ng-model="education.startDate">
 											</div>
 											<div class="form-group col-md-6" id="double_column">
 												<label class="control-label">To:</label>
-												<input class="form-control" type="date" ng-model="endDate">
+												<input class="form-control" type="date" ng-model="education.endDate">
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="control-label">Details</label>
-											<input class="form-control" type="text">
-										</div>
-										<!-- <i class="fa fa-2x fa-plus fa-fw "></i>
-										<label class="control-label">Add Another Degree</label>
-										<br>
-										<button type=" submit "="=" " "="">Submit</button> -->
 										<div class="row">
-											<div class="form-group col-md-11" id="double_column">
-												<i class="fa fa-1x fa-plus fa-fw "></i>
-												<label class="control-label">Add Another Education</label>
-												<!-- <br> -->
-											</div>
-											<div class="form-group col-md-1" id="double_column">
-												<!-- <a href=<%= new_education_path %>> -->
-												<button type=" submit "="=" " "="" ng-click="addNewEducation(startDate, endDate, degreeEarned, universityName)">Submit</button>
-												<!-- </a> -->
+											<div class="form-group col-md-6" id="double_column">
+												<div ng-repeat="highlight in education.highlights">
+													<table border="1">
+														<tr>
+															<td>
+																<label class="control-label">Highlights</label>
+																<input class="form-control" type="text" ng-click="anotherHighlightForm(education)" ng-model="highlight.highlight" placeholder="Enter specific details about this education">
+															</td>
+															<td style="padding: 8px;" ng-if="highlight.highlight">
+																<label class="remove" ng-click="removeHighlightForm(education, highlight)"><i class="fa fa-2x fa-times-circle-o"></i>
+																</label>
+															</td>
+														</tr>
+													</table>
+												</div>
+												<div ng-if="moreThanOne(educations)" class="form-group col-md-11" id="double_column">
+										    		<i class="fa fa-1x fa-plus fa-fw "></i>
+										    		<label class="control-label" ng-click="removeEducationForm(education)">Delete Education</label>
+												</div>
 											</div>
 										</div>
-									</form>
+										<hr>
+									</div>
+								<div class="row">
+									<div class="form-group col-md-11" id="double_column">
+										<i class="fa fa-1x fa-plus fa-fw "></i>
+										<label class="control-label" ng-click="anotherEducationForm()">Add Another Education</label>
+										<!-- <br> -->
+									</div>
+									<div class="form-group col-md-1" id="double_column">
+										<!-- <a href=<%= new_education_path %>> -->
+										<button type=" submit "="=" " "="" ng-click="addAllEducations(educations)">Submit</button>
+										<!-- </a> -->
+									</div>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -59,3 +75,4 @@
 
 		</div>
 	</div>
+</div>
