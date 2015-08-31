@@ -1,17 +1,75 @@
+<div class="edit_containter">
+<!-- Split button -->
+  <div class="stuff row">
+    <div class="button_one btn-group col-md-4">
+      <div class="button_center">
+        <button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class='button_text'>View template</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a onclick="window.open('/resumes/leach_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Leach template</a>
+          </li>
+          <li>
+            <a onclick="window.open('/resumes/walsh_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Walsh template</a>
+          </li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="button_two btn-group col-md-4">
+      <div class="button_center">
+        <button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class='button_text'>Get your PDF</span> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="/resumes/down_load_pdf/<%= @student.id %>.pdf">Get Walsh PDF!</a>
+          </li>
+          <li>
+            <a href="/resumes/down_load_pdf/<%= @student.id %>.pdf">Get Leach PDF!</a>
+          </li>
+          <li><a href="#"></a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#"></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="button_three btn-group col-md-4">
+      <div class="button_center">
+        <a href="/troyleach" >
+          <button type="button" class="btn btn-lg btn-primary">
+             <span class="button_text">Online Resume</span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div><!-- end of row -->
+</div><!-- end of edit_containter -->
+
 <div ng-app="app">
   <div ng-controller="resumeCtrl" ng-init="fetchData(<%= @student.id %>)">
+  <%= render 'personal_informations' %>
+  <%= render 'experiences' %>
+  <%= render 'educations' %>
+  <%= render 'professional_skills' %>
+  <%= render 'personal_skills' %>
+  <%= render 'references' %>
 
-  <button><a onclick="window.open('/resumes/leach_template_show({{usersData}})','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">TESTING</a></button>
 
-<button><a href="/resumes/down_load_pdf/<%= @student.id %>.pdf">Get your PDF!</a></button>
 
-<button><a onclick="window.open('/resumes/leach_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Leach template</a></button>
 
-<button><a onclick="window.open('http://localhost:3001/resumes/walsh_template_show/<%= @student.id %>.pdf','winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=680,height=700');">View Walsh template</a></button>
-{{'this is text'}}
-{{usersData.address}}<br>
-<%= render 'experiences' %>
+
 
     
   </div><!-- end of ng-controller -->
 </div><!-- end of ng-app -->
+
+
+<script>
+  $('.dropdown-toggle').dropdown()
+</script>

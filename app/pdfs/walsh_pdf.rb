@@ -65,7 +65,7 @@ class WalshPdf < Prawn::Document
                 ["", {:content => "#{education["university_name"]}", :font_style => :bold }],],
                 :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 1, 5] }, :column_widths => {0 => 60})
 
-          table(sub_table(education["details"]), :position => 75, :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 3, 10], :width => 400 })
+          table(sub_table(education.education_details), :position => 75, :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 3, 10], :width => 400 })
         move_down 5
         end
       } 
@@ -115,7 +115,7 @@ class WalshPdf < Prawn::Document
                     
                     :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 1, 5] }, :column_widths => [60])
 
-              table(sub_table(experience["details"]), :position => 75, :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 3, 0], :width => 400 })
+              table(sub_table(experience.experience_details), :position => 75, :cell_style => { :border_lines => [:dotted], :borders => [], :padding => [0, 0, 3, 0], :width => 400 })
             move_down 5
           end
         } 
@@ -140,7 +140,7 @@ private
 
   def convert_to_year(date)
     if date
-      date[/\d{4}/]
+      date.year
     else
       nil
     end

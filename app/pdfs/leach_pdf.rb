@@ -47,9 +47,9 @@ class LeachPdf < Prawn::Document
 
       @student.experiences.each do |experience|
         move_down(5)
-        text "#{experience["job_title"]}, #{experience["company_name"]} -- #{convert_to_year(experience["start_date"])} - #{convert_to_year(experience["end_date"])}", :style => :bold
-        experience["details"].each do |detail|
-
+        text "#{experience.job_title}, #{experience.company_name} -- #{convert_to_year(experience.start_date)} - #{convert_to_year(experience.end_date)}", :style => :bold
+        experience.experience_details.each do |detail|
+         
           table([[{:content => "\u2022", :padding => [0, 0, 0, 0], :borders => [], :align => :center},
                   {:content => "#{detail["detail"]}", :padding => [0, 0, 0, 0], :borders => [], :align => :justify} ]])
         end
@@ -63,8 +63,9 @@ class LeachPdf < Prawn::Document
       table(title, :position => :left, :cell_style => { :padding => [5, 0, 0, 0], :borders => [], :size => 16, :text_color => "858585", :font_style => :bold } )
       @student.educations.each do |education|
         move_down(5)
-        text "#{education["university_name"]}, #{education["degree"]} -- #{convert_to_year(education["start_date"])} - #{convert_to_year(education["end_date"])}", :style => :bold
-        education["details"].each do |detail|
+        
+        text "#{education.university_name}, #{education.degree} -- #{convert_to_year(education.start_date)} - #{convert_to_year(education.end_date)}", :style => :bold
+        education.education_details.each do |detail|
 
           table([[{:content => "\u2022", :padding => [0, 0, 0, 0], :borders => [], :align => :center},
                   {:content => "#{detail["detail"]}", :padding => [0, 0, 0, 0], :borders => [], :align => :justify} ]])
@@ -94,7 +95,7 @@ class LeachPdf < Prawn::Document
 
     def convert_to_year(date)
       if date
-        date[/\d{4}/]
+        date.year
       else
         nil
       end

@@ -3,7 +3,7 @@
 
   angular.module("app").controller("resumeCtrl", function($scope, $http, $location, $filter) {
 
-      // the post services below
+// the post services below
   	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
   		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
       $http.post("/api/v1/students.json", student).then(function(response){
@@ -13,16 +13,44 @@
       }
     }
 
+// the get services below
     $scope.fetchData = function(id) {
       $http.get("/api/v1/students/" + id + ".json").then(function(response) {
-        $scope.usersData = response.data;
-        $scope.experiences = $scope.usersData.experiences
-        $scope.ePanelStatus = "show"
+        $scope.usersData            = response.data;
+        $scope.personalInformation  = $scope.usersData;
+        $scope.experiences          = $scope.usersData.experiences;
+        $scope.educations           = $scope.usersData.educations;
+        $scope.professionalSkills   = $scope.usersData.professional_skills;
+        $scope.personalSkills       = $scope.usersData.personal_skills;
+        $scope.referecnces          = $scope.usersData.references;
+
+        $scope.pPanelStatus                 = "show";
+        $scope.ePanelStatus                 = "show";
+        $scope.educationPanelStatus         = "show";
+        $scope.professionalSkillPanelStatus = "show";
+        $scope.personalSkillsPanelStatus    = "show";
+        $scope.referecncesPanelStatus       = "show";
       });
     }
 
+    // $scope.formatedDate = function(dates) {
+    //   new Date(2014, 3, 19);
+    // }
+
+    $scope.dateBirth = new Date(2014, 3, 19);
+
+// this is the controller for personal information
+    $scope.editPPanel = function() {
+        $scope.pPanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
+
+    $scope.resetPPanel = function() {
+        $scope.pPanelStatus = "show"
+    };
     
 
+// this is the controller for experience/details
     $scope.editEPanel = function() {
         $scope.ePanelStatus = "edit"
         // $scope.SPanelDeletions = []
@@ -55,7 +83,6 @@
       return moreThanOne;
     }
 
-// this is the controller for experience/details
 
     $scope.jobs = [{details: [{}] }];
     
@@ -91,9 +118,16 @@
       
     }
 
-//  - - - - - - - - - - - - - - - - - 
 
 // education/education_details:
+    $scope.editEducationPanel = function() {
+        $scope.educationPanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
+  
+    $scope.resetEducationPanel = function() {
+        $scope.educationPanelStatus = "show"
+    };
 
     $scope.educations = [ {highlights: [{}] } ];
 
@@ -130,9 +164,15 @@
       }
     }
 
-    // -----------------------------------------------
 
 // professional skills controller
+    $scope.editProfessionalSkillsPanel = function() {
+        $scope.professionalSkillPanelStatus = "edit"
+    };
+
+    $scope.resetProfessionalSkillsPanel = function() {
+        $scope.professionalSkillPanelStatus = "show"
+    };
 
     $scope.professionalSkills = [ {} ]
 
@@ -156,9 +196,15 @@
       }
     }
 
-    // - - - - - - - -- - - -  - - -- - - - - - - - - - -- - 
-
 // personal skills controller
+
+    $scope.editPersonalSkillsPanel = function() {
+        $scope.personalSkillsPanelStatus = "edit"
+    };
+
+    $scope.resetPersonalSkillsPanel = function() {
+        $scope.personalSkillsPanelStatus = "show"
+    };
 
     $scope.personalSkills = [ {} ];
 
@@ -183,9 +229,15 @@
       }
     }
 
-    // - - - - - - - - - - - - --  -- - - - - - - - - - - - - - - -- - - 
 
-    // references controller
+// references controller
+    $scope.editReferecncesPanel = function() {
+        $scope.referecncesPanelStatus = "edit"
+    };
+
+    $scope.resetReferecncesPanel = function() {
+        $scope.referecncesPanelStatus = "show"
+    };
 
     $scope.references = [ {} ]
 
@@ -206,9 +258,6 @@
         $scope.errors = error.data.errors;
       }
     }
-
-
-
 
     window.scope = $scope;
 
