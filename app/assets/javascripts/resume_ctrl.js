@@ -3,9 +3,10 @@
 
   angular.module("app").controller("resumeCtrl", function($scope, $http, $location, $filter) {
 
-      // the post services below
+// the post services below
   	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
   		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
+
       $http.post("/api/v1/students.json", student).then(function(response){
         $scope.students.push(student);
       }), function(error){
@@ -13,27 +14,79 @@
       }
     }
 
+// the get services below
     $scope.fetchData = function(id) {
-      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
-        $scope.usersData = response.data;
-        $scope.experiences = $scope.usersData.experiences
-        $scope.ePanelStatus = "show"
+      $scope.userID = id
+
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
+        $scope.usersData            = response.data;
+        $scope.personalInformation  = $scope.usersData;
+        $scope.experiences          = $scope.usersData.experiences;
+        $scope.educations           = $scope.usersData.educations;
+        $scope.professionalSkills   = $scope.usersData.professional_skills;
+        $scope.personalSkills       = $scope.usersData.personal_skills;
+        $scope.referecnces          = $scope.usersData.references;
+
+        $scope.pPanelStatus                 = "show";
+        $scope.ePanelStatus                 = "show";
+        $scope.educationPanelStatus         = "show";
+        $scope.professionalSkillPanelStatus = "show";
+        $scope.personalSkillsPanelStatus    = "show";
+        $scope.referecncesPanelStatus       = "show";
       });
     }
 
+    // $scope.formatedDate = function(dates) {
+    //   new Date(2014, 3, 19);
+    // }
 
-    $scope.editEPanel = function() {
-        $scope.ePanelStatus = "edit"
+    $scope.dateBirth = new Date(2014, 3, 19);
+
+// this is the controller for personal information
+    $scope.editPPanel = function() {
+        $scope.pPanelStatus = "edit"
         // $scope.SPanelDeletions = []
     };
 
+    $scope.resetPPanel = function() {
+        $scope.pPanelStatus = "show"
+    };
+    
+
+// this is the controller for experience/details
+
+    $scope.editEPanel = function() {
+      $scope.ePanelStatus = "edit";
+      angular.forEach($scope.experiences, function(experience){
+        if (experience.details[(experience.details.length) - 1].detail){
+          experience.details.push( {} );
+        }
+      })
+      // $scope.SPanelDeletions = []
+    };
+
     $scope.resetEPanel = function() {
-        $scope.ePanelStatus = "show"
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
+        $scope.usersData = response.data;
+        $scope.experiences = $scope.usersData.experiences;
+        $scope.ePanelStatus = "show";
+      });
     };
 
     $scope.setDate = function(aDate) {
       // doesn't work yet
       $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
+    }
+
+    $scope.updateAllExperiences = function(experiences){
+      $http.patch("/api/v1/experiences/" + $scope.userID + ".json", experiences).then(function(response){
+      $scope.resetEPanel();
+      });
+    }
+
+    $scope.removeExperience = function(experience){
+      var indexOfExperienceWithinExperiences = $scope.experiences.indexOf(experience);
+      $scope.experiences.splice(indexOfExperienceWithinExperiences, 1);
     }
 
     $scope.moreThanOne = function(object){
@@ -44,45 +97,51 @@
       return moreThanOne;
     }
 
-// this is the controller for experience/details
 
-    $scope.jobs = [{details: [{}] }];
+    $scope.experiences = [{details: [{}] }];
     
-    $scope.addNewDetail = function(job) {
-      $scope.indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      $scope.indexOfSecondToLastDetail = $scope.jobs[$scope.indexOfJobWithinJobs].details.length - 2
-      if ($scope.jobs[$scope.indexOfJobWithinJobs].details.length < 2 || $scope.jobs[$scope.indexOfJobWithinJobs].details[$scope.indexOfSecondToLastDetail]['detail']){
-        $scope.jobs[$scope.indexOfJobWithinJobs].details.push( {} );
+    $scope.addNewDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfSecondToLastDetail = $scope.experiences[indexOfexperienceWithinexperiences].details.length - 2;
+      if ($scope.experiences[indexOfexperienceWithinexperiences].details.length === 1 || ($scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail]['detail'] && (!detail['detail'] || $scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail + 1]['detail']))){
+        $scope.experiences[indexOfexperienceWithinexperiences].details.push( {} );
       }
     };
 
-    $scope.addNewJob = function() {
-      $scope.jobs.push({details: [{}]});
+    $scope.addNewexperience = function() {
+      $scope.experiences.push({details: [{}]});
     };
 
-    $scope.removeJob = function(job){
-      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      $scope.jobs.splice(indexOfJobWithinJobs, 1);
+    $scope.removeexperience = function(experience){
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      $scope.experiences.splice(indexOfexperienceWithinexperiences, 1);
     }
       
-    $scope.removeDetail = function(job, item) {
-      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      var indexOfItemWithinDetailsOfTheJob = $scope.jobs[indexOfJobWithinJobs]['details'].indexOf(item);
-      $scope.jobs[indexOfJobWithinJobs]['details'].splice(indexOfItemWithinDetailsOfTheJob, 1);
+    $scope.removeDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfdetailWithinDetailsOfTheexperience = $scope.experiences[indexOfexperienceWithinexperiences]['details'].indexOf(detail);
+      $scope.experiences[indexOfexperienceWithinexperiences]['details'].splice(indexOfdetailWithinDetailsOfTheexperience, 1);
     };
 
-    $scope.addAllExperiences = function(jobs){
-      $http.post("/api/v1/experiences.json", jobs).then(function(response){
-        $scope.experiences.push(jobs);
+    $scope.addAllExperiences = function(experiences){
+      $http.post("/api/v1/experiences.json", experiences).then(function(response){
+        $scope.experiences.push(experiences);
       }), function(error){  
         $scope.errors = error.data.errors;
       }
       
     }
 
-//  - - - - - - - - - - - - - - - - - 
 
 // education/education_details:
+    $scope.editEducationPanel = function() {
+        $scope.educationPanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
+  
+    $scope.resetEducationPanel = function() {
+        $scope.educationPanelStatus = "show"
+    };
 
     $scope.educations = [ {highlights: [{}] } ];
 
@@ -90,11 +149,11 @@
       $scope.educations.push( {highlights: [{}] } );
     }
 
-    $scope.anotherHighlightForm = function(education){
+    $scope.anotherHighlightForm = function(education, current_highlight){
       var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
       var educationObjectOfInterest = $scope.educations[indexOfParticularEducationWithinEducations];
       var indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation = $scope.educations[indexOfParticularEducationWithinEducations].highlights.length - 2;
-      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight']){
+      if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight'] && (!current_highlight['highlight'] || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation + 1]['highlight'])){
         educationObjectOfInterest.highlights.push({});
       }
     }
@@ -119,9 +178,15 @@
       }
     }
 
-    // -----------------------------------------------
 
 // professional skills controller
+    $scope.editProfessionalSkillsPanel = function() {
+        $scope.professionalSkillPanelStatus = "edit"
+    };
+
+    $scope.resetProfessionalSkillsPanel = function() {
+        $scope.professionalSkillPanelStatus = "show"
+    };
 
     $scope.professionalSkills = [ {} ]
 
@@ -145,15 +210,21 @@
       }
     }
 
-    // - - - - - - - -- - - -  - - -- - - - - - - - - - -- - 
-
 // personal skills controller
+
+    $scope.editPersonalSkillsPanel = function() {
+        $scope.personalSkillsPanelStatus = "edit"
+    };
+
+    $scope.resetPersonalSkillsPanel = function() {
+        $scope.personalSkillsPanelStatus = "show"
+    };
 
     $scope.personalSkills = [ {} ];
 
     $scope.anotherPersonalSkillForm = function(skill){
       var indexOfSecondToLastSkillInPersonalSkills = $scope.personalSkills.length - 2;
-      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && !skill['skillKey'])){
+      if ($scope.personalSkills.length === 1 || ($scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills]['skillKey'] && (!skill['skillKey'] || $scope.personalSkills[indexOfSecondToLastSkillInPersonalSkills + 1]['skillKey']))){
         $scope.personalSkills.push( {} );
       }
     }
@@ -172,9 +243,15 @@
       }
     }
 
-    // - - - - - - - - - - - - --  -- - - - - - - - - - - - - - - -- - - 
 
-    // references controller
+// references controller
+    $scope.editReferecncesPanel = function() {
+        $scope.referecncesPanelStatus = "edit"
+    };
+
+    $scope.resetReferecncesPanel = function() {
+        $scope.referecncesPanelStatus = "show"
+    };
 
     $scope.references = [ {} ]
 

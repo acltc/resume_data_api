@@ -11,63 +11,63 @@
 							</div>
 							<div class="panel-body">
 								<form role="form" method="get" action="<%= new_education_path %>">
-								<div ng-repeat="job in jobs">
+								<div ng-repeat="experience in experiences">
 
 									<div class="form-group">
 										<label class="control-label">Job Title</label>
-										<input class="form-control" type="text" ng-model="job.jobTitle">
+										<input class="form-control" type="text" ng-model="experience.experienceTitle">
 									</div>
 									<div class="form-group">
 										<label class="control-label">Company Name</label>
-										<input class="form-control" type="text" ng-model="job.companyName">
+										<input class="form-control" type="text" ng-model="experience.companyName">
 									</div>
 									<div class="row">
 										<div class="form-group col-md-6" id="double_column">
 											<label class="control-label">Employed From:</label>
-											<input class="form-control" type="date" ng-model="job.startDate">
+											<input class="form-control" type="date" ng-model="experience.startDate">
 										</div>
 										<div class="form-group col-md-6" id="double_column">
 											<label class="control-label">To:</label>
-											<input class="form-control" type="date" ng-model="job.endDate">
+											<input class="form-control" type="date" ng-model="experience.endDate">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Job Description</label>
-										<textarea class="form-control" rows="5" ng-model="job.jobDescription"></textarea>
+										<textarea class="form-control" rows="5" ng-model="experience.experienceDescription"></textarea>
 									</div>
 
 									<div class="row">
 										<div class="form-group col-md-6" id="double_column">
-											<div ng-repeat="item in job.details">
+											<div ng-repeat="detail in experience.details">
 												<label class="control-label">Details:</label>
 												<table border="1">
 													<tr>
 														<td>
-															<input class="form-control" type="text" ng-click="addNewDetail(job)" ng-model="item.detail" placeholder="Enter details about the job">
+															<input class="form-control" type="text" ng-click="addNewDetail(experience, detail)" ng-model="detail.detail" placeholder="Enter details about the experience">
 														</td>
-														<td style="padding: 8px;" ng-if="item.detail">
-															<label class="remove" ng-click="removeDetail(job, item)"><i class="fa fa-2x fa-times-circle-o"></i></label>
+														<td style="padding: 8px;" ng-if="detail.detail">
+															<label class="remove" ng-click="removeDetail(experience, detail)"><i class="fa fa-2x fa-times-circle-o"></i></label>
 														</td>
 													</tr>
 												</table>
 											</div><!-- End of detail ng-repeat -->
 										</div>
-										<div ng-if="moreThanOne(jobs)" class="form-group col-md-11" id="double_column">
+										<div ng-if="moreThanOne(experiences)" class="form-group col-md-11" id="double_column">
 										    <i class="fa fa-1x fa-plus fa-fw "></i>
-										    <label class="control-label" ng-click="removeJob(job)">Delete Experience</label>
+										    <label class="control-label" ng-click="removeexperience(experience)">Delete Experience</label>
 										</div>
 									</div>
 									<hr>
-								</div><!-- End of jobs ng-repeat -->
+								</div><!-- End of experiences ng-repeat -->
 									
 									<div class="row">
 										<div class="form-group col-md-11" id="double_column">
 										    <i class="fa fa-1x fa-plus fa-fw "></i>
-										    <label class="control-label" ng-click="addNewJob()">Add Another Experience</label>
+										    <label class="control-label" ng-click="addNewexperience()">Add Another Experience</label>
 										</div>
 					
 										<div class="form-group col-md-1" id="double_column">
-									    	<button type=" submit "="=" " "="" ng-click="addAllExperiences(jobs)">Submit</button>
+									    	<button type=" submit "="=" " "="" ng-click="addAllExperiences(experiences)">Submit</button>
 									  	</div>
 									</div>
 								</form>
