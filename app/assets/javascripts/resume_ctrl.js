@@ -6,6 +6,7 @@
 // the post services below
   	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
   		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
+
       $http.post("/api/v1/students.json", student).then(function(response){
         $scope.students.push(student);
       }), function(error){
@@ -15,7 +16,9 @@
 
 // the get services below
     $scope.fetchData = function(id) {
-      $http.get("/api/v1/students/" + id + ".json").then(function(response) {
+      $scope.userID = id
+
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
         $scope.usersData            = response.data;
         $scope.personalInformation  = $scope.usersData;
         $scope.experiences          = $scope.usersData.experiences;
@@ -51,13 +54,23 @@
     
 
 // this is the controller for experience/details
+
     $scope.editEPanel = function() {
-        $scope.ePanelStatus = "edit"
-        // $scope.SPanelDeletions = []
+      $scope.ePanelStatus = "edit";
+      angular.forEach($scope.experiences, function(experience){
+        if (experience.details[(experience.details.length) - 1].detail){
+          experience.details.push( {} );
+        }
+      })
+      // $scope.SPanelDeletions = []
     };
 
     $scope.resetEPanel = function() {
-        $scope.ePanelStatus = "show"
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
+        $scope.usersData = response.data;
+        $scope.experiences = $scope.usersData.experiences;
+        $scope.ePanelStatus = "show";
+      });
     };
 
     $scope.setDate = function(aDate) {
@@ -66,8 +79,9 @@
     }
 
     $scope.updateAllExperiences = function(experiences){
-      $http.patch("/api/v1/experiences/9.json", experiences);
-      $scope.ePanelStatus = "show";
+      $http.patch("/api/v1/experiences/" + $scope.userID + ".json", experiences).then(function(response){
+      $scope.resetEPanel();
+      });
     }
 
     $scope.removeExperience = function(experience){
@@ -84,34 +98,34 @@
     }
 
 
-    $scope.jobs = [{details: [{}] }];
+    $scope.experiences = [{details: [{}] }];
     
-    $scope.addNewDetail = function(job, item) {
-      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      var indexOfSecondToLastDetail = $scope.jobs[indexOfJobWithinJobs].details.length - 2;
-      if ($scope.jobs[indexOfJobWithinJobs].details.length === 1 || ($scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail]['detail'] && (!item['detail'] || $scope.jobs[indexOfJobWithinJobs].details[indexOfSecondToLastDetail + 1]['detail']))){
-        $scope.jobs[indexOfJobWithinJobs].details.push( {} );
+    $scope.addNewDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfSecondToLastDetail = $scope.experiences[indexOfexperienceWithinexperiences].details.length - 2;
+      if ($scope.experiences[indexOfexperienceWithinexperiences].details.length === 1 || ($scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail]['detail'] && (!detail['detail'] || $scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail + 1]['detail']))){
+        $scope.experiences[indexOfexperienceWithinexperiences].details.push( {} );
       }
     };
 
-    $scope.addNewJob = function() {
-      $scope.jobs.push({details: [{}]});
+    $scope.addNewexperience = function() {
+      $scope.experiences.push({details: [{}]});
     };
 
-    $scope.removeJob = function(job){
-      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      $scope.jobs.splice(indexOfJobWithinJobs, 1);
+    $scope.removeexperience = function(experience){
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      $scope.experiences.splice(indexOfexperienceWithinexperiences, 1);
     }
       
-    $scope.removeDetail = function(job, item) {
-      var indexOfJobWithinJobs = $scope.jobs.indexOf(job);
-      var indexOfItemWithinDetailsOfTheJob = $scope.jobs[indexOfJobWithinJobs]['details'].indexOf(item);
-      $scope.jobs[indexOfJobWithinJobs]['details'].splice(indexOfItemWithinDetailsOfTheJob, 1);
+    $scope.removeDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfdetailWithinDetailsOfTheexperience = $scope.experiences[indexOfexperienceWithinexperiences]['details'].indexOf(detail);
+      $scope.experiences[indexOfexperienceWithinexperiences]['details'].splice(indexOfdetailWithinDetailsOfTheexperience, 1);
     };
 
-    $scope.addAllExperiences = function(jobs){
-      $http.post("/api/v1/experiences.json", jobs).then(function(response){
-        $scope.experiences.push(jobs);
+    $scope.addAllExperiences = function(experiences){
+      $http.post("/api/v1/experiences.json", experiences).then(function(response){
+        $scope.experiences.push(experiences);
       }), function(error){  
         $scope.errors = error.data.errors;
       }
