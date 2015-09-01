@@ -1,0 +1,138 @@
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-primary" ng-model="educationCollapsed">
+
+          <div class="panel-heading" ng-click="educationCollapsed=!educationCollapsed">
+            <span class="panel-title panel_title">Education</span>
+            <div class="pull-right">
+              <i class="expand fa fa-plus-circle fa-2x" ng-show="educationCollapsed"></i>
+              <i class="expand fa fa-minus-circle fa-2x" ng-show="!educationCollapsed"></i>
+            </div>
+          </div>
+          
+          <div class="panel-body" ng-show="!educationCollapsed" ng-switch on="educationPanelStatus">
+<!-- below is the code to view the experiences -->
+
+          <div ng-switch-when="show">
+            <div class="form-group well" ng-repeat="education in educations">
+              <div class="row">
+                <div class='panel_body'>
+
+                  <div class="col-md-2 panel_text">
+                    University Name:
+                  </div>
+                  <div class="col-md-10">
+                    {{education.university_name || 'N/A' }}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Degree Obtained:
+                  </div>
+                  <div class="col-md-10">
+                    {{education.degrees || 'N/A' }}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Start Date:
+                  </div>
+                  <div class="col-md-10">
+                    {{education.start_date | date :  "MM/dd/yyyy" || 'N/A' }}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    End Date:
+                  </div>
+                  <div class="col-md-10">
+                    {{education.end_date | date :  "MM/dd/yyyy" || 'N/A' }}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Details:
+                  </div>
+                  <div class="col-md-10">
+                    <ul ng-repeat="detail in education['details']">
+                      <li>{{detail['detail']}}</li>
+                    </ul>
+                  </div><!-- col-md-10 in details -->   
+                </div><!-- panel body -->
+              </div><!-- end of row -->
+            </div><!-- class="form-group" ng-repeat="job in experiences" -->
+              
+            <div class="row">
+            <div class="pull-right">
+                <div class="form-group col-md-12" class="pull-right" >
+                  <div class="form-group" ng-show="ePanelStatus='show'">
+                    <button type=" submit "="=" " "="" class='btn btn-lg btn-primary' style='width: 100%' ng-click="editEducationPanel()">Edit</button>
+                  </div>
+                </div>
+              </div>
+            </div><!-- end of row -->
+          </div><!-- ng-switch-when="show" -->
+
+          <div ng-switch-when="edit">
+              <form role="form" method="get" action="#">
+                <div class="well" ng-repeat="education in educations">
+                  {{education.end_date}}<br>
+                  {{dateBirth}}
+                    <div class="form-group">
+                      <label class="control-label">University Name:</label>
+                      <input class="form-control" type="text" ng-model="education.university_name">
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label">Degree Obtained:</label>
+                      <input class="form-control" type="text" ng-model="education.degrees">
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                        <label class="control-label">Start Date:&nbsp;&nbsp;&nbsp;{{education.start_date | date :  "MM/dd/yyyy"}}</label>
+                        <input class="form-control" type="date" ng-model="education.start_date">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="control-label">To:&nbsp;&nbsp;&nbsp;{{education.end_date | date :  "MM/dd/yyyy"}}</label>
+                        <input class="form-control" type="date" ng-model="dateBirth">
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="form-group col-md-12" id="double_column">
+                        <div ng-repeat="detail in education['details']">
+                            <label class="control-label">Details:</label>                            
+                            <table>
+                              <tr>
+                                <td>
+                                  <textarea class="form-control" rows="3" ng-click="addNewDetail()" ng-model="detail.detail">{{detail['detail']}}</textarea>
+                                </td>
+                                <td class="delete_circle">
+                                  <label class="remove" ng-click="removeDetail()"><i class="fa fa-2x fa-times-circle-o"></i></label>
+                                </td>
+                              </tr>
+                            </table>
+                        </div><!-- End of detail ng-repeat FOR THE EDIT FORM -->
+                      </div><!-- End class="form-group col-md-6" id="double_column" -->
+                    </div><!-- End of row -->
+                </div><!-- end ng-repeat="experience in experiences -->
+              </form>
+                <div class="row">
+                  <div class="panel_buttons col-md-4">
+                    <button class='btn-lg btn-success' style='width: 75%'>
+                      
+                      <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
+                    </button>
+                  </div>
+                  <div class="panel_buttons col-md-4">
+                    <button type=" submit "="=" " "="" class='btn-lg btn-danger' style='width: 75%' ng-click="resetEducationPanel()">Cancel</button>
+                  </div>
+                  <div class="panel_buttons col-md-4" id="double_column">
+                    <button type=" submit "="=" " "="" class='btn-lg btn-success' style='width: 75%' ng-click="addNewExperience(jobs)">Update</button>
+                  </div>
+                </div><!-- end of row -->
+            </div><!-- end ng-switch-when="edit" -->
+          </div><!-- end of panel-body ng-switch on="ePanelStatus" -->
+     
+        </div><!-- end of panel panel-primary -->
+      </div><!-- end of first col-md-12 -->
+    </div><!-- end of first row -->
+  </div><!-- end of container -->
+</div><!-- end of section -->

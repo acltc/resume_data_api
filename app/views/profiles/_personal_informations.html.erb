@@ -2,83 +2,223 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Personal Information</h3>
+        <div class="panel panel-primary" ng-model="personalCollapsed">
+          <div class="panel-heading" ng-click="personalCollapsed=!personalCollapsed">
+            <span class="panel-title panel_title">Personal Information</span>
+            <div class="pull-right">
+              <i class="expand fa fa-plus-circle fa-2x" ng-show="personalCollapsed"></i>
+              <i class="expand fa fa-minus-circle fa-2x" ng-show="!personalCollapsed"></i>
+            </div>
+          </div>
 
-          </div>
-          <div class="panel-body">
-            <form role="form" method="get" action="<%= new_experience_path %>">
-              <div class="form-group">
-                <label class="control-label" for="exampleInputEmail1">First Name</label>
-                <input class="form-control" id="exampleInputEmail1"
-                placeholder="Enter First Name" type="text" ng-model="firstName">
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="exampleInputPassword1">Last Name</label>
-                <input class="form-control" id="exampleInputPassword1"
-                placeholder="Enter Last Name" type="text" ng-model="lastName">
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="exampleInputPassword1">Email</label>
-                <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
-                type="email" ng-model="email">
-              </div>
-              <div class="form-group">
-                <label class="control-label" for="exampleInputPassword1">Phone Number</label>
-                <input class="form-control" id="exampleInputPassword1"
-                placeholder="Phone Number" type="text" ng-model="phoneNumber">
-              </div>
+        <div class="panel-body" ng-show="!personalCollapsed" ng-switch on="pPanelStatus">
+          <div ng-switch-when="show">
+            <div class="form-group well">
               <div class="row">
-                <div class="form-group col-md-6" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Street Address,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="Street Address" type="text" ng-model="streetAddress">
-                </div>
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Street Address,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="City" type="text" ng-model="city">
-                </div>
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1" contenteditable="true">State</label>
-                  <input class="form-control" id="exampleInputPassword1" placeholder="State"
-                  type="text" ng-model="state">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Github,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="Github" type="text" ng-model="github">
-                </div>
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Blog,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="Blog" type="text" ng-model="blog">
-                </div>
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Twitter,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="Twitter" type="text" ng-model="twitter">
-                </div>
-                <div class="form-group col-md-3" id="double_column">
-                  <label class="control-label" for="exampleInputPassword1">Linkedin,</label>
-                  <input class="form-control" id="exampleInputPassword1"
-                  placeholder="Linkedin" type="text" ng-model="linkedin">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-offset-11" id="double_column" >
-                  <!-- <a href=<%= new_experience_path %>> -->
-                      <button type="submit" class="btn btn-default" ng-click="addPersonalInfo(firstName, lastName, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state)">Edit</button>
-                      <!-- </a> -->
+                <div class='panel_body'>
+                  <div class="col-md-2 panel_text">
+                    First Name:
                   </div>
+                  <div class="col-md-10">
+                    {{personalInformation.first_name}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Last Name:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.last_name}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Address:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.address}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Apartment or suite:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.appt_number || 'N/A' }}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    City:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.city}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    State:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.state}}
+                  </div>
+
+
+                  <div class="col-md-2 panel_text">
+                    Job Title:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.job_title || 'N/A'}}
+                  </div>
+                  
+                  <div class="col-md-2 panel_text">
+                    Phone number:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.phone_number || 'N/A'}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Email:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.email || 'N/A'}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Linkedin:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.linkedin || 'N/A'}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Twitter:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.twitter || 'N/A'}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Blog:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.blog || 'N/A'}}
+                  </div>
+
+                  <div class="col-md-2 panel_text">
+                    Profile:
+                  </div>
+                  <div class="col-md-10">
+                    {{personalInformation.short_bio || 'None'}}
+                  </div>
+
+                </div><!-- panel body -->
+              </div><!-- end of row -->
+            </div><!-- class="form-group" ng-repeat="job in personal information" -->
+              
+            <div class="row">
+            <div class="pull-right">
+                <div class="form-group col-md-12" class="pull-right" >
+                  <div class="form-group" ng-show="pPanelStatus='show'">
+                    <button type=" submit "="=" " "="" class='btn btn-lg btn-primary' style='width: 100%' ng-click="editPPanel()">Edit</button>
+                  </div>
+                </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </div><!-- end of row -->
+          </div><!-- ng-switch-when="show" -->
+            
+<!-- below is the code to edit the personal information -->
+
+            <div ng-switch-when="edit">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel-body">
+                    <form role="form" method="get" action="#">
+                      <div class="row">
+                        <div class="form-group col-md-6" id="double_column">
+                          <label class="control-label" for="exampleInputEmail1">First Name</label>
+                          <input class="form-control" id="exampleInputEmail1"
+                          placeholder="Enter First Name" type="text" ng-model="firstName">
+                        </div>
+                        <div class="form-group col-md-6" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Last Name</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Enter Last Name" type="text" ng-model="lastName">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="exampleInputPassword1">Job Title</label>
+                        <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
+                        type="text" ng-model="jobTitle">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="exampleInputPassword1">Email</label>
+                        <input class="form-control" id="exampleInputPassword1" placeholder="Enter Email"
+                        type="email" ng-model="email">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" for="exampleInputPassword1">Phone Number</label>
+                        <input class="form-control" id="exampleInputPassword1"
+                        placeholder="Phone Number" type="text" ng-model="phoneNumber">
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Address,</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Street Address" type="text" ng-model="streetAddress">
+                        </div>
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">City</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="City" type="text" ng-model="city">
+                        </div>
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1" contenteditable="true">State</label>
+                          <input class="form-control" id="exampleInputPassword1" placeholder="State"
+                          type="text" ng-model="state">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Github,</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Github" type="text" ng-model="github">
+                        </div>
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Personal Website/Blog</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Blog" type="text" ng-model="blog">
+                        </div>
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Twitter,</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Twitter" type="text" ng-model="twitter">
+                        </div>
+                        <div class="form-group col-md-3" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Linkedin,</label>
+                          <input class="form-control" id="exampleInputPassword1"
+                          placeholder="Linkedin" type="text" ng-model="linkedin">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-12" id="double_column">
+                          <label class="control-label" for="exampleInputPassword1">Short Bio or Profile,</label>
+                          <input class="form-control" id="exampleInputPassword1" placeholder="???" type="text_area" ng-model="shortBio">
+                        </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="panel_buttons col-md-4">
+                  <!-- place holder column -->
+                </div>
+                <div class="panel_buttons col-md-4">
+                  <button type=" submit "="=" " "="" class='btn-lg btn-danger pull-right' style='width: 75%' ng-click="resetPPanel()">Cancel</button>
+                </div>
+                <div class="panel_buttons col-md-4 pull-right" id="double_column">
+                  <button type=" submit "="=" " "="" class='btn-lg btn-success  pull-right' style='width: 75%' ng-click="addNewExperience(jobs)">Update</button>
+                </div>
+
+              </div><!-- end of row -->
+            </div><!-- end ng-switch-when="edit" -->
+          </div><!-- end of panel-body ng-switch on="ePanelStatus" -->
+        </div><!-- end of panel panel-primary -->
+      </div><!-- end of first col-md-12 -->
+    </div><!-- end of first row -->
+  </div><!-- end of container -->
+</div><!-- end of section -->

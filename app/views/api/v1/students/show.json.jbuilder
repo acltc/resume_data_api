@@ -9,13 +9,22 @@ json.blog @student.blog
 json.online_resume @student.online_resume
 json.github @student.github
 json.address @student.address
+json.appt_number @student.appt_number
 json.city @student.city
 json.state @student.state
 json.photo @student.photo
 json.short_bio @student.short_bio
+json.job_title @student.job_title
 
-json.skills @student.personal_skills do |personal_skill| 
-json.id personal_skill.id
+json.professional_skills @student.professional_skills do |professional_skill| 
+  json.id professional_skill.id
+  json.student_id professional_skill.student_id
+  json.skill_name professional_skill.skill_name
+end
+
+json.personal_skills @student.personal_skills do |personal_skill|
+  json.id personal_skill.id
+  json.student_id personal_skill.student_id
   json.skill_name personal_skill.skill_name
 end
 

@@ -71,7 +71,7 @@
             <div class="pull-right">
                 <div class="form-group col-md-12" class="pull-right" >
                   <div class="form-group" ng-show="ePanelStatus='show'">
-                    <button type=" submit "="=" " "="" ng-click="editEPanel()">Edit</button>
+                    <button type=" submit "="=" " "="" class='btn btn-lg btn-primary' style='width: 100%' ng-click="editEPanel()">Edit</button>
                   </div>
                 </div>
               </div>
@@ -127,11 +127,13 @@
               </form>
                 <div class="row">
                   <div class="panel_buttons col-md-4">
-                    <i class="fa fa-1x fa-plus fa-fw"></i>
-                    <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
+                    <button class='btn-lg btn-success' style='width: 75%'>
+                      
+                      <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
+                    </button>
                   </div>
                   <div class="panel_buttons col-md-4">
-                    <button type=" submit "="=" " "="" ng-click="resetEPanel()">Cancel</button>
+                    <button type=" submit "="=" " "="" class='btn-lg btn-danger' style='width: 75%' ng-click="resetEPanel()">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
                     <button type=" submit "="=" " "="" ng-click="updateAllExperiences(experiences)">Update</button>
