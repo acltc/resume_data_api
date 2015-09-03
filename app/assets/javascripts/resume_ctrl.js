@@ -14,13 +14,14 @@
       }
     }
 
+
 // the get services below
     $scope.fetchData = function(id) {
       $scope.userID = id
 
       $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response) {
         $scope.usersData            = response.data;
-        $scope.personalInformation  = $scope.usersData;
+        $scope.personalInformation  = [$scope.usersData.personal_information];
         $scope.experiences          = $scope.usersData.experiences;
         $scope.educations           = $scope.usersData.educations;
         $scope.professionalSkills   = $scope.usersData.professional_skills;
@@ -36,6 +37,13 @@
       });
     }
 
+    $scope.updatePersonalInformation = function(personal_info_array){
+      $http.patch("/api/v1/students/" + $scope.userID + ".json", personal_info_array).then(function(response){
+        $scope.usersData = response.data;
+        $scope.personalInformation = [$scope.usersData.personal_information];
+        $scope.resetPPanel();
+      })
+    }
     // $scope.formatedDate = function(dates) {
     //   new Date(2014, 3, 19);
     // }

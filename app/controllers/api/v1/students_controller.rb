@@ -33,10 +33,28 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def update
+    new_personal_info = params["_json"][0]
+    p new_personal_info
     @student = Student.find(params[:id])
-	  @student.update({:first_name => params[:first_name], :last_name => params[:last_name], :email => params[:email], :phone_number => params[:phone_number], :linkedin => params[:linkedin], :twitter => params[:twitter], :blog => params[:blog], :online_resume => params[:online_resume], :github => params[:github], :photo => params[:photo], :short_bio => params[:short_bio]})
-	render 'show'
-	# redirect_to student_path(params[:id])
+    p @student
+	  @student.update({
+      :first_name => new_personal_info['first_name'], 
+      :last_name => new_personal_info['last_name'],
+      :job_title => new_personal_info['job_title'],
+      :email => new_personal_info['email'], 
+      :phone_number => new_personal_info['phone_number'], 
+      :github => new_personal_info['github'], 
+      :blog => new_personal_info['blog'], 
+      :twitter => new_personal_info['twitter'], 
+      :linkedin => new_personal_info['linkedin'],
+      :address => new_personal_info['address'],
+      :city => new_personal_info['city'],
+      :state => new_personal_info['state'],
+      :online_resume => new_personal_info['online_resume'], 
+      :photo => new_personal_info['photo'], 
+      :short_bio => new_personal_info['short_bio']
+    })
+	  render 'show'
   end
 	
 end
