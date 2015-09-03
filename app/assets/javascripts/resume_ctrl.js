@@ -58,7 +58,7 @@
     $scope.editEPanel = function() {
       $scope.ePanelStatus = "edit";
       angular.forEach($scope.experiences, function(experience){
-        if (experience.details[(experience.details.length) - 1].detail){
+        if (experience.details == false || experience.details[(experience.details.length) - 1].detail){
           experience.details.push( {} );
         }
       })
