@@ -3,19 +3,6 @@
 
   angular.module("app").controller("resumeCtrl", function($scope, $http, $location, $filter) {
 
-// the post services below
-  	$scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
-  		var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
-
-      $http.post("/api/v1/students.json", student).then(function(response){
-        $scope.students.push(student);
-      }), function(error){
-        $scope.errors = error.data.errors;
-      }
-    }
-
-
-// the get services below
     $scope.fetchData = function(id) {
       $scope.userID = id
 
@@ -36,6 +23,18 @@
         $scope.referecncesPanelStatus       = "show";
       });
     }
+
+// the post services below
+    $scope.addPersonalInfo = function(firstName, lastName, jobTitle, email, phoneNumber, github, blog, twitter, linkedin, streetAddress, city, state){
+      var student = {first_name: firstName, last_name: lastName, job_title: jobTitle, email: email, phone_number: phoneNumber, github: github, blog: blog, twitter: twitter, linkedin: linkedin, address: streetAddress, city: city, state: state};
+      $http.post("/api/v1/students.json", student).then(function(response){
+        $scope.students.push(student);
+      }), function(error){
+        $scope.errors = error.data.errors;
+      }
+    }
+
+// the get services below
 
     $scope.updatePersonalInformation = function(personal_info_array){
       $http.patch("/api/v1/students/" + $scope.userID + ".json", personal_info_array).then(function(response){
@@ -63,6 +62,53 @@
 
 // this is the controller for experience/details
 
+
+    $scope.setDate = function(aDate) {
+      // doesn't work yet
+      $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
+    }
+
+    $scope.moreThanOne = function(object){
+      var moreThanOne = false;
+      if (object.length > 1){
+        moreThanOne = true;
+      }
+      return moreThanOne;
+    }
+
+    $scope.experiences = [{details: [{}] }];
+    
+    $scope.addNewexperience = function() {
+      $scope.experiences.push({details: [{}]});
+    };
+
+    $scope.addNewDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfSecondToLastDetail = $scope.experiences[indexOfexperienceWithinexperiences].details.length - 2;
+      if ($scope.experiences[indexOfexperienceWithinexperiences].details.length === 1 || ($scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail]['detail'] && (!detail['detail'] || $scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail + 1]['detail']))){
+        $scope.experiences[indexOfexperienceWithinexperiences].details.push( {} );
+      }
+    };
+
+    // $scope.removeexperience = function(experience){
+    //   var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+    //   $scope.experiences.splice(indexOfexperienceWithinexperiences, 1);
+    // }
+      
+    $scope.removeDetail = function(experience, detail) {
+      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
+      var indexOfdetailWithinDetailsOfTheexperience = $scope.experiences[indexOfexperienceWithinexperiences]['details'].indexOf(detail);
+      $scope.experiences[indexOfexperienceWithinexperiences]['details'].splice(indexOfdetailWithinDetailsOfTheexperience, 1);
+    };
+
+    $scope.addAllExperiences = function(experiences){
+      $http.post("/api/v1/experiences.json", experiences).then(function(response){
+        $scope.experiences.push(experiences);
+      }), function(error){  
+        $scope.errors = error.data.errors;
+      }
+    }
+
     $scope.editEPanel = function() {
       $scope.ePanelStatus = "edit";
       angular.forEach($scope.experiences, function(experience){
@@ -81,11 +127,6 @@
       });
     };
 
-    $scope.setDate = function(aDate) {
-      // doesn't work yet
-      $scope.value = $filter('date')(aDate, "yyyy-MM-dd");
-    }
-
     $scope.updateAllExperiences = function(experiences){
       $http.patch("/api/v1/experiences/" + $scope.userID + ".json", experiences).then(function(response){
       $scope.resetEPanel();
@@ -97,64 +138,17 @@
       $scope.experiences.splice(indexOfExperienceWithinExperiences, 1);
     }
 
-    $scope.moreThanOne = function(object){
-      var moreThanOne = false;
-      if (object.length > 1){
-        moreThanOne = true;
-      }
-      return moreThanOne;
-    }
-
-
-    $scope.experiences = [{details: [{}] }];
-    
-    $scope.addNewDetail = function(experience, detail) {
-      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
-      var indexOfSecondToLastDetail = $scope.experiences[indexOfexperienceWithinexperiences].details.length - 2;
-      if ($scope.experiences[indexOfexperienceWithinexperiences].details.length === 1 || ($scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail]['detail'] && (!detail['detail'] || $scope.experiences[indexOfexperienceWithinexperiences].details[indexOfSecondToLastDetail + 1]['detail']))){
-        $scope.experiences[indexOfexperienceWithinexperiences].details.push( {} );
-      }
-    };
-
-    $scope.addNewexperience = function() {
-      $scope.experiences.push({details: [{}]});
-    };
-
-    $scope.removeexperience = function(experience){
-      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
-      $scope.experiences.splice(indexOfexperienceWithinexperiences, 1);
-    }
-      
-    $scope.removeDetail = function(experience, detail) {
-      var indexOfexperienceWithinexperiences = $scope.experiences.indexOf(experience);
-      var indexOfdetailWithinDetailsOfTheexperience = $scope.experiences[indexOfexperienceWithinexperiences]['details'].indexOf(detail);
-      $scope.experiences[indexOfexperienceWithinexperiences]['details'].splice(indexOfdetailWithinDetailsOfTheexperience, 1);
-    };
-
-    $scope.addAllExperiences = function(experiences){
-      $http.post("/api/v1/experiences.json", experiences).then(function(response){
-        $scope.experiences.push(experiences);
-      }), function(error){  
-        $scope.errors = error.data.errors;
-      }
-      
-    }
-
-
 // education/education_details:
-    $scope.editEducationPanel = function() {
-        $scope.educationPanelStatus = "edit"
-        // $scope.SPanelDeletions = []
-    };
-  
-    $scope.resetEducationPanel = function() {
-        $scope.educationPanelStatus = "show"
-    };
 
     $scope.educations = [ {highlights: [{}] } ];
 
     $scope.anotherEducationForm = function(){
       $scope.educations.push( {highlights: [{}] } );
+    }
+
+    $scope.removeEducationForm = function(education){
+      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
+      $scope.educations.splice(indexOfParticularEducationWithinEducations, 1);
     }
 
     $scope.anotherHighlightForm = function(education, current_highlight){
@@ -164,11 +158,6 @@
       if (educationObjectOfInterest.highlights.length === 1 || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation]['highlight'] && (!current_highlight['highlight'] || educationObjectOfInterest.highlights[indexOfSecondToLastHighlightWithinAllHighlightsOfThisParticularEducation + 1]['highlight'])){
         educationObjectOfInterest.highlights.push({});
       }
-    }
-
-    $scope.removeEducationForm = function(education){
-      var indexOfParticularEducationWithinEducations = $scope.educations.indexOf(education);
-      $scope.educations.splice(indexOfParticularEducationWithinEducations, 1);
     }
 
     $scope.removeHighlightForm = function(education, highlight){
@@ -186,6 +175,21 @@
       }
     }
 
+    $scope.updateAllEducations = function(educationsBlob){
+      $http.patch("/api/v1/educations/" + $scope.userID + ".json", educationsBlob).then(function(response){
+        $scope.educations = response.data.educations;
+        $scope.resetEducationPanel();
+      })
+    }
+
+    $scope.editEducationPanel = function() {
+        $scope.educationPanelStatus = "edit"
+        // $scope.SPanelDeletions = []
+    };
+  
+    $scope.resetEducationPanel = function() {
+        $scope.educationPanelStatus = "show"
+    };
 
 // professional skills controller
     $scope.editProfessionalSkillsPanel = function() {

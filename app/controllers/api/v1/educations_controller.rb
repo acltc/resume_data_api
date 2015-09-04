@@ -22,10 +22,14 @@ class Api::V1::EducationsController < ApplicationController
 		redirect_to "#{api_v1_students_path}.json"
 	end
 
-	def update
-		@education = Education.find(params[:id])
-		@education.update({:start_date => params[:start_date], :end_date => params[:end_date], :degree => params[:degree], :university_name => params[:university_name]})
-		@student = @education.student
+  def update
+    current_user = Student.find(params[:id])
+    db_educations = current_user.educations
+    json_educations = params["_json"][0]
+    p db_educations
+    p json_educations
+		# @education.update({:start_date => params[:start_date], :end_date => params[:end_date], :degree => params[:degree], :university_name => params[:university_name]})
+		# @student = @education.student
 		render "students/show"
 	end
 

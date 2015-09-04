@@ -112,20 +112,20 @@
                         </div><!-- End of detail ng-repeat FOR THE EDIT FORM -->
                       </div><!-- End class="form-group col-md-6" id="double_column" -->
                     </div><!-- End of row -->
+                    <label class="remove" ng-click="removeEducationForm(education)"><i class="fa fa-2x fa-times-circle-o"></i>Delete Education</label>
                 </div><!-- end ng-repeat="experience in experiences -->
               </form>
                 <div class="row">
                   <div class="panel_buttons col-md-4">
                     <button class='btn-lg btn-success' style='width: 75%'>
-                      
-                      <label class="control-label" ng-click="experiences.push({details: [{}]})">Add Another Experience</label>
+                      <label class="control-label" ng-click="anotherEducationForm()">Add Another Education</label>
                     </button>
                   </div>
                   <div class="panel_buttons col-md-4">
                     <button type=" submit "="=" " "="" class='btn-lg btn-danger' style='width: 75%' ng-click="resetEducationPanel()">Cancel</button>
                   </div>
                   <div class="panel_buttons col-md-4" id="double_column">
-                    <button type=" submit "="=" " "="" class='btn-lg btn-success' style='width: 75%' ng-click="addNewExperience(jobs)">Update</button>
+                    <button type=" submit "="=" " "="" class='btn-lg btn-success' style='width: 75%' ng-click="updateAllEducations(educations)">Update</button>
                   </div>
                 </div><!-- end of row -->
             </div><!-- end ng-switch-when="edit" -->
