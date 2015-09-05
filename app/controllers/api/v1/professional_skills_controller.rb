@@ -9,6 +9,10 @@ class Api::V1::ProfessionalSkillsController < ApplicationController
       	ProfessionalSkill.create({:student_id => student_id, :skill_name => skill["skillKey"]})
       end
     end
+
+    current_user.survey_status = 4
+    current_user.save
+
     redirect_to "#{api_v1_students_path(student_id)}.json"
   end
 

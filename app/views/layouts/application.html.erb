@@ -21,6 +21,7 @@
           rel="stylesheet" type="text/css">
 </head>
 <body>
+<% if current_user %>
   <div class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -43,6 +44,7 @@
       </div>
     </div>
   </div>
+<% end %>
 <% flash.each do |name, message| %>
   <div id="flash" class="alert alert-<%= name %> alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>

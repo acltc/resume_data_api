@@ -19,6 +19,10 @@ class Api::V1::EducationsController < ApplicationController
 				end
 			end
 		end
+
+		current_user.survey_status = 3
+		current_user.save
+
 		redirect_to "#{api_v1_students_path}.json"
 	end
 

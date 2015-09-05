@@ -9,6 +9,10 @@ class Api::V1::PersonalSkillsController < ApplicationController
 		    PersonalSkill.create({:skill_name => skill["skillKey"], :student_id => student_id})
 		  end
 		end
+
+		current_user.survey_status = 5
+		current_user.save
+
 		redirect_to "#{api_v1_students_path(student_id)}.json"
 	end
 

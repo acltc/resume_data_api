@@ -14,6 +14,13 @@
  *= require_self
  */
 
+ #landing_page {
+  background-image: url("backdrop2.jpg");
+  background-repeat: no-repeat;
+  width: auto;
+  height: 900px;
+ }
+
 .panel {
 	box-shadow: 10px 10px 5px #888888;
 }

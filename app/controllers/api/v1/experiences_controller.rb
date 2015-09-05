@@ -8,7 +8,8 @@ class Api::V1::ExperiencesController < ApplicationController
   def create
     @student = current_user.student
     user_id = @student.id
-    angular_experiences.each do |job|
+    # angular_experiences is undefined??? this controller doesn't work
+    experiences.each do |job|
       @experience = Experience.create({:start_date => job['startDate'], :end_date => job['endDate'], :job_title => job['jobTitle'], :company_name => job['companyName'], :job_description => job['jobDescription'], :student_id => user_id})
       experience_id = @experience.id
       job["details"].each do |each_detail|
@@ -17,6 +18,8 @@ class Api::V1::ExperiencesController < ApplicationController
         end
       end
     end
+    current_user.survey_status = 2
+    current_user.save
     redirect_to "#{api_v1_students_path}.json"
   end
 

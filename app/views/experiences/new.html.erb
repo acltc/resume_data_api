@@ -11,7 +11,7 @@
 							</div>
 							<div class="panel-body">
 								<form role="form" method="get" action="<%= new_education_path %>">
-								<div ng-repeat="experience in experiences">
+								<div ng-repeat="experience in experiences" class="well">
 
 									<div class="form-group">
 										<label class="control-label">Job Title</label>
@@ -52,22 +52,20 @@
 												</table>
 											</div><!-- End of detail ng-repeat -->
 										</div>
-										<div ng-if="moreThanOne(experiences)" class="form-group col-md-11" id="double_column">
-										    <i class="fa fa-1x fa-plus fa-fw "></i>
-										    <label class="control-label" ng-click="removeexperience(experience)">Delete Experience</label>
+										<div ng-if="moreThanOne(experiences)" class="form-group col-md-12" id="double_column">
+										    <label class="control-label btn-lg btn-danger glyphicon glyphicon-remove-circle" style='width: 25%' ng-click="removeexperience(experience)">&nbsp;Delete Experience</label>
 										</div>
 									</div>
 									<hr>
 								</div><!-- End of experiences ng-repeat -->
 									
 									<div class="row">
-										<div class="form-group col-md-11" id="double_column">
-										    <i class="fa fa-1x fa-plus fa-fw "></i>
-										    <label class="control-label" ng-click="addNewexperience()">Add Another Experience</label>
+										<div class="form-group col-md-4" id="double_column">
+										    <label class="control-label btn-lg btn-success fa fa-1x fa-plus fa-fw" style='width: 100%' ng-click="addNewexperience()">&nbsp;&nbsp;&nbsp;&nbsp;Add Another Experience</label>
 										</div>
-					
-										<div class="form-group col-md-1" id="double_column">
-									    	<button type=" submit "="=" " "="" ng-click="addAllExperiences(experiences)">Submit</button>
+										<div class="col-md-4"></div>
+										<div class="form-group col-md-4" id="double_column">
+									    	<button type=" submit "="=" " "="" class='btn-lg btn-success' style='width: 100%' ng-click="addAllExperiences(experiences)">Submit</button>
 									  	</div>
 									</div>
 								</form>

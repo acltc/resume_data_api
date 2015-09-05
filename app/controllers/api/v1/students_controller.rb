@@ -29,6 +29,10 @@ class Api::V1::StudentsController < ApplicationController
       :state => params[:state],
       :user_id => user_id
     })
+
+    current_user.survey_status = 1
+    current_user.save
+
     redirect_to "#{api_v1_student_path(@student.id)}.json"
   end
 

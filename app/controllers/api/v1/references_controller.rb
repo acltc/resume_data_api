@@ -13,6 +13,10 @@ class Api::V1::ReferencesController < ApplicationController
 		    Reference.create({:student_id => student_id, :first_name => reference["firstName"], :last_name => reference["lastName"], :email => reference["email"], :phone_number => reference["phoneNumber"], :company_name => reference["companyName"]})
 		  end
 		end
+
+		current_user.survey_status = 6
+		current_user.save
+
 		redirect_to "#{api_v1_student_path(student_id)}.json"
 	end
 
