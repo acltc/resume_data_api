@@ -14,6 +14,34 @@
  *= require_self
  */
 
+ #landing_page {
+  background-image: url("backdrop2.jpg");
+  background-repeat: no-repeat;
+  width: auto;
+  height: 900px;
+ }
+
 .panel {
 	box-shadow: 10px 10px 5px #888888;
+}
+
+.splat {
+  position: fixed;
+  top: 85%;
+  margin-left: 5%;
+}
+
+.modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+}
+
+.modal-footer {
+    background-color: #f9f9f9;
+}
+
+.user_feed_back {
+  margin-top: 20%;
 }

@@ -9,10 +9,12 @@ Rails.application.routes.draw do
        root 'devise/sessions#new', as: :unauthenticated_root
      end
    end
-   
-  get '/resumes/leach_template_show/:id' => 'resumes#leach_template_show'
   
   get '/:full_name' => 'profiles#show'
+  get '/resumes/leach_template_show/:id' => 'resumes#leach_template_show'
+  get '/resumes/:id' => 'resumes#show'
+  get '/resumes/down_load_pdf/:id' => 'resumes#down_load_pdf'
+  get '/resumes/walsh_template_show/:id' => 'resumes#walsh_template_show'
   # root 'profiles#edit'
 
   namespace :api do
@@ -27,11 +29,6 @@ Rails.application.routes.draw do
       resources :references
     end
   end
-
-  
-  get '/resumes/:id' => 'resumes#show'
-  get '/resumes/down_load_pdf/:id' => 'resumes#down_load_pdf'
-  get '/resumes/walsh_template_show/:id' => 'resumes#walsh_template_show'
 
   resources :personal_informations
   resources :profiles

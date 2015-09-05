@@ -2,9 +2,8 @@ class ProfilesController < ApplicationController
   include ProfilesHelper
   before_action :authenticate_user!, :only => [:edit]
   
-
   def edit
-    if current_user.student
+    if current_user.survey_status == 'User Details'
       @student = current_user.student
       @experiences = @student.experiences
       @educations = @student.educations
@@ -12,13 +11,13 @@ class ProfilesController < ApplicationController
       @personal_skills = @student.personal_skills
       @references = @student.references
     else
-      redirect_to new_personal_information_path
+      UserMailer.welcome_email(current_user).deliver_now if current_user.sign_in_count <= 1
+      redirect_to current_user.set_user_position(current_user.survey_status)
     end
   end
 
   def show
     @students = Student.all
-    # binding.pry
     if users_name(params[:full_name])
       @student = Student.find_by_first_name(users_name(params[:full_name]))
     else
@@ -26,10 +25,4 @@ class ProfilesController < ApplicationController
     end
     
   end
-
-
-
-   
-
-
 end

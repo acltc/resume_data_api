@@ -5,14 +5,23 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--  
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  -->
+
   <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
           rel="stylesheet" type="text/css">
   <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css">
 </head>
 <body>
+<% if current_user %>
   <div class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -35,6 +44,7 @@
       </div>
     </div>
   </div>
+<% end %>
 <% flash.each do |name, message| %>
   <div id="flash" class="alert alert-<%= name %> alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
@@ -42,7 +52,9 @@
   </div>
 <% end %>
 <%= yield %>
-
+  <div class="splat">
+    <%= render '../views/layouts/feed_back' %>
+  </div>
 </body>
 </html>
 
@@ -53,3 +65,12 @@
      });
   });
 </script>
+
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
+</script>
+
