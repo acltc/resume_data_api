@@ -1,3 +1,4 @@
+json.personal_information @student
 json.id @student.id
 json.first_name @student.first_name
 json.last_name @student.last_name
@@ -30,13 +31,15 @@ end
 
 json.educations @student.educations do |education|
 	json.id education.id
-  json.degrees education.degree
+  json.degree education.degree
   json.university_name education.university_name
   json.start_date education.start_date
   json.end_date education.end_date
+  json.student_id education.student_id
   json.details education.education_details do |education_detail|
     json.id education_detail.id
     json.detail education_detail.detail
+    json.education_id education_detail.education_id
   end
 end
 
@@ -48,9 +51,11 @@ json.experiences @student.experiences do |experience|
   json.start_date experience.start_date 
   json.end_date experience.end_date
   json.job_description experience.job_description
+  json.student_id experience.student_id
   json.details experience.experience_details do |experience_detail|
     json.id experience_detail.id
     json.detail experience_detail.detail
+    json.experience_id experience_detail.experience_id
   end
 end
 
