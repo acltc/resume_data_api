@@ -188,7 +188,10 @@
     };
   
     $scope.resetEducationPanel = function() {
-        $scope.educationPanelStatus = "show"
+      $http.get("/api/v1/students/" + $scope.userID + ".json").then(function(response){
+        $scope.educations = response.data.educations;
+        $scope.educationPanelStatus = "show";
+      })
     };
 
 // professional skills controller

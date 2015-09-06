@@ -27,23 +27,47 @@ class Api::V1::EducationsController < ApplicationController
     current_user = @student
     db_educations = current_user.educations
     json_educations = params["_json"]
-    array_of_id = []
+    array_of_db_id = []
+    array_of_json_id = []
     db_educations.each do |db_education|
-      array_of_id << db_education.id
+      array_of_db_id << db_education.id
     end
     json_educations.each_with_index do |json_education, index1|
+      array_of_json_id << json_education["id"]
       if !json_education["id"]
         @education = Education.new({
           :degree => json_education["degree"],
           :university_name => json_education["university_name"],
           :start_date => json_education["start_date"],
           :end_date => json_education["end_date"],
-          :student_id => @student.id,
+          :student_id => @student.id
         })
         if @education
           @education.save
         end
-      elsif array_of_id.include?(json_education["id"])
+      elsif array_of_db_id.include?(json_education["id"])
+        counter = index1
+        until db_educations[counter].id == json_education["id"]
+          counter += 1
+          if counter > db_educations.length
+            counter = 0
+          end
+        end
+        db_educations[counter].update({
+          :degree => json_education["degree"],
+          :university_name => json_education["university_name"],
+          :start_date => json_education["start_date"],
+          :end_date => json_education["end_date"],
+          :student_id => @student.id
+        })
+      end
+    end
+    array_of_json_id.delete(nil)
+    if db_educations.length > json_educations.length
+      db_educations.each do |db_education|
+        if !array_of_json_id.include?(db_education.id)
+          db_education.destroy
+        end
       end
     end
 		# @education.update({:start_date => params[:start_date], :end_date => params[:end_date], :degree => params[:degree], :university_name => params[:university_name]})
