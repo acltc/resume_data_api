@@ -8,16 +8,26 @@ class Api::V1::ExperiencesController < ApplicationController
   def create
     @student = current_user.student
     user_id = @student.id
+    angular_experiences = params["_json"]
     angular_experiences.each do |job|
-      @experience = Experience.create({:start_date => job['startDate'], :end_date => job['endDate'], :job_title => job['jobTitle'], :company_name => job['companyName'], :job_description => job['jobDescription'], :student_id => user_id})
-      experience_id = @experience.id
-      job["details"].each do |each_detail|
-        if each_detail["detail"]
-          ExperienceDetail.create({:experience_id => experience_id, :detail => each_detail["detail"]})
+      if job["job_title"] && job["company_name"]
+        @experience = Experience.create({
+          :start_date => job['start_date'], 
+          :end_date => job['end_date'], 
+          :job_title => job['job_title'], 
+          :company_name => job['company_name'], 
+          :job_description => job['job_description'], 
+          :student_id => user_id
+        })
+        experience_id = @experience.id
+        job["details"].each do |each_detail|
+          if each_detail["detail"]
+            ExperienceDetail.create({:experience_id => experience_id, :detail => each_detail["detail"]})
+          end
         end
       end
     end
-    redirect_to "#{api_v1_students_path}.json"
+    render "api/v1/students/show"
   end
 
   def update
